@@ -15,25 +15,23 @@ using System.Windows.Shapes;
 namespace WPF_UI
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for Register.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class Register : Window
     {
-        public Login()
+        public Register()
         {
             InitializeComponent();
         }
 
-        private void signInBtn_Click(object sender, RoutedEventArgs e)
+        private void okBtn_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void createAccountBtn_Click(object sender, RoutedEventArgs e)
+        private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            Register reg = new Register();
-            reg.ShowDialog();
-        }
 
+        }
     }
 }
