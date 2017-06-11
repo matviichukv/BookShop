@@ -52,6 +52,7 @@
     <Compile Include="Entity\BookShopContext.cs" />
     <Compile Include="Entity\Nationality.cs" />
     <Compile Include="Entity\Publisher.cs" />
+    <Compile Include="Entity\User.cs" />
     <Compile Include="Migrations\201706111005499_Initial Migration.cs" />
     <Compile Include="Migrations\201706111005499_Initial Migration.Designer.cs">
       <DependentUpon>201706111005499_Initial Migration.cs</DependentUpon>

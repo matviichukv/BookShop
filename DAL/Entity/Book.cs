@@ -17,5 +17,8 @@ namespace DAL.Entity
         public Author BookAuthor { get; set; }
         public int Volume { get; set; }
         public string Language { get; set; }
+        public string Description { get; set; }
+        public int Price { get; set; }
+        public int Count { get; set; }
     }
 }

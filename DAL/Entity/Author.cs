@@ -18,5 +18,6 @@ namespace DAL.Entity
         public ICollection<Book> WrittenBooks { get; set; }
         public int NationalityId { get; set; }
         public Nationality AuthorNationality { get; set; }
+        public string Description { get; set; }
     }
 }

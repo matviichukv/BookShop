@@ -18,5 +18,7 @@ namespace DAL.Entity
         public virtual DbSet<Author> Authors { get; set; }
         public virtual DbSet<Publisher> Publishers { get; set; }
         public virtual DbSet<Nationality> Nationalities { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Review> Reviews { get; set; }
     }
 }
