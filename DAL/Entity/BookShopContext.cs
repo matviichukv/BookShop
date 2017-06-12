@@ -20,5 +20,6 @@ namespace DAL.Entity
         public virtual DbSet<Nationality> Nationalities { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
     }
 }
