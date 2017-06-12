@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Entity
 {
-    class Image
+    public class Image
     {
         public int ImageId { get; set; }
         [Required]
