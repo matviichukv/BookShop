@@ -14,7 +14,7 @@
             <PasswordBox Name="passwordPb"></PasswordBox>
             <Button Height="30" Background="Green" Foreground="White" Margin="0,10,0,10" Name="signInBtn" Click="signInBtn_Click">SIGN IN</Button>
             <WrapPanel HorizontalAlignment="Center" Margin="10">
-                <Label>Not register?</Label>
+                <Label>Not registered?</Label>
                 <Button Name="createAccountBtn" Background="White" Foreground="Green" Click="createAccountBtn_Click">Create an account</Button>
             </WrapPanel>
         </StackPanel>

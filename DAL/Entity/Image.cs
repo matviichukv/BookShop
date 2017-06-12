@@ -11,6 +11,6 @@ namespace DAL.Entity
     {
         public int ImageId { get; set; }
         [Required]
-        public byte[] ImageFile { get; set; }
+        public string PathToImageFile { get; set; }
     }
 }

@@ -47,8 +47,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Category.cs" />
     <Compile Include="Entity\Image.cs" />
     <Compile Include="Entity\Review.cs" />
+    <Compile Include="Entity\Role.cs" />
+    <Compile Include="Migrations\201706121628501_Added Category, Publisher, User, Review, Role entities.cs" />
+    <Compile Include="Migrations\201706121628501_Added Category, Publisher, User, Review, Role entities.Designer.cs">
+      <DependentUpon>201706121628501_Added Category, Publisher, User, Review, Role entities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706121717428_Several fixes on database.cs" />
+    <Compile Include="Migrations\201706121717428_Several fixes on database.Designer.cs">
+      <DependentUpon>201706121717428_Several fixes on database.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706121732201_Fix images.cs" />
+    <Compile Include="Migrations\201706121732201_Fix images.Designer.cs">
+      <DependentUpon>201706121732201_Fix images.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +94,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706111009195_Fixed Publisher Book relationship.resx">
       <DependentUpon>201706111009195_Fixed Publisher Book relationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706121628501_Added Category, Publisher, User, Review, Role entities.resx">
+      <DependentUpon>201706121628501_Added Category, Publisher, User, Review, Role entities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706121717428_Several fixes on database.resx">
+      <DependentUpon>201706121717428_Several fixes on database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706121732201_Fix images.resx">
+      <DependentUpon>201706121732201_Fix images.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
