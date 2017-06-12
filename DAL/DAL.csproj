@@ -47,12 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="Entity\Book.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
-=======
+  <ItemGroup>
     <Compile Include="Entity\Author.cs" />
     <Compile Include="Entity\Book.cs" />
     <Compile Include="Entity\BookShopContext.cs" />
@@ -82,6 +80,5 @@
       <DependentUpon>201706111009195_Fixed Publisher Book relationship.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
->>>>>>> 35a9c71ee00c61d06a9fa196198bd006a159f43d
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
