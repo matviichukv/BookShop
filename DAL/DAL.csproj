@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Entity\Author.cs" />
     <Compile Include="Entity\Book.cs" />
     <Compile Include="Entity\BookShopContext.cs" />

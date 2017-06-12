@@ -22,6 +22,7 @@ namespace WPF_UI
     {
         public MainWindow()
         {
+            //hello
             InitializeComponent();
         }
     }
