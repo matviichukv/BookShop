@@ -21,5 +21,7 @@ namespace DAL.Entity
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
         public virtual DbSet<Image> Images { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
     }
 }
