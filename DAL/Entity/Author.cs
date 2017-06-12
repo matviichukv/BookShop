@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace DAL.Entity
 {
+    //hello guys first commit "serg commit" 
     public class Author
     {
         public Author()
         {
             WrittenBooks = new List<Book>();
         }
-
         public int AuthorId { get; set; }
-        
         public string AuthorName { get; set; }
         public ICollection<Book> WrittenBooks { get; set; }
         public int NationalityId { get; set; }
