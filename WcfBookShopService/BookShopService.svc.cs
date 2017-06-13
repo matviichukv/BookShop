@@ -1,10 +1,13 @@
-﻿using System;
+﻿using DAL.Entity;
+using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Data.Entity;
 
 namespace WcfBookShopService
 {
@@ -12,22 +15,81 @@ namespace WcfBookShopService
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class BookShopService : IBookShopService
     {
-        public string GetData(int value)
+        BookShopContext ctx = new BookShopContext();
+
+        public void BuyBook(int bookId)
         {
-            return string.Format("You entered: {0}", value);
+            throw new NotImplementedException();
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        public bool CheckUserCredentials(string email, string password)
         {
-            if (composite == null)
+            try
             {
-                throw new ArgumentNullException("composite");
+                return (BCrypt.Net.BCrypt.Verify(ctx.Users.FirstOrDefault(user => user.UserEmail == email).UserPassword, password));
             }
-            if (composite.BoolValue)
+            catch
             {
-                composite.StringValue += "Suffix";
+                return false;
             }
-            return composite;
+        }
+
+        public IList<string> GetBooks()
+        {
+            List<string> jsonBooks = new List<string>();
+
+            foreach (var book in ctx.Books)
+            {
+                jsonBooks.Add(JsonConvert.SerializeObject(book));
+            }
+
+            return jsonBooks;
+        }
+
+        public IList<string> GetBooksByCategory(string category)
+        {
+            List<string> jsonBooks = new List<string>();
+
+            foreach (var book in ctx.Books.Where(t => t.BookCategory.CategoryName == category))
+            {
+                jsonBooks.Add(JsonConvert.SerializeObject(book));
+            }
+
+            return jsonBooks;
+        }
+
+        public IList<string> GetCategories()
+        {
+            List<string> jsonCategories = new List<string>();
+
+            foreach (var category in ctx.Categories)
+            {
+                jsonCategories.Add(JsonConvert.SerializeObject(category));
+            }
+
+            return jsonCategories;
+        }
+
+        public string GetUserInfo(int userId)
+        {
+            return JsonConvert.SerializeObject(ctx.Users.FirstOrDefault(t => t.UserId == userId));
+        }
+
+        public void RegisterUser(string name, string email, string password)
+        {
+            User newUser = new User() { UserEmail = email,
+                                        UserName = name,
+                                        UserPassword = BCrypt.Net.BCrypt.HashPassword(password, "abc")
+            };
+
+            newUser.Roles.Add(ctx.Roles.FirstOrDefault(role => role.RoleName == "User"));
+            ctx.Users.Add(newUser);
+            ctx.SaveChanges();
+        }
+
+        public DbSet GetDbSetByType(Type type)
+        {
+            return ctx.Set(type);
         }
     }
 }
