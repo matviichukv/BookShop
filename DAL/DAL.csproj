@@ -64,6 +64,10 @@
     <Compile Include="Migrations\201706121732201_Fix images.Designer.cs">
       <DependentUpon>201706121732201_Fix images.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706131626565_Changed User Entity.cs" />
+    <Compile Include="Migrations\201706131626565_Changed User Entity.Designer.cs">
+      <DependentUpon>201706131626565_Changed User Entity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706121732201_Fix images.resx">
       <DependentUpon>201706121732201_Fix images.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706131626565_Changed User Entity.resx">
+      <DependentUpon>201706131626565_Changed User Entity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

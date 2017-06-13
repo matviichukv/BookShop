@@ -14,16 +14,13 @@ namespace DAL.Entity
             Roles = new List<Role>();
         }
 
-        public int Id { get; set; }
-        [Required]
-        [StringLength(maximumLength:20,MinimumLength = 3)]
-        public string Login { get; set; }
+        public int UserId { get; set; }
         [Required]
         [EmailAddress]
-        public string Email { get; set; }
+        public string UserEmail { get; set; }
         [Required]
         [StringLength(maximumLength:255)]
-        public string Password { get; set; }
+        public string UserPassword { get; set; }
 
         [Required]
         [StringLength(maximumLength:255)]
