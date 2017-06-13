@@ -30,13 +30,13 @@ namespace WcfBookShopService
         IList<string> GetCategories();
 
         [OperationContract]
-        void BuyBook(int bookId);
+        void BuyBook(int bookId, int count, int orderId, int userId);
 
         [OperationContract]
         bool CheckUserCredentials(string email, string password);
 
         [OperationContract]
-        string GetDbSetByType(Type type);
+        string GetDbSetByType(string type);
     }
 
 

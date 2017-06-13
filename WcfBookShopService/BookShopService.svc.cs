@@ -17,9 +17,13 @@ namespace WcfBookShopService
     {
         BookShopContext ctx = new BookShopContext();
 
-        public void BuyBook(int bookId)
+        public void BuyBook(int bookId, int count, int orderId, int userId)
         {
-            throw new NotImplementedException();
+            Order newOrder = new Order() {  BookCount = count,
+                                            OrderNumber = orderId,
+                                            OrderPrice = count * ctx.Books.FirstOrDefault(book => book.BookId == bookId).Price,
+                                            UserId = userId
+            };
         }
 
         public bool CheckUserCredentials(string email, string password)
@@ -87,9 +91,9 @@ namespace WcfBookShopService
             ctx.SaveChanges();
         }
 
-        public string GetDbSetByType(Type type)
+        public string GetDbSetByType(string type)
         {
-            return JsonConvert.SerializeObject(ctx.Set(type));
+            return JsonConvert.SerializeObject(ctx.Set(Type.GetType(type)));
         }
     }
 }

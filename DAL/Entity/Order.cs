@@ -10,11 +10,12 @@ namespace DAL.Entity
 {
     public class Order
     {
-        public int Id { get; set; }
+        public int OrderId { get; set; }
         public int OrderNumber { get; set; }
+        public int OrderPrice { get; set; }
+        public int BookCount { get; set; }
+
         public int UserId { get; set; }
         public User User { get; set; }
-        public int Price { get; set; }
-        public int Count { get; set; }
     }
 }
