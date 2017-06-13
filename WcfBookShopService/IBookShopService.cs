@@ -36,7 +36,7 @@ namespace WcfBookShopService
         bool CheckUserCredentials(string email, string password);
 
         [OperationContract]
-        DbSet GetDbSetByType(Type type);
+        string GetDbSetByType(Type type);
     }
 
 

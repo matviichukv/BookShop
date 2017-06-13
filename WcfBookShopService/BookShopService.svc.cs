@@ -87,9 +87,9 @@ namespace WcfBookShopService
             ctx.SaveChanges();
         }
 
-        public DbSet GetDbSetByType(Type type)
+        public string GetDbSetByType(Type type)
         {
-            return ctx.Set(type);
+            return JsonConvert.SerializeObject(ctx.Set(type));
         }
     }
 }
