@@ -5,17 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
+        Title="MainWindow" Height="550" Width="625">
+    <Grid Background="DarkGray">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.1*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.3*"/>
             <ColumnDefinition/>
+            <ColumnDefinition Width="0.4*"/>
         </Grid.ColumnDefinitions>
-        
+        <DockPanel Grid.Column="1" Grid.Row="0">
+            <Label DockPanel.Dock="Top" HorizontalAlignment="Center">Book Shop</Label>
+            <Button DockPanel.Dock="Right" Background="Blue" Foreground="White" Width="50" Name="searchBtn" Click="searchBtn_Click">Search</Button>
+            <TextBox DockPanel.Dock="Left"></TextBox>
+        </DockPanel>
+        <Button Grid.Column="2" Grid.Row="0" Background="Green" Foreground="White" Margin="20,25,20,0" Name="loginBtn" Click="loginBtn_Click">Login</Button>
+        <StackPanel Grid.Column="0" Grid.Row="1" Name="categorySp">
+            <Label HorizontalAlignment="Center">Categories</Label>
+            <ListBox HorizontalAlignment="Center">
+                <ListBoxItem>Horror</ListBoxItem>
+                <ListBoxItem>Detective</ListBoxItem>
+            </ListBox>
+            </StackPanel>
+        <ListBox Grid.Column="1" Grid.Row="1" Background="Gray">
+            <ListBoxItem>
+                <DockPanel>
+                    <Image DockPanel.Dock="Left" Source="E:\teamProject\WPF_UI\bin\Debug\img_0335.jpg" Height="100" Width="100"></Image>
+                    <Label DockPanel.Dock="Top">Harry Potter</Label>
+                    <Label DockPanel.Dock="Top">Джоан Роулінг</Label>
+                    <Label DockPanel.Dock="Top" Foreground="Orange">139 $</Label>
+                    <Button DockPanel.Dock="Bottom" Background="Orange" Foreground="White">Buy</Button>
+                </DockPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <DockPanel>
+                    <Image DockPanel.Dock="Left" Source="E:\teamProject\WPF_UI\bin\Debug\img_0335.jpg" Height="100" Width="100"></Image>
+                    <Label DockPanel.Dock="Top">Harry Potter</Label>
+                    <Label DockPanel.Dock="Top">Джоан Роулінг</Label>
+                    <Label DockPanel.Dock="Top" Foreground="Orange">139 $</Label>
+                    <Button DockPanel.Dock="Bottom" Background="Orange" Foreground="White">Buy</Button>
+                </DockPanel>
+            </ListBoxItem>
+        </ListBox>
     </Grid>
 </Window>

@@ -25,5 +25,15 @@ namespace WPF_UI
             //hello
             InitializeComponent();
         }
+
+        private void searchBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void loginBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
