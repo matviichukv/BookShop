@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,12 +27,32 @@ namespace WPF_UI
 
         private void okBtn_Click(object sender, RoutedEventArgs e)
         {
+            if(emailTb.Text == "" || firstNameTb.Text == "" || lastNameTb.Text == "" 
+                || passwordPb.Password == "" || confirmPasswordPB.Password == "")
+            {
+                MessageBox.Show("Fill all fields");
+            }
 
+            if(passwordPb.Password != confirmPasswordPB.Password)
+            {
+                MessageBox.Show("Password different");
+            }
         }
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void addPhotoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+
+            if(openFile.ShowDialog() == true)
+            {
+                ImageSource imageSource = new BitmapImage(new Uri(openFile.FileName));
+                userPhotoImg.Source = imageSource;
+            }
         }
     }
 }

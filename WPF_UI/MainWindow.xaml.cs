@@ -33,7 +33,16 @@ namespace WPF_UI
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)
         {
+            Login login = new Login();
+            login.ShowDialog();
+            loginBtn.Visibility = Visibility.Hidden;
+            showUserProfileBtn.Visibility = Visibility.Visible;
+            
+        }
 
+        private void showUserProfileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Hello");
         }
     }
 }

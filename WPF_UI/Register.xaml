@@ -18,16 +18,20 @@
         </Grid.RowDefinitions>
         <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Background="Green" Foreground="White">Registration</Label>
         <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
-            <Label HorizontalAlignment="Right" Margin="0,0,10,0">Login:</Label>
             <Label HorizontalAlignment="Right" Margin="0,0,10,0">Email:</Label>
+            <Label HorizontalAlignment="Right" Margin="0,0,10,0">First name:</Label>
+            <Label HorizontalAlignment="Right" Margin="0,0,10,0">Last name:</Label>
             <Label HorizontalAlignment="Right" Margin="0,0,10,0">Password:</Label>
             <Label HorizontalAlignment="Right" Margin="0,0,10,0">Confirm password:</Label>
+            <Button HorizontalAlignment="Center" Name="addPhotoBtn" Click="addPhotoBtn_Click">Add photo</Button>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
-            <TextBox Margin="0,0,10,5" Name="loginTb"></TextBox>
             <TextBox Margin="0,0,10,5" Name="emailTb"></TextBox>
+            <TextBox Margin="0,0,10,5" Name="firstNameTb"></TextBox>
+            <TextBox Margin="0,0,10,5" Name="lastNameTb"></TextBox>
             <PasswordBox Margin="0,0,10,5" Name="passwordPb"></PasswordBox>
             <PasswordBox Margin="0,0,10,5" Name="confirmPasswordPB"></PasswordBox>
+            <Image Name="userPhotoImg" Margin="0,0,10,0" Height="25" Width="50"></Image>
         </StackPanel>
         <Button Grid.Column="0" Grid.Row="2" Background="Green" Foreground="White" Name="okBtn" Click="okBtn_Click">OK</Button>
         <Button Grid.Column="1" Grid.Row="2" Background="Red" Foreground="White" Name="cancelBtn" Click="cancelBtn_Click">Cancel</Button>

@@ -17,6 +17,9 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="0.4*"/>
         </Grid.ColumnDefinitions>
+        <Button Grid.Column="2" Grid.Row="0" Visibility="Hidden" Name="showUserProfileBtn" Click="showUserProfileBtn_Click" Margin="10,0,10,0">
+            <Image Name="userPhoto" Source="D:\bookShop\DAL\Images\nonePhoto.jpg"></Image>
+        </Button>
         <DockPanel Grid.Column="1" Grid.Row="0">
             <Label DockPanel.Dock="Top" HorizontalAlignment="Center">Book Shop</Label>
             <Button DockPanel.Dock="Right" Background="Blue" Foreground="White" Width="50" Name="searchBtn" Click="searchBtn_Click">Search</Button>
@@ -33,7 +36,7 @@
         <ListBox Grid.Column="1" Grid.Row="1" Background="Gray">
             <ListBoxItem>
                 <DockPanel>
-                    <Image DockPanel.Dock="Left" Source="E:\teamProject\WPF_UI\bin\Debug\img_0335.jpg" Height="100" Width="100"></Image>
+                    <Image DockPanel.Dock="Left" Height="100" Width="100"></Image>
                     <Label DockPanel.Dock="Top">Harry Potter</Label>
                     <Label DockPanel.Dock="Top">Джоан Роулінг</Label>
                     <Label DockPanel.Dock="Top" Foreground="Orange">139 $</Label>
@@ -42,7 +45,7 @@
             </ListBoxItem>
             <ListBoxItem>
                 <DockPanel>
-                    <Image DockPanel.Dock="Left" Source="E:\teamProject\WPF_UI\bin\Debug\img_0335.jpg" Height="100" Width="100"></Image>
+                    <Image DockPanel.Dock="Left" Height="100" Width="100"></Image>
                     <Label DockPanel.Dock="Top">Harry Potter</Label>
                     <Label DockPanel.Dock="Top">Джоан Роулінг</Label>
                     <Label DockPanel.Dock="Top" Foreground="Orange">139 $</Label>
