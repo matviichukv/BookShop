@@ -12,16 +12,17 @@ namespace DAL.Migrations
             RenameColumn(table: "dbo.RoleUsers", name: "User_Id", newName: "User_UserId");
             RenameIndex(table: "dbo.RoleUsers", name: "IX_User_Id", newName: "IX_User_UserId");
             DropPrimaryKey("dbo.Users");
+            DropColumn("dbo.Users", "Id");
+            DropColumn("dbo.Users", "Login");
+            DropColumn("dbo.Users", "Email");
+            DropColumn("dbo.Users", "Password");
             AddColumn("dbo.Users", "UserId", c => c.Int(nullable: false, identity: true));
             AddColumn("dbo.Users", "UserEmail", c => c.String(nullable: false));
             AddColumn("dbo.Users", "UserPassword", c => c.String(nullable: false, maxLength: 255));
             AddPrimaryKey("dbo.Users", "UserId");
             AddForeignKey("dbo.RoleUsers", "User_UserId", "dbo.Users", "UserId", cascadeDelete: true);
             AddForeignKey("dbo.Reviews", "UserId", "dbo.Users", "UserId", cascadeDelete: true);
-            DropColumn("dbo.Users", "Id");
-            DropColumn("dbo.Users", "Login");
-            DropColumn("dbo.Users", "Email");
-            DropColumn("dbo.Users", "Password");
+            
         }
         
         public override void Down()

@@ -6,12 +6,15 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{57056057-69F7-4F22-9EAE-BFFFDF06206B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{820B63F6-190D-4B7F-B881-3E0618F75051}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9ABB40F7-B4A1-416A-9BA3-7340A35D0981} = {9ABB40F7-B4A1-416A-9BA3-7340A35D0981}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_UI", "WPF_UI\WPF_UI.csproj", "{58C8FA3E-7DFC-4D78-BF52-93AF92A9D40D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfBookShopService", "WcfBookShopService\WcfBookShopService.csproj", "{9ABB40F7-B4A1-416A-9BA3-7340A35D0981}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminPanel", "AdminPanel\AdminPanel.csproj", "{BD8B427E-F213-4B15-937A-B698064C1C81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAdmin", "WpfAdmin\WpfAdmin.csproj", "{6FF274DE-67B2-4DE5-9A3D-10CBDF902E67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfBookShopService", "WcfBookShopService\WcfBookShopService.csproj", "{9ABB40F7-B4A1-416A-9BA3-7340A35D0981}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +34,14 @@ Global
 		{58C8FA3E-7DFC-4D78-BF52-93AF92A9D40D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58C8FA3E-7DFC-4D78-BF52-93AF92A9D40D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58C8FA3E-7DFC-4D78-BF52-93AF92A9D40D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD8B427E-F213-4B15-937A-B698064C1C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD8B427E-F213-4B15-937A-B698064C1C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD8B427E-F213-4B15-937A-B698064C1C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD8B427E-F213-4B15-937A-B698064C1C81}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9ABB40F7-B4A1-416A-9BA3-7340A35D0981}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9ABB40F7-B4A1-416A-9BA3-7340A35D0981}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9ABB40F7-B4A1-416A-9BA3-7340A35D0981}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9ABB40F7-B4A1-416A-9BA3-7340A35D0981}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6FF274DE-67B2-4DE5-9A3D-10CBDF902E67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6FF274DE-67B2-4DE5-9A3D-10CBDF902E67}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6FF274DE-67B2-4DE5-9A3D-10CBDF902E67}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6FF274DE-67B2-4DE5-9A3D-10CBDF902E67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
