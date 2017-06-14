@@ -5,10 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="625">
+        Title="MainWindow" Height="760" Width="625">
+    <Window.Resources>
+        <ControlTemplate TargetType="Button" x:Key="btTemplate">
+            <Border CornerRadius="50" BorderBrush="Black" BorderThickness="1"
+                    Background="white" Height="40" Width="60" >
+                <ContentControl Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image></Image>
+                </ContentControl>
+            </Border>
+        </ControlTemplate>
+    </Window.Resources>
+    
     <Grid Background="DarkGray">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.07*"/>
+            <RowDefinition Height="0.05*" />
             <RowDefinition/>
         </Grid.RowDefinitions>
         
@@ -17,41 +29,141 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="0.4*"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="2" Grid.Row="0" Visibility="Hidden" Name="showUserProfileBtn" Click="showUserProfileBtn_Click" Margin="10,0,10,0">
-            <Image Name="userPhoto" Source="D:\bookShop\DAL\Images\nonePhoto.jpg"></Image>
+
+        <Button Template="{StaticResource btTemplate}" Grid.Column="2" Grid.Row="0" Visibility="Hidden" Name="showUserProfileBtn" Click="showUserProfileBtn_Click" Margin="10,5,10,0">
+            <Image Name="userPhoto"></Image>
+        </Button>
+        <Button Grid.Column="2" Grid.Row="1" Name="cartBtn" Margin="10,0,10,0" Visibility="Hidden">
+            <WrapPanel>
+                <Label>Cart</Label>
+                <Image></Image>
+                <Label Foreground="Orange">0</Label>
+            </WrapPanel>
         </Button>
         <DockPanel Grid.Column="1" Grid.Row="0">
             <Label DockPanel.Dock="Top" HorizontalAlignment="Center">Book Shop</Label>
             <Button DockPanel.Dock="Right" Background="Blue" Foreground="White" Width="50" Name="searchBtn" Click="searchBtn_Click">Search</Button>
             <TextBox DockPanel.Dock="Left"></TextBox>
         </DockPanel>
+        <Button Grid.Column="0" Grid.Row="1" Margin="30,0,30,0">Back</Button>
         <Button Grid.Column="2" Grid.Row="0" Background="Green" Foreground="White" Margin="20,25,20,0" Name="loginBtn" Click="loginBtn_Click">Login</Button>
-        <StackPanel Grid.Column="0" Grid.Row="1" Name="categorySp">
+        <StackPanel Grid.Column="0" Grid.Row="2" Name="categorySp">
             <Label HorizontalAlignment="Center">Categories</Label>
             <ListBox HorizontalAlignment="Center">
                 <ListBoxItem>Horror</ListBoxItem>
                 <ListBoxItem>Detective</ListBoxItem>
             </ListBox>
             </StackPanel>
-        <ListBox Grid.Column="1" Grid.Row="1" Background="Gray">
-            <ListBoxItem>
-                <DockPanel>
-                    <Image DockPanel.Dock="Left" Height="100" Width="100"></Image>
-                    <Label DockPanel.Dock="Top">Harry Potter</Label>
-                    <Label DockPanel.Dock="Top">Джоан Роулінг</Label>
-                    <Label DockPanel.Dock="Top" Foreground="Orange">139 $</Label>
-                    <Button DockPanel.Dock="Bottom" Background="Orange" Foreground="White">Buy</Button>
+        <TabControl Grid.Column="1" Grid.Row="2" Name="tabControl">
+            <TabItem Visibility="Hidden" Name="mainWindowTab">
+                <StackPanel Background="Gray"></StackPanel>
+            </TabItem>
+            <TabItem Visibility="Hidden" Name="searchTab">
+                <DockPanel Background="Gray">
+                    <ListBox Grid.Column="1" Grid.Row="2" Background="Gray" DockPanel.Dock="Bottom" Name="booksLb" SelectionChanged="booksLb_SelectionChanged">
+                        <ListBoxItem>
+                            <DockPanel>
+                                <Image DockPanel.Dock="Left" Height="100" Width="100"></Image>
+                                <Label DockPanel.Dock="Top">Harry Potter</Label>
+                                <Label DockPanel.Dock="Top">Джоан Роулінг</Label>
+                                <Label DockPanel.Dock="Top" Foreground="Orange">139 $</Label>
+                                <Button DockPanel.Dock="Bottom" Background="Orange" Foreground="White">Buy</Button>
+                            </DockPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <DockPanel>
+                                <Image DockPanel.Dock="Left" Height="100" Width="100"></Image>
+                                <Label DockPanel.Dock="Top">Harry Potter</Label>
+                                <Label DockPanel.Dock="Top">Джоан Роулінг</Label>
+                                <Label DockPanel.Dock="Top" Foreground="Orange">139 $</Label>
+                                <Button DockPanel.Dock="Bottom" Background="Orange" Foreground="White">Buy</Button>
+                            </DockPanel>
+                        </ListBoxItem>
+                    </ListBox>
                 </DockPanel>
-            </ListBoxItem>
-            <ListBoxItem>
-                <DockPanel>
-                    <Image DockPanel.Dock="Left" Height="100" Width="100"></Image>
-                    <Label DockPanel.Dock="Top">Harry Potter</Label>
-                    <Label DockPanel.Dock="Top">Джоан Роулінг</Label>
-                    <Label DockPanel.Dock="Top" Foreground="Orange">139 $</Label>
-                    <Button DockPanel.Dock="Bottom" Background="Orange" Foreground="White">Buy</Button>
-                </DockPanel>
-            </ListBoxItem>
-        </ListBox>
+            </TabItem>
+            <TabItem Visibility="Hidden">
+                <StackPanel Background="Gray">
+                    <Label HorizontalAlignment="Center" Foreground="Orange" FontSize="20">Title</Label>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Height="130" HorizontalAlignment="Center"></Image>
+                        <StackPanel Grid.Column="1">
+                            <Label>Author:</Label>
+                            <Label>Publish:</Label>
+                            <Label>Language:</Label>
+                            <Label>Publish date:</Label>
+                            <Label>Volume:</Label>
+                            <Label>Price :</Label>
+                            <Button Margin="50,0,50,0" Background="Orange" Foreground="White">Buy</Button>
+                        </StackPanel>
+                    </Grid>
+                    <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center">Description:</Label>
+                    <Label>asdsdadka</Label>
+                    <Label HorizontalAlignment="Center">About author</Label>
+                    <DockPanel Margin="10">
+                        <Image Height="100" DockPanel.Dock="Left"></Image>
+                        <Label DockPanel.Dock="Top">Name</Label>
+                        <TextBox AcceptsReturn="True" MaxLines="4" MinLines="2" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap">aaaaaaaaaaaaaaaaaaaaaaddd</TextBox>
+                    </DockPanel>
+                    <Label HorizontalAlignment="Center">Reviews</Label>
+                    <ListBox Margin="5" Background="Gray" Height="150">
+                        <ListBoxItem>
+                            <DockPanel>
+                                <Label DockPanel.Dock="Top">Harry Potter, 2017.06.14</Label>
+                                <TextBox DockPanel.Dock="top" AcceptsReturn="True" MaxLines="2" MinLines="2" Width="310" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap">aaa3333333333334444444555555555555566666666667aaaaaaaaaaaaaaaaaaadddbbbbbbbbbbdddddddddddaa</TextBox>
+                                <WrapPanel DockPanel.Dock="Bottom">
+                                    <Button>Up</Button>
+                                    <Label>1</Label>
+                                    <Button>Down</Button>
+                                    <Label>0</Label>
+                                </WrapPanel>
+                            </DockPanel>
+                        </ListBoxItem>
+
+                        <ListBoxItem>
+                            <DockPanel>
+                                <Label DockPanel.Dock="Top">Harry Potter, 2017.06.14</Label>
+                                <TextBox DockPanel.Dock="top" AcceptsReturn="True" MaxLines="2" MinLines="2" Width="310" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap">aaa3333333333334444444555555555555566666666667aaaaaaaaaaaaaaaaaaadddbbbbbbbbbbdddddddddddaa</TextBox>
+                                <WrapPanel DockPanel.Dock="Bottom">
+                                    <Button>Up</Button>
+                                    <Label>3</Label>
+                                    <Button>Down</Button>
+                                    <Label>2</Label>
+                                </WrapPanel>
+                            </DockPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <DockPanel>
+                                <Label DockPanel.Dock="Top">Harry Potter, 2017.06.14</Label>
+                                <TextBox DockPanel.Dock="top" AcceptsReturn="True" MaxLines="2" MinLines="2" Width="310" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap">aaa3333333333334444444555555555555566666666667aaaaaaaaaaaaaaaaaaadddbbbbbbbbbbdddddddddddaa</TextBox>
+                                <WrapPanel DockPanel.Dock="Bottom">
+                                    <Button>Up</Button>
+                                    <Label>4</Label>
+                                    <Button>Down</Button>
+                                    <Label>1</Label>
+                                </WrapPanel>
+                            </DockPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <DockPanel>
+                                <Label DockPanel.Dock="Top">Harry Potter, 2017.06.14</Label>
+                                <TextBox DockPanel.Dock="top" AcceptsReturn="True" MaxLines="2" MinLines="2" Width="310" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap">aaa3333333333334444444555555555555566666666667aaaaaaaaaaaaaaaaaaadddbbbbbbbbbbdddddddddddaa</TextBox>
+                                <WrapPanel DockPanel.Dock="Bottom">
+                                    <Button>Up</Button>
+                                    <Label>2</Label>
+                                    <Button>Down</Button>
+                                    <Label>2</Label>
+                                </WrapPanel>
+                            </DockPanel>
+                        </ListBoxItem>
+                    </ListBox>
+                    <Button Margin="100,10,100,0">Send review</Button>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
