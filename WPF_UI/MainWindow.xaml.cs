@@ -28,7 +28,7 @@ namespace WPF_UI
 
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            tabControl.SelectedIndex = 1;
         }
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)
@@ -37,12 +37,18 @@ namespace WPF_UI
             login.ShowDialog();
             loginBtn.Visibility = Visibility.Hidden;
             showUserProfileBtn.Visibility = Visibility.Visible;
+            cartBtn.Visibility = Visibility.Visible;
             
         }
 
         private void showUserProfileBtn_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Hello");
+        }
+
+        private void booksLb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tabControl.SelectedIndex = 2;
         }
     }
 }
