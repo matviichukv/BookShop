@@ -61,22 +61,36 @@
             <TabItem Visibility="Hidden" Name="searchTab">
                 <DockPanel Background="Gray">
                     <ListBox Grid.Column="1" Grid.Row="2" Background="Gray" DockPanel.Dock="Bottom" Name="booksLb" SelectionChanged="booksLb_SelectionChanged">
-                        <ListBoxItem>
-                            <DockPanel>
-                                <Image DockPanel.Dock="Left" Height="100" Width="100"></Image>
-                                <Label DockPanel.Dock="Top">Harry Potter</Label>
-                                <Label DockPanel.Dock="Top">Джоан Роулінг</Label>
-                                <Label DockPanel.Dock="Top" Foreground="Orange">139 $</Label>
-                                <Button DockPanel.Dock="Bottom" Background="Orange" Foreground="White">Buy</Button>
+                        <ListBoxItem Width="360" HorizontalAlignment="Right">
+                            <DockPanel Width="350">
+                                <Image DockPanel.Dock="Left" Source="C:\Users\Sergiy\Documents\Visual Studio 2017\Projects\BookShop(teamwork)\DAL\Images\harry_poter.jpg" Height="100" Width="84"/>
+                                <DockPanel Width="136" HorizontalAlignment="Left" Height="96" >
+                                    <Label DockPanel.Dock="Top" Name="bookName" Content="Harry Potter" Height="28" FontWeight="Bold" FontSize="13" Foreground="#FF020208"/>
+                                    <Label DockPanel.Dock="Top" Name="autorName" Height="22" Content="Джоан Роулінг" FontSize="9" Foreground="Black" FontWeight="Medium"/>
+                                    <TextBlock DockPanel.Dock="Top" Name="description" TextWrapping="Wrap" FontSize="8" Margin="10,0,0,0" Height="46" VerticalAlignment="Bottom">Приключение волшебника гарика в стране программистов и бла бла бла пришел тут он и победил админа.</TextBlock>
+                                </DockPanel>
+                                <DockPanel Height="72" VerticalAlignment="Bottom" Width="104" HorizontalAlignment="Right">
+                                    <Label DockPanel.Dock="left" Margin="0,3,0,0" Foreground="Orange" Content="Price:" Height="29" Width="42" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                                    <Label DockPanel.Dock="Top" Margin="5.333,3,10,0" Foreground="LightGreen" Content="139 $" Height="29" HorizontalContentAlignment="Right" FontSize="14"/>
+                                    <Button DockPanel.Dock="Bottom" Margin="-20,0,10,8" Background="#FFF0C35D" Foreground="White" Content="Buy" Height="22" Width="72" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                                </DockPanel>
+
                             </DockPanel>
                         </ListBoxItem>
-                        <ListBoxItem>
-                            <DockPanel>
-                                <Image DockPanel.Dock="Left" Height="100" Width="100"></Image>
-                                <Label DockPanel.Dock="Top">Harry Potter</Label>
-                                <Label DockPanel.Dock="Top">Джоан Роулінг</Label>
-                                <Label DockPanel.Dock="Top" Foreground="Orange">139 $</Label>
-                                <Button DockPanel.Dock="Bottom" Background="Orange" Foreground="White">Buy</Button>
+                        <ListBoxItem Width="360" HorizontalAlignment="Right">
+                            <DockPanel Width="350">
+                                <Image DockPanel.Dock="Left" Source="C:\Users\Sergiy\Documents\Visual Studio 2017\Projects\BookShop(teamwork)\DAL\Images\harry_poter.jpg" Height="100" Width="84"/>
+                                <DockPanel Width="136" HorizontalAlignment="Left" Height="96" >
+                                    <Label DockPanel.Dock="Top" Content="Harry Potter" Height="28" FontWeight="Bold" FontSize="13" Foreground="#FF020208"/>
+                                    <Label DockPanel.Dock="Top"  Height="22" Content="Джоан Роулінг" FontSize="9" Foreground="Black" FontWeight="Medium"/>
+                                    <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" FontSize="8" Margin="10,0,0,0" Height="46" VerticalAlignment="Bottom">Приключение волшебника гарика в стране программистов и бла бла бла пришел тут он и победил админа.</TextBlock>
+                                </DockPanel>
+                                <DockPanel Height="72" VerticalAlignment="Bottom" Width="104" HorizontalAlignment="Right">
+                                    <Label DockPanel.Dock="left" Margin="0,3,0,0" Foreground="Orange" Content="Price:" Height="29" Width="42" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                                    <Label DockPanel.Dock="Top" Margin="5.333,3,10,0" Foreground="LightGreen" Content="139 $" Height="29" HorizontalContentAlignment="Right" FontSize="14"/>
+                                    <Button DockPanel.Dock="Bottom" Margin="-20,0,10,8" Background="#FFF0C35D" Foreground="White" Content="Buy" Height="22" Width="72" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                                </DockPanel>
+
                             </DockPanel>
                         </ListBoxItem>
                     </ListBox>

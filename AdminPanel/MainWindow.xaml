@@ -1,0 +1,32 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdminPanel"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="AdminPanel.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.35*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <ComboBox Name="TableSelectionComboBox" SelectionChanged="ComboBox_SelectionChanged" >
+                <System:String>Users</System:String>
+                <System:String>Roles</System:String>
+                <System:String>Books</System:String>
+                <System:String>Authors</System:String>
+                <System:String>Images</System:String>
+                <System:String>Publishers</System:String>
+                <System:String>Categories</System:String>
+                <System:String>Nationalities</System:String>
+                <System:String>Orders</System:String>
+                <System:String>Reviews</System:String>
+            </ComboBox>
+            <Button Content="Save changes" Click="SaveButton_Click"/>
+        </StackPanel>
+        <DataGrid Grid.Column="1" x:Name="TableDataGrid" ItemsSource="{Binding}"/>
+    </Grid>
+</Window>

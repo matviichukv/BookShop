@@ -9,7 +9,7 @@ namespace DAL.Entity
 {
     public class BookShopContext : DbContext
     {
-        public BookShopContext() : base("BookShopDB")
+        public BookShopContext() : base("name=BookShopDb")
         {
             Database.SetInitializer<BookShopContext>(null);
         }

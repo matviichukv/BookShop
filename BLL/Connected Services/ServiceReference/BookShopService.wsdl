@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BookShopService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:2233/BookShopService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:2233/BookShopService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:2233/BookShopService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IBookShopService_GetBooks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBooks" />
+  </wsdl:message>
+  <wsdl:message name="IBookShopService_GetBooks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBooksResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBookShopService_RegisterUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterUser" />
+  </wsdl:message>
+  <wsdl:message name="IBookShopService_RegisterUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBookShopService_GetBooksByCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBooksByCategory" />
+  </wsdl:message>
+  <wsdl:message name="IBookShopService_GetBooksByCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBooksByCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBookShopService_GetUserInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="IBookShopService_GetUserInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBookShopService_GetCategories_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCategories" />
+  </wsdl:message>
+  <wsdl:message name="IBookShopService_GetCategories_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBookShopService_BuyBook_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuyBook" />
+  </wsdl:message>
+  <wsdl:message name="IBookShopService_BuyBook_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuyBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBookShopService_CheckUserCredentials_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckUserCredentials" />
+  </wsdl:message>
+  <wsdl:message name="IBookShopService_CheckUserCredentials_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckUserCredentialsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBookShopService_GetDbSetByType_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDbSetByType" />
+  </wsdl:message>
+  <wsdl:message name="IBookShopService_GetDbSetByType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDbSetByTypeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IBookShopService">
+    <wsdl:operation name="GetBooks">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBookShopService/GetBooks" message="tns:IBookShopService_GetBooks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBookShopService/GetBooksResponse" message="tns:IBookShopService_GetBooks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBookShopService/RegisterUser" message="tns:IBookShopService_RegisterUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBookShopService/RegisterUserResponse" message="tns:IBookShopService_RegisterUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBooksByCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBookShopService/GetBooksByCategory" message="tns:IBookShopService_GetBooksByCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBookShopService/GetBooksByCategoryResponse" message="tns:IBookShopService_GetBooksByCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBookShopService/GetUserInfo" message="tns:IBookShopService_GetUserInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBookShopService/GetUserInfoResponse" message="tns:IBookShopService_GetUserInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCategories">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBookShopService/GetCategories" message="tns:IBookShopService_GetCategories_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBookShopService/GetCategoriesResponse" message="tns:IBookShopService_GetCategories_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuyBook">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBookShopService/BuyBook" message="tns:IBookShopService_BuyBook_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBookShopService/BuyBookResponse" message="tns:IBookShopService_BuyBook_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserCredentials">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBookShopService/CheckUserCredentials" message="tns:IBookShopService_CheckUserCredentials_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBookShopService/CheckUserCredentialsResponse" message="tns:IBookShopService_CheckUserCredentials_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDbSetByType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBookShopService/GetDbSetByType" message="tns:IBookShopService_GetDbSetByType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBookShopService/GetDbSetByTypeResponse" message="tns:IBookShopService_GetDbSetByType_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IBookShopService" type="tns:IBookShopService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetBooks">
+      <soap:operation soapAction="http://tempuri.org/IBookShopService/GetBooks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterUser">
+      <soap:operation soapAction="http://tempuri.org/IBookShopService/RegisterUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBooksByCategory">
+      <soap:operation soapAction="http://tempuri.org/IBookShopService/GetBooksByCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <soap:operation soapAction="http://tempuri.org/IBookShopService/GetUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCategories">
+      <soap:operation soapAction="http://tempuri.org/IBookShopService/GetCategories" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuyBook">
+      <soap:operation soapAction="http://tempuri.org/IBookShopService/BuyBook" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUserCredentials">
+      <soap:operation soapAction="http://tempuri.org/IBookShopService/CheckUserCredentials" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDbSetByType">
+      <soap:operation soapAction="http://tempuri.org/IBookShopService/GetDbSetByType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BookShopService">
+    <wsdl:port name="BasicHttpBinding_IBookShopService" binding="tns:BasicHttpBinding_IBookShopService">
+      <soap:address location="http://localhost:2233/BookShopService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
