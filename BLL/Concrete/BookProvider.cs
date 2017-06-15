@@ -78,33 +78,19 @@ namespace BLL.Concrete
 
         public List<BookShortInfoViewModel> SearchBooks(string filter)
         {
-            List<BookShortInfoViewModel> result = new List<BookShortInfoViewModel>();
+            var filteredBooks = bookRepository.GetBooks().AsQueryable();
 
-            foreach (var book in bookRepository.GetBooks().Where(t => t.BookName.Contains(filter)))
-            {
-                result.Add(new BookShortInfoViewModel()
+            var result = filteredBooks
+                .Where(r => r.BookName.Contains("Taras") || r.BookAuthor.AuthorName.Contains("Taras"))
+                .Select(b => new BookShortInfoViewModel()
                 {
-                    BookAuthorName = book.BookAuthor.AuthorName,
-                    BookDescription = book.Description,
-                    BookId = book.BookId,
-                    BookName = book.BookName,
-                    BookImagePath = book.BookImage.PathToImageFile,
-                    BookPrice = book.Price
-                });
-            }
-
-            foreach (var book in bookRepository.GetBooks().Where(t => t.BookAuthor.AuthorName.Contains(filter)))
-            {
-                result.Add(new BookShortInfoViewModel()
-                {
-                    BookAuthorName = book.BookAuthor.AuthorName,
-                    BookDescription = book.Description,
-                    BookId = book.BookId,
-                    BookName = book.BookName,
-                    BookImagePath = book.BookImage.PathToImageFile,
-                    BookPrice = book.Price
-                });
-            }
+                    BookAuthorName = b.BookAuthor.AuthorName,
+                    BookDescription = b.Description,
+                    BookId = b.BookId,
+                    BookName = b.BookName,
+                    BookImagePath = b.BookImage.PathToImageFile,
+                    BookPrice = b.Price
+                }).ToList();
 
             return result;
         }
