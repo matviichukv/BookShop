@@ -10,5 +10,6 @@ namespace DAL.Abstract
     public interface IBookRepository
     {
         Book GetBookById(int bookId);
+        List<Book> GetBooks();
     }
 }

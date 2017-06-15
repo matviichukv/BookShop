@@ -10,5 +10,7 @@ namespace BLL.Abstract
     interface IBookProvider
     {
         BookInfoViewModel GetBookInfo(int bookId);
+        List<BookShortInfoViewModel> GetBooks();
+        List<BookShortInfoViewModel> SearchBooks(string filter);
     }
 }

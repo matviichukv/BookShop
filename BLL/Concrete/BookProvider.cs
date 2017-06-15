@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 using BLL.Models;
 using DAL.Concrete;
 using DAL.Entity;
@@ -53,6 +54,59 @@ namespace BLL.Concrete
             };
             
             return bookInfo;
+        }
+
+        public List<BookShortInfoViewModel> GetBooks()
+        {
+            List<BookShortInfoViewModel> result = new List<BookShortInfoViewModel>();
+
+            foreach (var book in bookRepository.GetBooks())
+            {
+                result.Add(new BookShortInfoViewModel()
+                {
+                    BookAuthorName = book.BookAuthor.AuthorName,
+                    BookDescription = book.Description,
+                    BookId = book.BookId,
+                    BookName = book.BookName,
+                    BookImagePath = book.BookImage.PathToImageFile,
+                    BookPrice = book.Price
+                });
+            }
+
+            return result;
+        }
+
+        public List<BookShortInfoViewModel> SearchBooks(string filter)
+        {
+            List<BookShortInfoViewModel> result = new List<BookShortInfoViewModel>();
+
+            foreach (var book in bookRepository.GetBooks().Where(t => t.BookName.Contains(filter)))
+            {
+                result.Add(new BookShortInfoViewModel()
+                {
+                    BookAuthorName = book.BookAuthor.AuthorName,
+                    BookDescription = book.Description,
+                    BookId = book.BookId,
+                    BookName = book.BookName,
+                    BookImagePath = book.BookImage.PathToImageFile,
+                    BookPrice = book.Price
+                });
+            }
+
+            foreach (var book in bookRepository.GetBooks().Where(t => t.BookAuthor.AuthorName.Contains(filter)))
+            {
+                result.Add(new BookShortInfoViewModel()
+                {
+                    BookAuthorName = book.BookAuthor.AuthorName,
+                    BookDescription = book.Description,
+                    BookId = book.BookId,
+                    BookName = book.BookName,
+                    BookImagePath = book.BookImage.PathToImageFile,
+                    BookPrice = book.Price
+                });
+            }
+
+            return result;
         }
     }
 }

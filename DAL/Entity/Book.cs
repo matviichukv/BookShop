@@ -25,7 +25,7 @@ namespace DAL.Entity
         public int Count { get; set; }
 
         public int PublisherId { get; set; }
-        public Publisher BookPublisher;
+        public Publisher BookPublisher { get; set; }
         
         public int? ImageId { get; set; }
         public Image BookImage { get; set; }
