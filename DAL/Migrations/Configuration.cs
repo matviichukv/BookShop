@@ -26,6 +26,11 @@ namespace DAL.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            context.Users.AddOrUpdate(
+                u => u.UserEmail,
+                new Entity.User { UserEmail = "v.matv@gmail.com", UserName = "Matv", UserPassword = "123" }
+                );
         }
     }
 }

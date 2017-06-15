@@ -13,7 +13,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <ComboBox Name="TableSelectionComboBox" SelectionChanged="ComboBox_SelectionChanged" >
+            <ComboBox Name="TableSelectionComboBox" SelectionChanged="TableSelection_SelectionChanged" >
                 <System:String>Users</System:String>
                 <System:String>Roles</System:String>
                 <System:String>Books</System:String>

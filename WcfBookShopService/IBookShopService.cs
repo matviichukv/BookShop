@@ -1,5 +1,6 @@
 ﻿using DAL.Entity;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -36,7 +37,10 @@ namespace WcfBookShopService
         bool CheckUserCredentials(string email, string password);
 
         [OperationContract]
-        string GetDbSetByType(string type);
+        IList GetDbSetByType(string type);
+
+        [OperationContract]
+        void ContextSaveChanges();
     }
 
 

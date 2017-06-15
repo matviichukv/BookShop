@@ -8,6 +8,9 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using System.Data.Entity;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+using System.Collections;
 
 namespace WcfBookShopService
 {
@@ -19,11 +22,15 @@ namespace WcfBookShopService
 
         public void BuyBook(int bookId, int count, int orderId, int userId)
         {
-            Order newOrder = new Order() {  BookCount = count,
-                                            OrderNumber = orderId,
-                                            OrderPrice = count * ctx.Books.FirstOrDefault(book => book.BookId == bookId).Price,
-                                            UserId = userId
+            Order newOrder = new Order()
+            {
+                BookCount = count,
+                OrderNumber = orderId,
+                OrderPrice = count * ctx.Books.FirstOrDefault(book => book.BookId == bookId).Price,
+                UserId = userId
             };
+
+
         }
 
         public bool CheckUserCredentials(string email, string password)
@@ -81,9 +88,11 @@ namespace WcfBookShopService
 
         public void RegisterUser(string name, string email, string password)
         {
-            User newUser = new User() { UserEmail = email,
-                                        UserName = name,
-                                        UserPassword = BCrypt.Net.BCrypt.HashPassword(password, "abc")
+            User newUser = new User()
+            {
+                UserEmail = email,
+                UserName = name,
+                UserPassword = BCrypt.Net.BCrypt.HashPassword(password, "abc")
             };
 
             newUser.Roles.Add(ctx.Roles.FirstOrDefault(role => role.RoleName == "User"));
@@ -91,9 +100,22 @@ namespace WcfBookShopService
             ctx.SaveChanges();
         }
 
-        public string GetDbSetByType(string type)
+        public IList GetDbSetByType(string type)
         {
-            return JsonConvert.SerializeObject(ctx.Set(Type.GetType(type)));
+            using (var memory = new MemoryStream())
+            {
+                BinaryFormatter binary = new BinaryFormatter();
+
+                Type mytype = typeof(Book).Assembly.GetTypes().FirstOrDefault(t => t.Name == type);
+                var dbSet = ctx.Set(mytype);
+                ctx.Users.Load();
+                return ctx.Users.Local;
+            }
+        }
+
+        public void ContextSaveChanges()
+        {
+            ctx.SaveChanges();
         }
     }
 }

@@ -55,6 +55,12 @@
   <wsdl:message name="IBookShopService_GetDbSetByType_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetDbSetByTypeResponse" />
   </wsdl:message>
+  <wsdl:message name="IBookShopService_ContextSaveChanges_InputMessage">
+    <wsdl:part name="parameters" element="tns:ContextSaveChanges" />
+  </wsdl:message>
+  <wsdl:message name="IBookShopService_ContextSaveChanges_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ContextSaveChangesResponse" />
+  </wsdl:message>
   <wsdl:portType name="IBookShopService">
     <wsdl:operation name="GetBooks">
       <wsdl:input wsaw:Action="http://tempuri.org/IBookShopService/GetBooks" message="tns:IBookShopService_GetBooks_InputMessage" />
@@ -87,6 +93,10 @@
     <wsdl:operation name="GetDbSetByType">
       <wsdl:input wsaw:Action="http://tempuri.org/IBookShopService/GetDbSetByType" message="tns:IBookShopService_GetDbSetByType_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBookShopService/GetDbSetByTypeResponse" message="tns:IBookShopService_GetDbSetByType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ContextSaveChanges">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBookShopService/ContextSaveChanges" message="tns:IBookShopService_ContextSaveChanges_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBookShopService/ContextSaveChangesResponse" message="tns:IBookShopService_ContextSaveChanges_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IBookShopService" type="tns:IBookShopService">
@@ -156,6 +166,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetDbSetByType">
       <soap:operation soapAction="http://tempuri.org/IBookShopService/GetDbSetByType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ContextSaveChanges">
+      <soap:operation soapAction="http://tempuri.org/IBookShopService/ContextSaveChanges" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
