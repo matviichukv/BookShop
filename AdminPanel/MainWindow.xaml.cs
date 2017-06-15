@@ -16,6 +16,8 @@ using BLL;
 using DAL.Entity;
 using System.Data.Entity.Design.PluralizationServices;
 using System.Globalization;
+using System.Data.Entity;
+using System.Reflection;
 
 namespace AdminPanel
 {
@@ -25,17 +27,29 @@ namespace AdminPanel
     public partial class MainWindow : Window
     {
         BookShopContext ctx = new BookShopContext();
+        private readonly Dictionary<string, DbSet> DbSets = new Dictionary<string, DbSet>();
 
         public MainWindow()
         {
             InitializeComponent();
-
+            #region dictionary fill
+            DbSets.Add("Users", ctx.Users);
+            DbSets.Add("Roles", ctx.Roles);
+            DbSets.Add("Authors", ctx.Authors);
+            DbSets.Add("Books", ctx.Books);
+            DbSets.Add("Categories", ctx.Categories);
+            DbSets.Add("Images", ctx.Images);
+            DbSets.Add("Nationalities", ctx.Nationalities);
+            DbSets.Add("Orders", null);
+            DbSets.Add("Publishers", ctx.Publishers);
+            DbSets.Add("Reviews", ctx.Reviews);
+            #endregion
         }
 
         private void TableSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            PluralizationService service = PluralizationService.CreateService(CultureInfo.GetCultureInfo("en-US"));
-            var dbset = ctx.Set(typeof(Book).Assembly.GetTypes().FirstOrDefault(t => t.Name == service.Singularize(TableSelectionComboBox.SelectedItem.ToString() )));
+            var dbset = DbSets[TableSelectionComboBox.SelectedItem.ToString()];
+            dbset.Load();
             TableDataGrid.DataContext = dbset.Local;
 
         }
