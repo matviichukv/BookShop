@@ -22,7 +22,7 @@ namespace DAL.Entity
         public int PublisherId { get; set; }
         public Publisher BookPublisher;
         
-        public int ImageId { get; set; }
+        public int? ImageId { get; set; }
         public Image BookImage { get; set; }
 
         public int CategoryId { get; set; }
