@@ -24,6 +24,9 @@ namespace DAL.Entity
         [Required]
         [StringLength(maximumLength:255)]
         public string UserName { get; set; }
+
+        [Required]
+        public string Salt { get; set; }
         
         public int ImageId { get; set; }
         public virtual Image Avatar { get; set; }

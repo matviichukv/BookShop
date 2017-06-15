@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace BLL.Abstract
 {
     interface IUserProvider
     {
-
+        UserStatus CreateUser(UserCreateViewModel userModel);
     }
 }

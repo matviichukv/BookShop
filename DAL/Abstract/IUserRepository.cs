@@ -10,5 +10,6 @@ namespace DAL.Abstract
     public interface IUserRepository
     {
         User CreateUser(User user);
+        List<string> GetEmails();
     }
 }

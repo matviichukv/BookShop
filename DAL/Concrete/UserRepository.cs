@@ -18,5 +18,17 @@ namespace DAL.Concrete
             ctx.SaveChanges();
             return user;
         }
+
+        public List<string> GetEmails()
+        {
+            List<string> result = new List<string>();
+
+            foreach (var user in ctx.Users)
+            {
+                result.Add(user.UserEmail);
+            }
+
+            return result;
+        }
     }
 }
