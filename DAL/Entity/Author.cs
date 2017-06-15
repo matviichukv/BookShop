@@ -15,12 +15,14 @@ namespace DAL.Entity
         }
         public int AuthorId { get; set; }
         public string AuthorName { get; set; }
-        public ICollection<Book> WrittenBooks { get; set; }
+        public string Description { get; set; }
+
         public int NationalityId { get; set; }
         public Nationality AuthorNationality { get; set; }
-        public string Description { get; set; }
 
         public int ImageId { get; set; }
         public virtual Image AuthorImage { get; set; }
+
+        public ICollection<Book> WrittenBooks { get; set; }
     }
 }

@@ -13,11 +13,12 @@ namespace DAL.Entity
         [Required]
         public string Message { get; set; }
         public DateTime Date { get; set; }
-
         public int ThumbUp { get; set; }
         public int ThumbDown { get; set; }
+
         public int UserId { get; set; }
         public User User { get; set; }
+
         public int BookId { get; set; }
         public Book Book { get; set; }
     }

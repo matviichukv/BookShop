@@ -22,7 +22,6 @@ namespace DAL.Migrations
             AddPrimaryKey("dbo.Users", "UserId");
             AddForeignKey("dbo.RoleUsers", "User_UserId", "dbo.Users", "UserId", cascadeDelete: true);
             AddForeignKey("dbo.Reviews", "UserId", "dbo.Users", "UserId", cascadeDelete: true);
-            
         }
         
         public override void Down()

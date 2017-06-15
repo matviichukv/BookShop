@@ -16,6 +16,7 @@ namespace DAL.Entity
         public int PublisherId { get; set; }
         public string PublisherName { get; set; }
         public string PublisherCity { get; set; }
+
         public ICollection<Book> PublishedBooks { get; private set; }
     }
 }
