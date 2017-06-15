@@ -33,7 +33,7 @@
         <Button Template="{StaticResource btTemplate}" Grid.Column="2" Grid.Row="0" Visibility="Hidden" Name="showUserProfileBtn" Click="showUserProfileBtn_Click" Margin="10,5,10,0">
             <Image Name="userPhoto"></Image>
         </Button>
-        <Button Grid.Column="2" Grid.Row="1" Name="cartBtn" Margin="10,0,10,0" Visibility="Hidden">
+        <Button Grid.Column="2" Grid.Row="1" Name="cartBtn" Margin="10,0,10,0" Visibility="Hidden" Click="cartBtn_Click">
             <WrapPanel>
                 <Label>Cart</Label>
                 <Image></Image>
@@ -55,9 +55,11 @@
             </ListBox>
             </StackPanel>
         <TabControl Grid.Column="1" Grid.Row="2" Name="tabControl">
+            <!--Start window-->
             <TabItem Visibility="Hidden" Name="mainWindowTab">
                 <StackPanel Background="Gray"></StackPanel>
             </TabItem>
+            <!--Search window-->
             <TabItem Visibility="Hidden" Name="searchTab">
                 <DockPanel Background="Gray">
                     <ListBox Grid.Column="1" Grid.Row="2" Background="Gray" DockPanel.Dock="Bottom" Name="booksLb" SelectionChanged="booksLb_SelectionChanged">
@@ -96,6 +98,7 @@
                     </ListBox>
                 </DockPanel>
             </TabItem>
+            <!--Full info book-->
             <TabItem Visibility="Hidden">
                 <StackPanel Background="Gray">
                     <Label HorizontalAlignment="Center" Foreground="Orange" FontSize="20">Title</Label>
@@ -176,6 +179,54 @@
                         </ListBoxItem>
                     </ListBox>
                     <Button Margin="100,10,100,0">Send review</Button>
+                </StackPanel>
+            </TabItem>
+            <!--Cart window-->
+            <TabItem Visibility="Hidden">
+                <StackPanel Background="Gray">
+                    <Label FontSize="20" Background="Orange" Foreground="White">The goods are delivered to the cat</Label>
+                    <ListBox>
+                        <ListBoxItem HorizontalAlignment="Center">
+                            <DockPanel HorizontalAlignment="Left">
+                                <Image Height="100" Width="50" DockPanel.Dock="Left" Margin="10,0,10,0"></Image>
+                                <WrapPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="50,0,0,0">
+                                    <Button Width="20">-</Button>
+                                    <Label>1</Label>
+                                    <Button Width="20">+</Button>
+                                    <Label Foreground="Orange">139 $</Label>
+                                    <Button Width="20" Background="Red" Foreground="White">X</Button>
+                                </WrapPanel>
+                                <Label DockPanel.Dock="Top">Name</Label>
+                                <Label DockPanel.Dock="Top">Author</Label>
+                                <Label DockPanel.Dock="Top">Price: 139</Label>
+                            </DockPanel>
+                        </ListBoxItem>
+                        <ListBoxItem HorizontalAlignment="Center">
+                            <DockPanel HorizontalAlignment="Left">
+                                <Image Height="100" Width="50" DockPanel.Dock="Left" Margin="10,0,10,0"></Image>
+                                <WrapPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="50,0,0,0">
+                                    <Button Width="20">-</Button>
+                                    <Label>1</Label>
+                                    <Button Width="20">+</Button>
+                                    <Label Foreground="Orange">139 $</Label>
+                                    <Button Width="20" Background="Red" Foreground="White">X</Button>
+                                </WrapPanel>
+                                <Label DockPanel.Dock="Top">Name</Label>
+                                <Label DockPanel.Dock="Top">Author</Label>
+                                <Label DockPanel.Dock="Top">Price: 139</Label>
+                            </DockPanel>
+                        </ListBoxItem>
+                    </ListBox>
+                    <DockPanel>
+                        <Button DockPanel.Dock="Left" Name="continueSearchBtn" Click="continueSearchBtn_Click">Continue search goods</Button>
+                        <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
+                            <WrapPanel>
+                                <Label FontSize="20">Result: </Label>
+                                <Label FontSize="20" Foreground="Orange">278</Label>
+                            </WrapPanel>
+                        </StackPanel>
+                    </DockPanel>
+                    <Button HorizontalAlignment="Right" Background="Orange" Foreground="White">Place order</Button>
                 </StackPanel>
             </TabItem>
         </TabControl>
