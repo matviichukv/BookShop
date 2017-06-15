@@ -28,7 +28,7 @@ namespace DAL.Entity
         [Required]
         public string Salt { get; set; }
         
-        public int ImageId { get; set; }
+        public int? ImageId { get; set; }
         public virtual Image Avatar { get; set; }
 
         public virtual ICollection<Role> Roles { get; private set; }
