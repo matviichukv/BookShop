@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BLL;
+using DAL.Entity;
+using System.Data.Entity.Design.PluralizationServices;
+using System.Globalization;
 
 namespace AdminPanel
 {
@@ -21,6 +24,8 @@ namespace AdminPanel
     /// </summary>
     public partial class MainWindow : Window
     {
+        BookShopContext ctx = new BookShopContext();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -29,16 +34,15 @@ namespace AdminPanel
 
         private void TableSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            AdminPanelLogic logic = new AdminPanelLogic();
-            var sth = logic.GetDbSetByType(TableSelectionComboBox.SelectedItem.ToString());
-            
-            TableDataGrid.DataContext = sth.Local;
+            PluralizationService service = PluralizationService.CreateService(CultureInfo.GetCultureInfo("en-US"));
+            var dbset = ctx.Set(typeof(Book).Assembly.GetTypes().FirstOrDefault(t => t.Name == service.Singularize(TableSelectionComboBox.SelectedItem.ToString() )));
+            TableDataGrid.DataContext = dbset.Local;
+
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            AdminPanelLogic logic = new AdminPanelLogic();
-            logic.SaveChangesInDb();
+            ctx.SaveChanges();
             TableDataGrid.Items.Refresh();
         }
     }
