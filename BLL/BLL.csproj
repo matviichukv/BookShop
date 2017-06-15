@@ -43,11 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IBookProvider.cs" />
     <Compile Include="Abstract\IUserProvider.cs" />
+    <Compile Include="Concrete\BookProvider.cs" />
     <Compile Include="Concrete\UserProvider.cs" />
+    <Compile Include="Models\BookInfoViewModel.cs" />
+    <Compile Include="Models\ReviewViewModel.cs" />
     <Compile Include="Models\UserCreateViewModel.cs" />
+    <Compile Include="Models\UserInfoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utility\ImageWorker.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="LICENSE.txt" />

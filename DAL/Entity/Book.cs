@@ -9,6 +9,11 @@ namespace DAL.Entity
 {
     public class Book
     {
+        public Book()
+        {
+            BookReviews = new List<Review>();
+        }
+
         public int BookId { get; set; }
         [Required]
         public string BookName { get; set; }
@@ -30,5 +35,7 @@ namespace DAL.Entity
 
         public int AuthorId { get; set; }
         public Author BookAuthor { get; set; }
+
+        public virtual ICollection<Review> BookReviews { get; private set; }
     }
 }

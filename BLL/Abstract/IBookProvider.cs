@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace BLL.Abstract
 {
-    interface IUserProvider
+    interface IBookProvider
     {
-        UserStatus CreateUser(UserCreateViewModel userModel);
-        UserInfoViewModel GetUserInfo(string Email);
+        BookInfoViewModel GetBookInfo(int bookId);
     }
 }

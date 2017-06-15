@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 using BLL.Models;
 using DAL.Concrete;
 using DAL.Entity;
+using DAL.Abstract;
 
 namespace BLL.Concrete
 {
     class UserProvider : IUserProvider
     {
-        UserRepository userRepository = new UserRepository();
+        IUserRepository userRepository = new UserRepository();
 
         public UserStatus CreateUser(UserCreateViewModel userModel)
         {
@@ -31,6 +32,21 @@ namespace BLL.Concrete
 
             userRepository.CreateUser(newUser);
             return UserStatus.Success;
+        }
+
+        public UserInfoViewModel GetUserInfo(string Email)
+        {
+            User user = userRepository.GetUserByEmail(Email);
+
+            UserInfoViewModel userInfo = new UserInfoViewModel()
+            {
+                AvatarPath = user.Avatar.PathToImageFile,
+                UserEmail = user.UserEmail,
+                UserName = user.UserName,
+                UserPassword = user.UserPassword
+            };
+
+            return userInfo;
         }
     }
 }

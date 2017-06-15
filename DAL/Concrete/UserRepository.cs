@@ -30,5 +30,10 @@ namespace DAL.Concrete
 
             return result;
         }
+
+        public User GetUserByEmail(string Email)
+        {
+            return ctx.Users.FirstOrDefault(t => t.UserEmail == Email);
+        }
     }
 }
