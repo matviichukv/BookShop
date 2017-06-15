@@ -58,10 +58,18 @@ namespace BLL.ServiceReference {
         System.Threading.Tasks.Task<bool> CheckUserCredentialsAsync(string email, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBookShopService/GetDbSetByType", ReplyAction="http://tempuri.org/IBookShopService/GetDbSetByTypeResponse")]
-        string GetDbSetByType(string type);
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(object[]))]
+        object[] GetDbSetByType(string type);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBookShopService/GetDbSetByType", ReplyAction="http://tempuri.org/IBookShopService/GetDbSetByTypeResponse")]
-        System.Threading.Tasks.Task<string> GetDbSetByTypeAsync(string type);
+        System.Threading.Tasks.Task<object[]> GetDbSetByTypeAsync(string type);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBookShopService/ContextSaveChanges", ReplyAction="http://tempuri.org/IBookShopService/ContextSaveChangesResponse")]
+        void ContextSaveChanges();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBookShopService/ContextSaveChanges", ReplyAction="http://tempuri.org/IBookShopService/ContextSaveChangesResponse")]
+        System.Threading.Tasks.Task ContextSaveChangesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -147,12 +155,20 @@ namespace BLL.ServiceReference {
             return base.Channel.CheckUserCredentialsAsync(email, password);
         }
         
-        public string GetDbSetByType(string type) {
+        public object[] GetDbSetByType(string type) {
             return base.Channel.GetDbSetByType(type);
         }
         
-        public System.Threading.Tasks.Task<string> GetDbSetByTypeAsync(string type) {
+        public System.Threading.Tasks.Task<object[]> GetDbSetByTypeAsync(string type) {
             return base.Channel.GetDbSetByTypeAsync(type);
+        }
+        
+        public void ContextSaveChanges() {
+            base.Channel.ContextSaveChanges();
+        }
+        
+        public System.Threading.Tasks.Task ContextSaveChangesAsync() {
+            return base.Channel.ContextSaveChangesAsync();
         }
     }
 }

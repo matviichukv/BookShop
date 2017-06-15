@@ -107,8 +107,18 @@
   <xs:element name="GetDbSetByTypeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="GetDbSetByTypeResult" nillable="true" type="xs:string" />
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetDbSetByTypeResult" nillable="true" type="q4:ArrayOfanyType" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ContextSaveChanges">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ContextSaveChangesResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

@@ -29,12 +29,17 @@ namespace AdminPanel
 
         private void TableSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TableDataGrid.DataContext = AdminPanelLogic.GetDbSetByType(TableSelectionComboBox.SelectedItem.ToString());
+            AdminPanelLogic logic = new AdminPanelLogic();
+            var sth = logic.GetDbSetByType(TableSelectionComboBox.SelectedItem.ToString());
+            
+            TableDataGrid.DataContext = sth.Local;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-
+            AdminPanelLogic logic = new AdminPanelLogic();
+            logic.SaveChangesInDb();
+            TableDataGrid.Items.Refresh();
         }
     }
 }
