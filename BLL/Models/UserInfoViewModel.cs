@@ -12,6 +12,6 @@ namespace BLL.Models
         public string UserEmail { get; set; }
         public string UserPassword { get; set; }
         public string UserName { get; set; }
-        public string PathToAvatar { get; set; }
+        public string AvatarPath { get; set; }
     }
 }
