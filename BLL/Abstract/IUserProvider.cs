@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL
+namespace BLL.Abstract
 {
-    public class ClientLogic
+    interface IUserProvider
     {
 
     }
