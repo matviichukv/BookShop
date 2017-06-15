@@ -46,6 +46,7 @@
     <Compile Include="Abstract\IUserProvider.cs" />
     <Compile Include="Concrete\UserProvider.cs" />
     <Compile Include="Models\UserCreateViewModel.cs" />
+    <Compile Include="Models\UserInfoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

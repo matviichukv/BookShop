@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Abstract
 {
-    public interface IUserRepository
+    public interface IBookRepository
     {
-        User CreateUser(User user);
-        List<string> GetEmails();
-        User GetUserByEmail(string Email);
+        Book GetBookById(int bookId);
     }
 }
