@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLL.Concrete;
+using BLL.Models;
 
 namespace WPF_UI
 {
@@ -36,6 +38,25 @@ namespace WPF_UI
             if(passwordPb.Password != confirmPasswordPB.Password)
             {
                 MessageBox.Show("Password different");
+            }
+
+            UserProvider userProvider = new UserProvider();
+            UserCreateViewModel createUser = new UserCreateViewModel()
+            {
+                Email = emailTb.Text,
+                Password = passwordPb.Password,
+                UserName = lastNameTb.Text + " " + firstNameTb.Text
+            };
+
+            UserStatus res = userProvider.CreateUser(createUser);
+
+            if (res == UserStatus.Success)
+            {
+                this.Close();
+            }
+            else if (res == UserStatus.DublicationEmail)
+            {
+                MessageBox.Show("Error! DublicationEmail");
             }
         }
 
