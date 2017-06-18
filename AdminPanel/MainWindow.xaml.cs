@@ -18,6 +18,8 @@ using System.Data.Entity.Design.PluralizationServices;
 using System.Globalization;
 using System.Data.Entity;
 using System.Reflection;
+using System.Windows.Markup;
+using BLL.Concrete;
 
 namespace AdminPanel
 {
@@ -32,32 +34,10 @@ namespace AdminPanel
         public MainWindow()
         {
             InitializeComponent();
-            #region dictionary fill
-            DbSets.Add("Users", ctx.Users);
-            DbSets.Add("Roles", ctx.Roles);
-            DbSets.Add("Authors", ctx.Authors);
-            DbSets.Add("Books", ctx.Books);
-            DbSets.Add("Categories", ctx.Categories);
-            DbSets.Add("Images", ctx.Images);
-            DbSets.Add("Nationalities", ctx.Nationalities);
-            DbSets.Add("Orders", null);
-            DbSets.Add("Publishers", ctx.Publishers);
-            DbSets.Add("Reviews", ctx.Reviews);
-            #endregion
-        }
-
-        private void TableSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var dbset = DbSets[TableSelectionComboBox.SelectedItem.ToString()];
-            dbset.Load();
-            TableDataGrid.DataContext = dbset.Local;
-
-        }
-
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            ctx.SaveChanges();
-            TableDataGrid.Items.Refresh();
+            AdminPanelProvider p = new AdminPanelProvider();
+            var result = p.GetTablesAndNamesList();
+            TablesTabControl.DataContext = result.Select(item => item.Item2);
+            
         }
     }
 }

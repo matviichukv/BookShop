@@ -42,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,9 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IAdminPanelRepository.cs" />
     <Compile Include="Abstract\IBookRepository.cs" />
     <Compile Include="Abstract\ICategoryRepository.cs" />
     <Compile Include="Abstract\IUserRepository.cs" />
+    <Compile Include="Concrete\AdminPanelRepository.cs" />
     <Compile Include="Concrete\BookRepository.cs" />
     <Compile Include="Concrete\CategoryRepository.cs" />
     <Compile Include="Concrete\UserRepository.cs" />
@@ -80,6 +83,10 @@
     <Compile Include="Migrations\201706151601025_Made imageid nullable.cs" />
     <Compile Include="Migrations\201706151601025_Made imageid nullable.Designer.cs">
       <DependentUpon>201706151601025_Made imageid nullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706181152246_fixed review id.cs" />
+    <Compile Include="Migrations\201706181152246_fixed review id.Designer.cs">
+      <DependentUpon>201706181152246_fixed review id.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -127,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706151601025_Made imageid nullable.resx">
       <DependentUpon>201706151601025_Made imageid nullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706181152246_fixed review id.resx">
+      <DependentUpon>201706181152246_fixed review id.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
