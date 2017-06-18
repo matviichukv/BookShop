@@ -67,7 +67,7 @@ namespace WPF_UI
                 return;
             }
 
-            BookInfo info = new BookInfo(booksShortInfo[shortBooksInfoLb.SelectedIndex].BookId);
+            BookInfo info = new BookInfo(booksShortInfo[shortBooksInfoLb.SelectedIndex].BookId, user);
             info.ShowDialog();
             shortBooksInfoLb.SelectedIndex = -1;
         }

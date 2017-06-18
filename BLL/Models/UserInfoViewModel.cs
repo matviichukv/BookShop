@@ -9,6 +9,7 @@ namespace BLL.Models
 {
     public class UserInfoViewModel
     {
+        public int UserId { get; set; }
         public string UserEmail { get; set; }
         public string UserPassword { get; set; }
         public string UserName { get; set; }

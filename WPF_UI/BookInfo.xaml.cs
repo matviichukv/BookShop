@@ -23,15 +23,19 @@ namespace WPF_UI
     {
         private BookProvider bookProvider = new BookProvider();
         private BookInfoViewModel bookInfo = null;
+        private UserInfoViewModel user = null;
+        private int bookId;
 
         public BookInfo()
         {
             InitializeComponent();
         }
 
-        public BookInfo(int bookId)
+        public BookInfo(int _bookId, UserInfoViewModel _user)
         {
             InitializeComponent();
+            user = _user;
+            bookId = _bookId;
             bookInfo = bookProvider.GetBookInfo(bookId);
             FillBookInfo(bookInfo);
         }
@@ -51,6 +55,18 @@ namespace WPF_UI
             descriptionAuthorTb.Text = bookInfo.AuthorDescription;
 
             reviewLB.ItemsSource = bookInfo.BookReviews;
+        }
+
+        private void sendReviewBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(user == null)
+            {
+                MessageBox.Show("Error.Need sign in if you want send review.");
+                return;
+            }
+
+            SendReview sendReview = new SendReview(user, bookId);
+            sendReview.ShowDialog();
         }
     }
 }
