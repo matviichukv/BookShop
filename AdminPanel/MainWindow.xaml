@@ -4,10 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdminPanel"
-        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="AdminPanel.MainWindow"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:models="clr-namespace:BLL.Models;assembly=BLL"
+        x:Class="AdminPanel.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
+    <!-- <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.35*"/>
             <ColumnDefinition/>
@@ -28,5 +30,22 @@
             <Button Content="Save changes" Click="SaveButton_Click"/>
         </StackPanel>
         <DataGrid Grid.Column="1" x:Name="TableDataGrid" ItemsSource="{Binding}"/>
-    </Grid>
+    </Grid>-->
+
+    <TabControl Name="TablesTabControl" ItemsSource="{Binding}">
+        <TabControl.ItemTemplate>
+            <DataTemplate DataType="models:TabItemModel">
+                <TextBlock Text="{Binding Header}"/>
+            </DataTemplate>
+        </TabControl.ItemTemplate>
+        <TabControl.ContentTemplate>
+            <DataTemplate DataType="models:TabItemModel">
+
+                <ContentPresenter Content="{Binding TableGrid}">
+                    
+                </ContentPresenter>
+                
+            </DataTemplate>
+        </TabControl.ContentTemplate>
+    </TabControl>
 </Window>

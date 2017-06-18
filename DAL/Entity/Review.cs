@@ -9,7 +9,7 @@ namespace DAL.Entity
 {
     public class Review
     {
-        public int Id { get; set; }
+        public int ReviewId { get; set; }
         [Required]
         public string Message { get; set; }
         public DateTime Date { get; set; }
