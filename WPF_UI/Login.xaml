@@ -8,8 +8,8 @@
         Title="Login" Height="300" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel VerticalAlignment="Center" Margin="15">
-            <Label HorizontalAlignment="Center">Login</Label>
-            <TextBox Name="loginTb"></TextBox>
+            <Label HorizontalAlignment="Center">Email</Label>
+            <TextBox Name="EmailTb"></TextBox>
             <Label HorizontalAlignment="Center">Password</Label>
             <PasswordBox Name="passwordPb"></PasswordBox>
             <Button Height="30" Background="Green" Foreground="White" Margin="0,10,0,10" Name="signInBtn" Click="signInBtn_Click">SIGN IN</Button>

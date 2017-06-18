@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLL.Concrete;
+using BLL.Models;
 
 namespace WPF_UI
 {
@@ -19,14 +21,32 @@ namespace WPF_UI
     /// </summary>
     public partial class Login : Window
     {
+        public UserInfoViewModel user { get; set; }
+
         public Login()
         {
             InitializeComponent();
         }
 
+        public Login(UserInfoViewModel _user)
+        {
+            InitializeComponent();
+            user = _user;
+        }
+
         private void signInBtn_Click(object sender, RoutedEventArgs e)
         {
+            UserProvider userProvider = new UserProvider();
+            user = userProvider.GetUserInfo(EmailTb.Text, passwordPb.Password);
 
+            if(user == null)
+            {
+                MessageBox.Show("Error.Try again!");
+            }
+            else
+            {
+                this.Close();
+            }
         }
 
         private void createAccountBtn_Click(object sender, RoutedEventArgs e)

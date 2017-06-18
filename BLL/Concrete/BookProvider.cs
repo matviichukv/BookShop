@@ -12,7 +12,7 @@ using DAL.Abstract;
 
 namespace BLL.Concrete
 {
-    class BookProvider : IBookProvider
+    public class BookProvider : IBookProvider
     {
         IBookRepository bookRepository = new BookRepository();
 
@@ -68,7 +68,7 @@ namespace BLL.Concrete
                     BookDescription = book.Description,
                     BookId = book.BookId,
                     BookName = book.BookName,
-                    BookImagePath = book.BookImage.PathToImageFile,
+                    BookImagePath = "",
                     BookPrice = book.Price
                 });
             }

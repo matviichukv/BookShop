@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Models
 {
-    class UserInfoViewModel
+    public class UserInfoViewModel
     {
         public string UserEmail { get; set; }
         public string UserPassword { get; set; }

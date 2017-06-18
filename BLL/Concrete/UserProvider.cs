@@ -11,7 +11,7 @@ using DAL.Abstract;
 
 namespace BLL.Concrete
 {
-    class UserProvider : IUserProvider
+    public class UserProvider : IUserProvider
     {
         IUserRepository userRepository = new UserRepository();
 
@@ -34,17 +34,27 @@ namespace BLL.Concrete
             return UserStatus.Success;
         }
 
-        public UserInfoViewModel GetUserInfo(string Email)
+        public UserInfoViewModel GetUserInfo(string Email, string password)
         {
             User user = userRepository.GetUserByEmail(Email);
 
-            UserInfoViewModel userInfo = new UserInfoViewModel()
+            if(user == null)
             {
-                AvatarPath = user.Avatar.PathToImageFile,
-                UserEmail = user.UserEmail,
-                UserName = user.UserName,
-                UserPassword = user.UserPassword
-            };
+                return null;
+            }
+
+            UserInfoViewModel userInfo = null;
+
+            if(BCrypt.Net.BCrypt.Verify(password, user.UserPassword))
+            {
+                userInfo = new UserInfoViewModel()
+                {
+                    AvatarPath = user.Avatar == null ? null : user.Avatar.PathToImageFile,
+                    UserEmail = user.UserEmail,
+                    UserName = user.UserName,
+                    UserPassword = user.UserPassword
+                };
+            }
 
             return userInfo;
         }

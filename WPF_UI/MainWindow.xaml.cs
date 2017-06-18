@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BLL.Models;
+using BLL.Concrete;
 
 namespace WPF_UI
 {
@@ -20,44 +22,65 @@ namespace WPF_UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        UserInfoViewModel user = null;
+
         public MainWindow()
         {
             //hello
+            BookProvider providerBook = new BookProvider();
+            var list = providerBook.GetBooks();
             InitializeComponent();
+            list[0].BookImagePath = @"E:\img_0335.jpg";
+            listboxFolder1.ItemsSource = list;
+            FillCategorisLb();
         }
 
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
-            tabControl.SelectedIndex = 1;
+            
         }
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)
         {
-            Login login = new Login();
+            Login login = new Login(user);
             login.ShowDialog();
-            loginBtn.Visibility = Visibility.Hidden;
-            showUserProfileBtn.Visibility = Visibility.Visible;
-            cartBtn.Visibility = Visibility.Visible;
+            user = login.user;
+
+            if (user != null)
+            {
+                cartBtn.Visibility = Visibility.Visible;
+                showUserProfileBtn.Visibility = Visibility.Visible;
+                loginBtn.Visibility = Visibility.Hidden;
+            }
         }
 
         private void showUserProfileBtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Hello");
+            PrivateOffice office = new PrivateOffice(user);
+            office.Show();
         }
 
         private void booksLb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            tabControl.SelectedIndex = 2;
+            if(listboxFolder1.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            listboxFolder1.SelectedIndex = -1;
+            BookInfo info = new BookInfo();
+            info.Show();
         }
 
         private void cartBtn_Click(object sender, RoutedEventArgs e)
         {
-            tabControl.SelectedIndex = 3;
+            Basket basket = new Basket();
+            basket.Show();
         }
 
-        private void continueSearchBtn_Click(object sender, RoutedEventArgs e)
+        private void FillCategorisLb()
         {
-            tabControl.SelectedIndex = 1;
+            categoriesLb.ItemsSource = new CategoryProvider().GetNameCategories();
         }
     }
 }
