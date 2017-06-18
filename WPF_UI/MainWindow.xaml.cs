@@ -22,16 +22,16 @@ namespace WPF_UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        UserInfoViewModel user = null;
+        private UserInfoViewModel user = null;
+        private List<BookShortInfoViewModel> booksShortInfo = new List<BookShortInfoViewModel>();
 
         public MainWindow()
         {
             //hello
-            BookProvider providerBook = new BookProvider();
-            var list = providerBook.GetBooks();
             InitializeComponent();
-            list[0].BookImagePath = @"E:\img_0335.jpg";
-            listboxFolder1.ItemsSource = list;
+            BookProvider providerBook = new BookProvider();
+            booksShortInfo = providerBook.GetBooks();
+            shortBooksInfoLb.ItemsSource = booksShortInfo;
             FillCategorisLb();
         }
 
@@ -62,14 +62,14 @@ namespace WPF_UI
 
         private void booksLb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(listboxFolder1.SelectedIndex == -1)
+            if(shortBooksInfoLb.SelectedIndex == -1)
             {
                 return;
             }
 
-            listboxFolder1.SelectedIndex = -1;
-            BookInfo info = new BookInfo();
-            info.Show();
+            BookInfo info = new BookInfo(booksShortInfo[shortBooksInfoLb.SelectedIndex].BookId);
+            info.ShowDialog();
+            shortBooksInfoLb.SelectedIndex = -1;
         }
 
         private void cartBtn_Click(object sender, RoutedEventArgs e)
@@ -81,6 +81,12 @@ namespace WPF_UI
         private void FillCategorisLb()
         {
             categoriesLb.ItemsSource = new CategoryProvider().GetNameCategories();
+        }
+
+        private void addToBasket_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            int index = shortBooksInfoLb.Items.IndexOf(button.DataContext);
         }
     }
 }

@@ -29,19 +29,19 @@ namespace BLL.Concrete
                     Message = review.Message,
                     ThumbDown = review.ThumbDown,
                     ThumbUp = review.ThumbUp,
-                    UserName = review.User.UserName
+                    UserName = ""//review.User.UserName
                 });
             }
 
             BookInfoViewModel bookInfo = new BookInfoViewModel()
             {
                 AuthorDescription = book.BookAuthor.Description,
-                AuthorImagePath = book.BookAuthor.AuthorImage.PathToImageFile,
+                AuthorImagePath = book.BookAuthor.AuthorImage == null? null : book.BookAuthor.AuthorImage.PathToImageFile,
                 AuthorName = book.BookAuthor.AuthorName,
-                AuthorNationality = book.BookAuthor.AuthorNationality.NationalityName,
+                AuthorNationality = book.BookAuthor.AuthorNationality == null? null : book.BookAuthor.AuthorNationality.NationalityName,
                 BookCount = book.Count,
                 BookDescription = book.Description,
-                BookImagePath = book.BookImage.PathToImageFile,
+                BookImagePath = book.BookImage == null? null : book.BookImage.PathToImageFile,
                 BookLanguage = book.Language,
                 BookName = book.BookName,
                 BookPrice = book.Price,
@@ -68,7 +68,7 @@ namespace BLL.Concrete
                     BookDescription = book.Description,
                     BookId = book.BookId,
                     BookName = book.BookName,
-                    BookImagePath = "",
+                    BookImagePath = book.BookImage == null ? null : book.BookImage.PathToImageFile,
                     BookPrice = book.Price
                 });
             }

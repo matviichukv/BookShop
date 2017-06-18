@@ -40,13 +40,13 @@
             </WrapPanel>
         </Button>
         <DockPanel Grid.Column="1" Grid.Row="0">
-            <Label DockPanel.Dock="Top" HorizontalAlignment="Center">Book Shop</Label>
+            <Label DockPanel.Dock="Top" HorizontalAlignment="Center">BOOK SHOP</Label>
             <Button DockPanel.Dock="Right" Background="Blue" Foreground="White" Width="50" Name="searchBtn" Click="searchBtn_Click">Search</Button>
             <TextBox DockPanel.Dock="Left"></TextBox>
         </DockPanel>
         <Button Grid.Column="2" Grid.Row="0" Background="Green" Foreground="White" Margin="20,25,20,0" Name="loginBtn" Click="loginBtn_Click">Login</Button>
         <StackPanel Grid.Column="0" Grid.Row="2">
-            <Label HorizontalAlignment="Center">Categories</Label>
+            <Label HorizontalAlignment="Center" FontSize="18">Categories</Label>
             <ListBox HorizontalAlignment="Center" Name="categoriesLb" ItemsSource="{Binding}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -55,7 +55,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </StackPanel>
-        <ListBox x:Name="listboxFolder1" Grid.Column="1" Grid.Row="2" BorderThickness="0" 
+        <ListBox x:Name="shortBooksInfoLb" Grid.Column="1" Grid.Row="2" BorderThickness="0" 
             ItemsSource="{Binding}" SelectionChanged="booksLb_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -68,8 +68,8 @@
                         </DockPanel>
                         <DockPanel Height="72" VerticalAlignment="Bottom" Width="104" HorizontalAlignment="Right">
                             <Label DockPanel.Dock="left" Margin="0,3,0,0" Foreground="Orange" Content="Price:" Height="29" Width="42" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
-                            <TextBlock DockPanel.Dock="Top" Text="{Binding BookPrice}" Margin="5.333,3,10,0" Foreground="LightGreen" Height="29" FontSize="14"/>
-                            <Button DockPanel.Dock="Bottom" Margin="-20,0,10,8" Background="#FFF0C35D" Foreground="White" Content="Buy" Height="22" Width="72" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                            <TextBlock DockPanel.Dock="Top" Text="{Binding BookPrice}" Margin="5.333,3,10,0" Foreground="Black" Height="29" FontSize="14"/>
+                            <Button DockPanel.Dock="Bottom" Margin="-20,0,10,8" Name="addToBasket" Click="addToBasket_Click" Background="#FFF0C35D" Foreground="White" Content="Buy" Height="22" Width="72" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                         </DockPanel>
                     </DockPanel>
                 </DataTemplate>
