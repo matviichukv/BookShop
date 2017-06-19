@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BLL.Models;
+using BLL.Concrete;
 
 namespace WPF_UI
 {
@@ -47,6 +48,8 @@ namespace WPF_UI
         private void historyReviews_Click(object sender, RoutedEventArgs e)
         {
             tabContorl.SelectedIndex = 2;
+            ReviewProvider reviewProvider = new ReviewProvider();
+            reviewsHistoryLb.ItemsSource = reviewProvider.GetUserReviews(user.UserId);
         }
 
         private void backToMainWindowBtn_Click(object sender, RoutedEventArgs e)

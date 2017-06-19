@@ -17,5 +17,10 @@ namespace DAL.Concrete
             ctx.Reviews.Add(review);
             ctx.SaveChanges();
         }
+
+        public List<Review> GetUserReviews(int userId)
+        {
+            return ctx.Reviews.Where(i => i.UserId == userId).ToList();
+        }
     }
 }

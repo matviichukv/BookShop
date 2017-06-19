@@ -36,19 +36,22 @@
                 
             </TabItem>
             <TabItem Visibility="Hidden">
-                <ListBox Grid.ColumnSpan="3" Width="355" HorizontalAlignment="Center">
-                    <ListBoxItem>
-                        <DockPanel>
-                            <Label DockPanel.Dock="Top">Harry Potter, 2017.06.14</Label>
-                            <TextBox DockPanel.Dock="top" AcceptsReturn="True" MaxLines="2" MinLines="2" Width="330" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap">aaa3333333333334444444555555555555566666666667aaaaaaaaaaaaaaaaaaadddbbbbbbbbbbdddddddddddaa</TextBox>
-                            <WrapPanel DockPanel.Dock="Bottom">
-                                <Button>Up</Button>
-                                <Label>1</Label>
-                                <Button>Down</Button>
-                                <Label>0</Label>
-                            </WrapPanel>
-                        </DockPanel>
-                    </ListBoxItem>
+                <ListBox Grid.ColumnSpan="3" Width="355" HorizontalAlignment="Center" ItemsSource="{Binding}" Name="reviewsHistoryLb">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <TextBox DockPanel.Dock="Top" Text="{Binding UserName}"></TextBox>
+                                <TextBox DockPanel.Dock="Top" Text="{Binding Date}"></TextBox>
+                                <TextBox DockPanel.Dock="top" Text="{Binding Message}" AcceptsReturn="True" MaxLines="2" MinLines="2" Width="330" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap"></TextBox>
+                                <WrapPanel DockPanel.Dock="Bottom">
+                                    <Button>Up</Button>
+                                    <TextBox Text="{Binding ThumbUp}"></TextBox>
+                                    <Button>Down</Button>
+                                    <TextBox Text="{Binding ThumbDown}"></TextBox>
+                                </WrapPanel>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
             </TabItem>
         </TabControl>

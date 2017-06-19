@@ -69,9 +69,13 @@
                         <TextBox DockPanel.Dock="Top" Text="{Binding Date,StringFormat=dd-MM-yyyy}"></TextBox>
                         <TextBox DockPanel.Dock="top" Text="{Binding Message}" AcceptsReturn="True" MaxLines="2" MinLines="2" Width="430" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap"></TextBox>
                         <WrapPanel DockPanel.Dock="Bottom">
-                            <Button>Up</Button>
+                            <Button>
+                                <Image Height="20"></Image>
+                            </Button>
                             <TextBox Text="{Binding ThumbUp}"></TextBox>
-                            <Button>Down</Button>
+                            <Button>
+                                <Image Height="20"></Image>
+                            </Button>
                             <TextBox Text="{Binding ThumbDown}"></TextBox>
                         </WrapPanel>
                     </DockPanel>

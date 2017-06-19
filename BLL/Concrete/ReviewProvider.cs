@@ -29,5 +29,25 @@ namespace BLL.Concrete
 
             reviewRepository.AddReview(review);
         }
+
+        public List<ReviewViewModel> GetUserReviews(int userId)
+        {
+            var reviews = reviewRepository.GetUserReviews(userId);
+            List<ReviewViewModel> result = new List<ReviewViewModel>();
+
+            foreach(var item in reviews)
+            {
+                result.Add(new ReviewViewModel
+                {
+                     Message = item.Message,
+                     Date = item.Date,
+                     ThumbUp = item.ThumbUp,
+                     ThumbDown = item.ThumbDown,
+                     UserName = ""//item.User.UserName
+                });
+            }
+
+            return result;
+        }
     }
 }

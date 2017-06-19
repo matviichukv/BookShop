@@ -10,5 +10,6 @@ namespace DAL.Abstract
     public interface IReviewRepository
     {
         void AddReview(Review review);
+        List<Review> GetUserReviews(int userId);
     }
 }
