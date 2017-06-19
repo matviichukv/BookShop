@@ -64,6 +64,7 @@
     <Compile Include="Concrete\CategoryProvider.cs" />
     <Compile Include="Concrete\ReviewProvider.cs" />
     <Compile Include="Concrete\UserProvider.cs" />
+    <Compile Include="Models\BookInBasketViewModel.cs" />
     <Compile Include="Models\BookInfoViewModel.cs" />
     <Compile Include="Models\BookShortInfoViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />

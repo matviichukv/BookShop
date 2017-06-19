@@ -24,6 +24,7 @@ namespace WPF_UI
     {
         private UserInfoViewModel user = null;
         private List<BookShortInfoViewModel> booksShortInfo = new List<BookShortInfoViewModel>();
+        private List<BookInBasketViewModel> booksInBasket = new List<BookInBasketViewModel>();
 
         public MainWindow()
         {
@@ -74,7 +75,7 @@ namespace WPF_UI
 
         private void cartBtn_Click(object sender, RoutedEventArgs e)
         {
-            Basket basket = new Basket();
+            Basket basket = new Basket(booksInBasket);
             basket.Show();
         }
 
@@ -87,6 +88,26 @@ namespace WPF_UI
         {
             Button button = sender as Button;
             int index = shortBooksInfoLb.Items.IndexOf(button.DataContext);
+            ShortBookInfoVMToBookInBastekVm(booksShortInfo[index].BookId);
+        }
+
+        private void ShortBookInfoVMToBookInBastekVm(int bookId)
+        {
+            BookProvider bookProvider = new BookProvider();
+            BookInfoViewModel book = bookProvider.GetBookInfo(bookId);
+
+            BookInBasketViewModel bookInBastek = new BookInBasketViewModel
+            {
+                BookId = bookId,
+                AuthorName = book.AuthorName,
+                BookImagePath = book.BookImagePath,
+                BookName = book.BookName,
+                Count = 1,
+                Price = book.BookPrice,
+                Cost = book.BookPrice
+            };
+
+            booksInBasket.Add(bookInBastek);
         }
     }
 }

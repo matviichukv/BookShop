@@ -13,23 +13,25 @@
             <RowDefinition Height="0.2*" MaxHeight="100"></RowDefinition>
         </Grid.RowDefinitions>
         <Label Grid.Row="0" FontSize="20" Background="Orange" Foreground="White">The goods are delivered to the cart</Label>
-        <ListBox Grid.Row="1">
-            <ListBoxItem HorizontalAlignment="Center">
-                <DockPanel HorizontalAlignment="Left" Margin="10">
-                    <Image Height="100" Width="50" DockPanel.Dock="Left" Margin="10,0,10,0"></Image>
-                    <WrapPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="50,0,0,0">
-                        <Button Width="20">-</Button>
-                        <Label>1</Label>
-                        <Button Width="20">+</Button>
-                        <Label Foreground="Orange">139 $</Label>
-                        <Button Width="20" Background="Red" Foreground="White">X</Button>
-                    </WrapPanel>
-                    <Label DockPanel.Dock="Top">Name</Label>
-                    <Label DockPanel.Dock="Top">Author</Label>
-                    <Label DockPanel.Dock="Top">Price: 139</Label>
-                </DockPanel>
-            </ListBoxItem>
-           
+        <ListBox Grid.Row="1" ItemsSource="{Binding}" Name="basketLb">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel HorizontalAlignment="Left" Margin="10">
+                        <Image Height="100" Width="50" DockPanel.Dock="Left" Margin="10,0,10,0"></Image>
+                        <WrapPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="50,0,0,0">
+                            <Button Width="20">-</Button>
+                            <Label Content="{Binding Count}"></Label>
+                            <Button Width="20">+</Button>
+                            <Label Content="{Binding Price}" Foreground="Orange"></Label>
+                            <Button Width="20" Background="Red" Foreground="White">X</Button>
+                        </WrapPanel>
+                        <Label Content="{Binding BookName}" DockPanel.Dock="Top"></Label>
+                        <Label Content="{Binding AuthorName}" DockPanel.Dock="Top"></Label>
+                        <Label Content="{Binding Cost}" DockPanel.Dock="Top"></Label>
+                    </DockPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
         </ListBox>
         <DockPanel Grid.Row="2">
             <Button DockPanel.Dock="Left" Name="continueSearchBtn" Background="Green" Foreground="White" Click="continueSearchBtn_Click" Margin="20">Continue search goods</Button>

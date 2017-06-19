@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BLL.Models;
 
 namespace WPF_UI
 {
@@ -19,9 +20,18 @@ namespace WPF_UI
     /// </summary>
     public partial class Basket : Window
     {
+        private List<BookInBasketViewModel> books = null;
+
         public Basket()
         {
             InitializeComponent();
+        }
+
+        public Basket(List<BookInBasketViewModel> _books)
+        {
+            InitializeComponent();
+            books = _books;
+            basketLb.ItemsSource = books;
         }
 
         private void continueSearchBtn_Click(object sender, RoutedEventArgs e)
