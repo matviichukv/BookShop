@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BLL.Models;
 using BLL.Concrete;
+using System.Collections.ObjectModel;
 
 namespace WPF_UI
 {
@@ -24,7 +25,7 @@ namespace WPF_UI
     {
         private UserInfoViewModel user = null;
         private List<BookShortInfoViewModel> booksShortInfo = new List<BookShortInfoViewModel>();
-        private List<BookInBasketViewModel> booksInBasket = new List<BookInBasketViewModel>();
+        private ObservableCollection<OrderInfoViewModel> booksInBasket = new ObservableCollection<OrderInfoViewModel>();
 
         public MainWindow()
         {
@@ -96,7 +97,7 @@ namespace WPF_UI
             BookProvider bookProvider = new BookProvider();
             BookInfoViewModel book = bookProvider.GetBookInfo(bookId);
 
-            BookInBasketViewModel bookInBastek = new BookInBasketViewModel
+            OrderInfoViewModel bookInBastek = new OrderInfoViewModel
             {
                 BookId = bookId,
                 AuthorName = book.AuthorName,
