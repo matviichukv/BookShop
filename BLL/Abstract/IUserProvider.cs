@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BLL.Abstract
 {
-    interface IUserProvider
+    public interface IUserProvider
     {
         UserStatus CreateUser(UserCreateViewModel userModel);
-        UserInfoViewModel GetUserInfo(string Email);
+        UserInfoViewModel GetUserInfo(string Email, string password);
     }
 }

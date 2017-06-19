@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BLL.Models;
+using BLL.Concrete;
 
 namespace WPF_UI
 {
@@ -20,44 +22,92 @@ namespace WPF_UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private UserInfoViewModel user = null;
+        private List<BookShortInfoViewModel> booksShortInfo = new List<BookShortInfoViewModel>();
+        private List<BookInBasketViewModel> booksInBasket = new List<BookInBasketViewModel>();
+
         public MainWindow()
         {
             //hello
             InitializeComponent();
+            BookProvider providerBook = new BookProvider();
+            booksShortInfo = providerBook.GetBooks();
+            shortBooksInfoLb.ItemsSource = booksShortInfo;
+            FillCategorisLb();
         }
 
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
-            tabControl.SelectedIndex = 1;
+            
         }
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)
         {
-            Login login = new Login();
+            Login login = new Login(user);
             login.ShowDialog();
-            loginBtn.Visibility = Visibility.Hidden;
-            showUserProfileBtn.Visibility = Visibility.Visible;
-            cartBtn.Visibility = Visibility.Visible;
+            user = login.user;
+
+            if (user != null)
+            {
+                cartBtn.Visibility = Visibility.Visible;
+                showUserProfileBtn.Visibility = Visibility.Visible;
+                loginBtn.Visibility = Visibility.Hidden;
+            }
         }
 
         private void showUserProfileBtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Hello");
+            PrivateOffice office = new PrivateOffice(user);
+            office.Show();
         }
 
         private void booksLb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            tabControl.SelectedIndex = 2;
+            if(shortBooksInfoLb.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            BookInfo info = new BookInfo(booksShortInfo[shortBooksInfoLb.SelectedIndex].BookId, user);
+            info.ShowDialog();
+            shortBooksInfoLb.SelectedIndex = -1;
         }
 
         private void cartBtn_Click(object sender, RoutedEventArgs e)
         {
-            tabControl.SelectedIndex = 3;
+            Basket basket = new Basket(booksInBasket);
+            basket.Show();
         }
 
-        private void continueSearchBtn_Click(object sender, RoutedEventArgs e)
+        private void FillCategorisLb()
         {
-            tabControl.SelectedIndex = 1;
+            categoriesLb.ItemsSource = new CategoryProvider().GetNameCategories();
+        }
+
+        private void addToBasket_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            int index = shortBooksInfoLb.Items.IndexOf(button.DataContext);
+            ShortBookInfoVMToBookInBastekVm(booksShortInfo[index].BookId);
+        }
+
+        private void ShortBookInfoVMToBookInBastekVm(int bookId)
+        {
+            BookProvider bookProvider = new BookProvider();
+            BookInfoViewModel book = bookProvider.GetBookInfo(bookId);
+
+            BookInBasketViewModel bookInBastek = new BookInBasketViewModel
+            {
+                BookId = bookId,
+                AuthorName = book.AuthorName,
+                BookImagePath = book.BookImagePath,
+                BookName = book.BookName,
+                Count = 1,
+                Price = book.BookPrice,
+                Cost = book.BookPrice
+            };
+
+            booksInBasket.Add(bookInBastek);
         }
     }
 }

@@ -12,6 +12,7 @@ namespace DAL.Entity
         public User()
         {
             Roles = new List<Role>();
+            Reviews = new List<Review>();
         }
 
         public int UserId { get; set; }
@@ -32,5 +33,6 @@ namespace DAL.Entity
         public virtual Image Avatar { get; set; }
 
         public virtual ICollection<Role> Roles { get; private set; }
+        public virtual ICollection<Review> Reviews { get; private set; }
     }
 }

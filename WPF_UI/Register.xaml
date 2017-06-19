@@ -12,7 +12,8 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.12*"></RowDefinition>
+            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="0.12*"></RowDefinition>
         </Grid.RowDefinitions>
@@ -23,17 +24,17 @@
             <Label HorizontalAlignment="Right" Margin="0,0,10,0">Last name:</Label>
             <Label HorizontalAlignment="Right" Margin="0,0,10,0">Password:</Label>
             <Label HorizontalAlignment="Right" Margin="0,0,10,0">Confirm password:</Label>
-            <Button HorizontalAlignment="Center" Name="addPhotoBtn" Click="addPhotoBtn_Click">Add photo</Button>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
-            <TextBox Margin="0,0,10,5" Name="emailTb"></TextBox>
-            <TextBox Margin="0,0,10,5" Name="firstNameTb"></TextBox>
-            <TextBox Margin="0,0,10,5" Name="lastNameTb"></TextBox>
-            <PasswordBox Margin="0,0,10,5" Name="passwordPb"></PasswordBox>
-            <PasswordBox Margin="0,0,10,5" Name="confirmPasswordPB"></PasswordBox>
-            <Image Name="userPhotoImg" Margin="0,0,10,0" Height="25" Width="50"></Image>
+            <TextBox Margin="0,0,10,7" Name="emailTb"></TextBox>
+            <TextBox Margin="0,0,10,7" Name="firstNameTb"></TextBox>
+            <TextBox Margin="0,0,10,7" Name="lastNameTb"></TextBox>
+            <PasswordBox Margin="0,0,10,7" Name="passwordPb"></PasswordBox>
+            <PasswordBox Margin="0,0,10,7" Name="confirmPasswordPB"></PasswordBox>
         </StackPanel>
-        <Button Grid.Column="0" Grid.Row="2" Background="Green" Foreground="White" Name="okBtn" Click="okBtn_Click">OK</Button>
-        <Button Grid.Column="1" Grid.Row="2" Background="Red" Foreground="White" Name="cancelBtn" Click="cancelBtn_Click">Cancel</Button>
+        <Image Name = "userPhotoImg" Grid.Column="1" Grid.Row="2" Margin = "10,10,10,10" ></Image>
+        <Button Grid.Column="0" Grid.Row="2" Height="30" Background="White" HorizontalAlignment = "Center" Name = "addPhotoBtn" Click = "addPhotoBtn_Click" >Add photo</Button>
+        <Button Grid.Column="0" Grid.Row="3" Background="Green" Foreground="White" Name="okBtn" Click="okBtn_Click">OK</Button>
+        <Button Grid.Column="1" Grid.Row="3" Background="Red" Foreground="White" Name="cancelBtn" Click="cancelBtn_Click">Cancel</Button>
     </Grid>
 </Window>

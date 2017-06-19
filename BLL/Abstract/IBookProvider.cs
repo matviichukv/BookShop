@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Abstract
 {
-    interface IBookProvider
+    public interface IBookProvider
     {
         BookInfoViewModel GetBookInfo(int bookId);
         List<BookShortInfoViewModel> GetBooks();
