@@ -21,6 +21,7 @@ namespace DAL.Concrete
                 .Include(b => b.BookPublisher)
                 .Include(b => b.BookAuthor)
                 .FirstOrDefault(book => book.BookId == bookId);
+            
         }
 
         public List<Book> GetBooks()

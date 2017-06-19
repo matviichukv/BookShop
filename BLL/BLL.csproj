@@ -48,6 +48,7 @@
     <Compile Include="Concrete\BookProvider.cs" />
     <Compile Include="Concrete\UserProvider.cs" />
     <Compile Include="Models\BookInfoViewModel.cs" />
+    <Compile Include="Models\BookShortInfoViewModel.cs" />
     <Compile Include="Models\ReviewViewModel.cs" />
     <Compile Include="Models\UserCreateViewModel.cs" />
     <Compile Include="Models\UserInfoViewModel.cs" />
