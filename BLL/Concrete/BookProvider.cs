@@ -29,7 +29,7 @@ namespace BLL.Concrete
                     Message = review.Message,
                     ThumbDown = review.ThumbDown,
                     ThumbUp = review.ThumbUp,
-                    UserName = ""//review.User.UserName
+                    UserName = review.User.UserName
                 });
             }
 
