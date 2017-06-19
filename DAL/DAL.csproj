@@ -54,11 +54,13 @@
     <Compile Include="Abstract\IAdminPanelRepository.cs" />
     <Compile Include="Abstract\IBookRepository.cs" />
     <Compile Include="Abstract\ICategoryRepository.cs" />
+    <Compile Include="Abstract\IOrderRepository.cs" />
     <Compile Include="Abstract\IReviewRepository.cs" />
     <Compile Include="Abstract\IUserRepository.cs" />
     <Compile Include="Concrete\AdminPanelRepository.cs" />
     <Compile Include="Concrete\BookRepository.cs" />
     <Compile Include="Concrete\CategoryRepository.cs" />
+    <Compile Include="Concrete\OrderRepository.cs" />
     <Compile Include="Concrete\ReviewRepository.cs" />
     <Compile Include="Concrete\UserRepository.cs" />
     <Compile Include="Entity\Category.cs" />

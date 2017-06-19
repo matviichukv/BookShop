@@ -57,14 +57,16 @@
     <Compile Include="Abstract\IAdminPanelProvider.cs" />
     <Compile Include="Abstract\IBookProvider.cs" />
     <Compile Include="Abstract\ICategoryProvider.cs" />
+    <Compile Include="Abstract\IOrderProvider.cs" />
     <Compile Include="Abstract\IReviewProvider.cs" />
     <Compile Include="Abstract\IUserProvider.cs" />
     <Compile Include="Concrete\AdminPanelProvider.cs" />
     <Compile Include="Concrete\BookProvider.cs" />
     <Compile Include="Concrete\CategoryProvider.cs" />
+    <Compile Include="Concrete\OrderProvider.cs" />
     <Compile Include="Concrete\ReviewProvider.cs" />
     <Compile Include="Concrete\UserProvider.cs" />
-    <Compile Include="Models\BookInBasketViewModel.cs" />
+    <Compile Include="Models\OrderInfoViewModel.cs" />
     <Compile Include="Models\BookInfoViewModel.cs" />
     <Compile Include="Models\BookShortInfoViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
