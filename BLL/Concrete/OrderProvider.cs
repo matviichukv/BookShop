@@ -6,12 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using BLL.Models;
 using DAL.Concrete;
+using DAL.Abstract;
 
 namespace BLL.Concrete
 {
     public class OrderProvider : IOrderProvider
     {
-        OrderRepository orderRepository = new OrderRepository();
+        IOrderRepository orderRepository = new OrderRepository();
 
         public List<OrderInfoViewModel> GetBasket()
         {

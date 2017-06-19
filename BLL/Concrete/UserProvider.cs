@@ -15,6 +15,24 @@ namespace BLL.Concrete
     {
         IUserRepository userRepository = new UserRepository();
 
+        public bool ChangeUserInfo(UserChangeViewModel userChangeViewModel)
+        {
+            User changeUser = userRepository.GetUserByEmail(userChangeViewModel.Email);
+            if (changeUser.UserPassword == BCrypt.Net.BCrypt.HashPassword(userChangeViewModel.OldPassword, changeUser.Salt))
+            {
+                string salt = BCrypt.Net.BCrypt.GenerateSalt();
+
+                changeUser.UserName = userChangeViewModel.NewUserName;
+                changeUser.Salt = salt;
+                changeUser.UserPassword = BCrypt.Net.BCrypt.HashPassword(userChangeViewModel.NewPassword, salt);
+                changeUser.Avatar.PathToImageFile = userChangeViewModel.NewImagePath;
+
+                return true;
+            }
+            else
+                return false;
+        }
+
         public UserStatus CreateUser(UserCreateViewModel userModel)
         {
             if (userRepository.GetEmails().Contains(userModel.Email))

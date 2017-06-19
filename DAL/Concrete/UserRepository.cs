@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 using DAL.Entity;
 
 namespace DAL.Concrete
@@ -33,7 +34,9 @@ namespace DAL.Concrete
 
         public User GetUserByEmail(string Email)
         {
-            return ctx.Users.FirstOrDefault(t => t.UserEmail == Email);
+            return ctx.Users
+                .Include(u => u.Avatar)
+                .FirstOrDefault(t => t.UserEmail == Email);
         }
     }
 }

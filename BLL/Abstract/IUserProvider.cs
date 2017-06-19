@@ -11,5 +11,6 @@ namespace BLL.Abstract
     {
         UserStatus CreateUser(UserCreateViewModel userModel);
         UserInfoViewModel GetUserInfo(string Email, string password);
+        bool ChangeUserInfo(UserChangeViewModel userChangeViewModel);
     }
 }
