@@ -57,22 +57,15 @@ namespace BLL.Concrete
 
         public List<BookShortInfoViewModel> GetBooks()
         {
-            List<BookShortInfoViewModel> result = new List<BookShortInfoViewModel>();
-
-            foreach (var book in bookRepository.GetBooks())
+            return bookRepository.GetBooks().Select(book => new BookShortInfoViewModel()
             {
-                result.Add(new BookShortInfoViewModel()
-                {
-                    BookAuthorName = book.BookAuthor.AuthorName,
-                    BookDescription = book.Description,
-                    BookId = book.BookId,
-                    BookName = book.BookName,
-                    BookImagePath = book.BookImage == null ? null : book.BookImage.PathToImageFile,
-                    BookPrice = book.Price
-                });
-            }
-
-            return result;
+                BookAuthorName = book.BookAuthor.AuthorName,
+                BookDescription = book.Description,
+                BookId = book.BookId,
+                BookName = book.BookName,
+                BookImagePath = book.BookImage == null ? null : book.BookImage.PathToImageFile,
+                BookPrice = book.Price
+            }).ToList();
         }
 
         public List<BookShortInfoViewModel> SearchBooks(string filter)

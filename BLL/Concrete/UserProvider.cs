@@ -38,14 +38,14 @@ namespace BLL.Concrete
         {
             User user = userRepository.GetUserByEmail(Email);
 
-            if(user == null)
+            if (user == null)
             {
                 return null;
             }
 
             UserInfoViewModel userInfo = null;
 
-            if(BCrypt.Net.BCrypt.Verify(password, user.UserPassword))
+            if (BCrypt.Net.BCrypt.Verify(password, user.UserPassword))
             {
                 userInfo = new UserInfoViewModel()
                 {

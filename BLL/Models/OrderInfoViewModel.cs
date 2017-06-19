@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Models
 {
-    public class BookInBasketViewModel
+    public class OrderInfoViewModel
     {
         public int BookId { get; set; }
         public string BookName { get; set; }
