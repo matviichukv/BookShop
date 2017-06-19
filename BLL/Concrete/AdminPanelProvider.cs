@@ -44,7 +44,9 @@ namespace BLL.Concrete
                     var dataGrid = new DataGrid() {Name = $"{tableName}DataGrid"};
                     dataGrid.SetValue(Grid.ColumnProperty, 1);
                     dataGrid.ItemsSource = dbSet.Local;
-                    dataGrid.SelectedIndex = 0;
+                    dataGrid.SelectedIndex = 1;
+                    dataGrid.SelectionChanged += TableDataGridOnSelectionChanged;
+                    
                     tabItem.TableGrid.Children.Add(dataGrid);
 
                     var stackPanel = new StackPanel(){Name = $"{tableName}StackPanel"};
@@ -56,8 +58,23 @@ namespace BLL.Concrete
                         if ((propertyInfo.PropertyType == typeof(int) || propertyInfo.PropertyType == typeof(string)) && !propertyInfo.Name.Contains("Id"))
                         {
                             tabItem.TableGrid.Children.OfType<StackPanel>().FirstOrDefault()?.Children.Add(new Label() { Content = propertyInfo.Name });
-                            Binding binding = new Binding { Mode = BindingMode.TwoWay, ElementName = $"{tableName}DataGrid"};
-                            tabItem.TableGrid.Children.OfType<StackPanel>().FirstOrDefault()?.Children.Add(new TextBox() { Name = tableName + "_" + propertyInfo.Name, DataContext = binding});
+                            if (dataGrid.Items.Count > 1)
+                            {
+                                var textBox = new TextBox(){ Name = tableName + propertyInfo.Name};
+                                textBox.TextChanged += TextBoxOnTextChanged;
+                                tabItem.TableGrid.Children.OfType<StackPanel>()
+                                    .FirstOrDefault()?
+                                    .Children.Add(textBox);
+                            }
+                            else
+                            {
+                                tabItem.TableGrid.Children.OfType<StackPanel>()
+                                    .FirstOrDefault()?
+                                    .Children.Add(new TextBox()
+                                    {
+                                        Name = tableName + propertyInfo.Name
+                                    });
+                            }
                         }
                         else if (propertyInfo.Name.Contains("Id") && service.Singularize(tableName) + "Id" != propertyInfo.Name && propertyInfo.PropertyType != typeof(DAL.Entity.Image) && propertyInfo.Name != "ImageId")
                         {
@@ -72,7 +89,11 @@ namespace BLL.Concrete
                             tabItem.TableGrid.Children.OfType<StackPanel>().FirstOrDefault()?.Children.Add(new ComboBox() { Name = tableName + "_" + propertyInfo.Name });
                             foreach (var item in set)
                             {
-                                string itemValue = item.GetType().GetProperty(set.ElementType.Name + "Id").GetValue(item) + " - " + item.GetType().GetProperty(set.ElementType.Name + "Name").GetValue(item);
+                                string itemValue = item.GetType()
+                                    .GetProperty(set.ElementType.Name + "Id")
+                                    .GetValue(item) + " - " + item.GetType()
+                                    .GetProperty(set.ElementType.Name + "Name")
+                                    .GetValue(item);
                                 tabItem.TableGrid
                                     .Children.OfType<ComboBox>()
                                     .FirstOrDefault(c => c.Name == tableName + "_" + propertyInfo.Name)
@@ -88,6 +109,44 @@ namespace BLL.Concrete
 
             }
             return result;
+        }
+
+        private void TextBoxOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
+        {
+            var dataGrid =
+                (((sender as TextBox).Parent as StackPanel).Parent as Grid).Children.OfType<DataGrid>().FirstOrDefault();
+            var property = dataGrid.SelectedItem.GetType().GetProperty((sender as TextBox).Name.Replace(dataGrid.Name.Replace("DataGrid", ""), ""));
+            if (property.PropertyType == typeof(int))
+            {
+                property.SetValue(dataGrid.SelectedItem, Int32.Parse( (sender as TextBox).Text) );
+            }
+            else
+            {
+                property.SetValue(dataGrid.SelectedItem, (sender as TextBox).Text);
+            }
+            repo.ContextSaveChanges();
+            dataGrid.Items.Refresh();
+        }
+
+        private void TableDataGridOnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
+        {
+            var stackPanel = ((sender as DataGrid).Parent as Grid).Children.OfType<StackPanel>().FirstOrDefault();
+            foreach (var textBox in stackPanel.Children.OfType<TextBox>())
+            {
+                try
+                {
+                    textBox.Text =
+                    (sender as DataGrid).SelectedItem.GetType()
+                    .GetProperty(textBox.Name.Replace(stackPanel.Name.Replace("StackPanel", ""), ""))
+                    .GetValue((sender as DataGrid).SelectedItem)
+                    .ToString();
+                }
+                catch (NullReferenceException e)
+                {
+                    //(sender as DataGrid)..Add(Activator.CreateInstance((sender as DataGrid).Items[0].GetType()));
+                }
+                
+            }
         }
 
         private void SaveChanges_Click(object sender, RoutedEventArgs e)
