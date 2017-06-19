@@ -90,6 +90,10 @@
     <Compile Include="Migrations\201706181152246_fixed review id.Designer.cs">
       <DependentUpon>201706181152246_fixed review id.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706191521189_test.cs" />
+    <Compile Include="Migrations\201706191521189_test.Designer.cs">
+      <DependentUpon>201706191521189_test.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706181152246_fixed review id.resx">
       <DependentUpon>201706181152246_fixed review id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706191521189_test.resx">
+      <DependentUpon>201706191521189_test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
