@@ -14,8 +14,12 @@ namespace DAL.Entity
         public int OrderNumber { get; set; }
         public int OrderPrice { get; set; }
         public int BookCount { get; set; }
+        public bool IsPaid { get; set; }
 
         public int UserId { get; set; }
         public User User { get; set; }
+
+        public int BookId { get; set; }
+        public Book Book { get; set; }
     }
 }

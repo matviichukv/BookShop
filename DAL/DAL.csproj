@@ -64,6 +64,7 @@
     <Compile Include="Entity\Category.cs" />
     <Compile Include="Entity\Image.cs" />
     <Compile Include="Entity\Order.cs" />
+    <Compile Include="Entity\Like.cs" />
     <Compile Include="Entity\Review.cs" />
     <Compile Include="Entity\Role.cs" />
     <Compile Include="Migrations\201706121628501_Added Category, Publisher, User, Review, Role entities.cs" />
@@ -89,6 +90,10 @@
     <Compile Include="Migrations\201706181152246_fixed review id.cs" />
     <Compile Include="Migrations\201706181152246_fixed review id.Designer.cs">
       <DependentUpon>201706181152246_fixed review id.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706191553482_Created Orders DbSet and Like DbSet.cs" />
+    <Compile Include="Migrations\201706191553482_Created Orders DbSet and Like DbSet.Designer.cs">
+      <DependentUpon>201706191553482_Created Orders DbSet and Like DbSet.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201706191521189_test.cs" />
     <Compile Include="Migrations\201706191521189_test.Designer.cs">
@@ -143,9 +148,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706181152246_fixed review id.resx">
       <DependentUpon>201706181152246_fixed review id.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706191521189_test.resx">
-      <DependentUpon>201706191521189_test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

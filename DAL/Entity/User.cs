@@ -20,19 +20,20 @@ namespace DAL.Entity
         [EmailAddress]
         public string UserEmail { get; set; }
         [Required]
-        [StringLength(maximumLength:255)]
+        [StringLength(maximumLength: 255)]
         public string UserPassword { get; set; }
         [Required]
-        [StringLength(maximumLength:255)]
+        [StringLength(maximumLength: 255)]
         public string UserName { get; set; }
 
         [Required]
         public string Salt { get; set; }
-        
+
         public int? ImageId { get; set; }
         public virtual Image Avatar { get; set; }
 
         public virtual ICollection<Role> Roles { get; private set; }
         public virtual ICollection<Review> Reviews { get; private set; }
+        public virtual ICollection<Like> UserLikes { get; private set; }
     }
 }

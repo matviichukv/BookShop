@@ -20,6 +20,8 @@ namespace DAL.Concrete
                 .Include(b => b.BookImage)
                 .Include(b => b.BookPublisher)
                 .Include(b => b.BookAuthor)
+                .Include(b => b.BookReviews)
+                .Include(b => b.BookReviews.Select(r => r.User))
                 .FirstOrDefault(book => book.BookId == bookId);
         }
 

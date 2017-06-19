@@ -23,5 +23,7 @@ namespace DAL.Entity
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Like> Likes { get; set; }
     }
 }
