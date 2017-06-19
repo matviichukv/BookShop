@@ -17,7 +17,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="0.1*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Grid.Column="0" Grid.ColumnSpan="2" FontSize="14" Foreground="Orange" HorizontalAlignment="Center">Private office</Label>
+        <Label Grid.Column="0" Grid.ColumnSpan="2" FontSize="20" Foreground="Orange" HorizontalAlignment="Center">Private office</Label>
         <Button Grid.Column="1" Grid.Row="3" Background="Green" Foreground="White" MaxWidth="200" Name="backToMainWindowBtn" Click="backToMainWindowBtn_Click">Continue search goods</Button>
         <StackPanel Grid.Column="0" Grid.Row="1">
             <Button FontSize="15" Name="personalInfoBtn" Background="White" Click="personalInfoBtn_Click">Personal Info</Button>

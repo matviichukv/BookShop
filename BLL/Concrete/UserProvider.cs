@@ -49,6 +49,7 @@ namespace BLL.Concrete
             {
                 userInfo = new UserInfoViewModel()
                 {
+                    UserId = user.UserId,
                     AvatarPath = user.Avatar == null ? null : user.Avatar.PathToImageFile,
                     UserEmail = user.UserEmail,
                     UserName = user.UserName,
