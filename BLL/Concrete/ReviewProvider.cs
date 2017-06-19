@@ -21,8 +21,6 @@ namespace BLL.Concrete
             {
                 Message = message,
                 Date = DateTime.Now,
-                ThumbUp = 0,
-                ThumbDown = 0,
                 BookId = bookId,
                 UserId = userId
             };
@@ -41,9 +39,8 @@ namespace BLL.Concrete
                 {
                      Message = item.Message,
                      Date = item.Date,
-                     ThumbUp = item.ThumbUp,
-                     ThumbDown = item.ThumbDown,
-                     UserName = ""//item.User.UserName
+                     Likes = item.ReviewLikes.Count,
+                     UserName = item.User.UserName
                 });
             }
 

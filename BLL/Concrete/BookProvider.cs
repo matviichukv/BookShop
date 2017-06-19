@@ -27,8 +27,7 @@ namespace BLL.Concrete
                 {
                     Date = review.Date,
                     Message = review.Message,
-                    ThumbDown = review.ThumbDown,
-                    ThumbUp = review.ThumbUp,
+                    Likes = review.ReviewLikes.Count,
                     UserName = review.User.UserName
                 });
             }

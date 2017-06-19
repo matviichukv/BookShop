@@ -1,9 +1,10 @@
-﻿using System;
+﻿using DAL.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.Abstract;
+using System.Data.Entity;
 using DAL.Entity;
 
 namespace DAL.Concrete
@@ -20,7 +21,9 @@ namespace DAL.Concrete
 
         public List<Review> GetUserReviews(int userId)
         {
-            return ctx.Reviews.Where(i => i.UserId == userId).ToList();
+            return ctx.Reviews
+                .Include(r => r.User)
+                .Where(i => i.UserId == userId).ToList();
         }
     }
 }
