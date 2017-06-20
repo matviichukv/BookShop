@@ -87,5 +87,24 @@ namespace BLL.Concrete
 
             return result;
         }
+
+        public List<BookShortInfoViewModel> GetBooksByCategoty(string category)
+        {
+            var filteredBooks = bookRepository.GetBooks().AsQueryable();
+
+            var result = filteredBooks
+                .Where(r => r.BookCategory.CategoryName == category)
+                .Select(b => new BookShortInfoViewModel()
+                {
+                    BookAuthorName = b.BookAuthor.AuthorName,
+                    BookDescription = b.Description,
+                    BookId = b.BookId,
+                    BookName = b.BookName,
+                    BookImagePath = b.BookImage.PathToImageFile,
+                    BookPrice = b.Price
+                }).ToList();
+
+            return result;
+        }
     }
 }

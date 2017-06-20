@@ -10,5 +10,8 @@ namespace DAL.Abstract
     public interface IOrderRepository
     {
         List<Order> GetOrders();
+        bool AddOrder(Order order);
+        bool RemoveOrder(int orderId);
+        bool ConfirmOrder(int orderId);
     }
 }

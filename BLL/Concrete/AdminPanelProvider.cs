@@ -46,7 +46,8 @@ namespace BLL.Concrete
                     dataGrid.ItemsSource = dbSet.Local;
                     dataGrid.SelectedIndex = 1;
                     dataGrid.SelectionChanged += TableDataGridOnSelectionChanged;
-                    
+                    dataGrid.AutoGeneratingColumn += DataGrid_AutoGeneratingColumn;
+                    dataGrid.AddingNewItem += DataGrid_AddingNewItem;
                     tabItem.TableGrid.Children.Add(dataGrid);
 
                     var stackPanel = new StackPanel(){Name = $"{tableName}StackPanel"};
@@ -85,8 +86,8 @@ namespace BLL.Concrete
                                 string itemValue = item.GetType()
                                     .GetProperty(set.ElementType.Name + "Id")
                                     .GetValue(item) + " - " + item.GetType()
-                                    .GetProperty(set.ElementType.Name + "Name")
-                                    .GetValue(item);
+                                                              .GetProperty(set.ElementType.Name + "Name")
+                                                              .GetValue(item);
                                 comboBox.Items.Add(itemValue);
                             }
                         }
@@ -101,12 +102,28 @@ namespace BLL.Concrete
             return result;
         }
 
+        private void DataGrid_AddingNewItem(object sender, AddingNewItemEventArgs e)
+        {
+            (sender as DataGrid).Items.Refresh();
+        }
+
+        private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (!e.PropertyType.IsPrimitive)
+            {
+                if (!e.PropertyType.IsInstanceOfType(""))
+                    e.Cancel = true;
+            }
+            
+        }
+
         private void ForeignKeyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var dataGrid =
                 (((sender as ComboBox).Parent as StackPanel).Parent as Grid).Children.OfType<DataGrid>().FirstOrDefault();
             var property = dataGrid.SelectedItem.GetType().GetProperty((sender as ComboBox).Name.Replace(dataGrid.Name.Replace("DataGrid", ""), ""));
-            property.SetValue(dataGrid.SelectedItem, (sender as ComboBox).SelectedIndex + 1);
+            property.SetValue( dataGrid.SelectedItem, Int32.Parse( ( (sender as ComboBox).SelectedItem.ToString().Split(' ')[0] ) ) );
+            dataGrid.Items.Refresh();
         }
 
         private void TextBoxOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
@@ -141,22 +158,44 @@ namespace BLL.Concrete
                 }
                 catch (NullReferenceException e)
                 {
-                    //(sender as DataGrid)..Add(Activator.CreateInstance((sender as DataGrid).Items[0].GetType()));
+
                 }
                 
             }
             foreach(var comboBox in stackPanel.Children.OfType<ComboBox>())
             {
-                comboBox.SelectedIndex =
-                (int)(sender as DataGrid).SelectedItem.GetType()
-                .GetProperty(comboBox.Name.Replace(stackPanel.Name.Replace("StackPanel", ""), ""))
-                .GetValue((sender as DataGrid).SelectedItem) - 1;
+                try
+                {
+                    int fkId = (int)(sender as DataGrid).SelectedItem.GetType() //foreign key id
+                    .GetProperty(comboBox.Name.Replace(stackPanel.Name.Replace("StackPanel", ""), ""))
+                    .GetValue((sender as DataGrid).SelectedItem);
+                    foreach (var item in comboBox.Items)
+                    {
+                        if (item.ToString().Substring(0, 1) == fkId.ToString())
+                        {
+                            comboBox.SelectedItem = item;
+                            break;
+                        }
+                    }
+                }
+                catch
+                {
+
+                }
             }
         }
 
         private void SaveChanges_Click(object sender, RoutedEventArgs e)
         {
-            repo.ContextSaveChanges();
+            try
+            {
+                repo.ContextSaveChanges();
+
+            }
+            catch
+            {
+
+            }
         }
     }
 }

@@ -11,5 +11,6 @@ namespace DAL.Abstract
     {
         Book GetBookById(int bookId);
         List<Book> GetBooks();
+        void SaveChanges();
     }
 }

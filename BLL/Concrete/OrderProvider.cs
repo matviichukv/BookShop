@@ -7,12 +7,39 @@ using System.Threading.Tasks;
 using BLL.Models;
 using DAL.Concrete;
 using DAL.Abstract;
+using DAL.Entity;
 
 namespace BLL.Concrete
 {
     public class OrderProvider : IOrderProvider
     {
         IOrderRepository orderRepository = new OrderRepository();
+        IUserRepository userRepository = new UserRepository();
+        
+        public bool RemoveOrder(int orderId)
+        {
+            return orderRepository.RemoveOrder(orderId);
+        }
+
+        public bool AddOrder(OrderAddViewModel orderModel, string userEmail)
+        {
+            Order newOrder = new Order()
+            {
+                BookId = orderModel.BookId,
+                BookCount = orderModel.Count,
+                IsPaid = false,
+                OrderPrice = orderModel.Price,
+                UserId = userRepository.GetUserByEmail(userEmail).UserId,
+                DateOrdered = null
+            };
+
+            return orderRepository.AddOrder(newOrder);
+        }
+
+        public bool ConfirmOrder(int orderId)
+        {
+            return orderRepository.ConfirmOrder(orderId);
+        }
 
         public List<OrderInfoViewModel> GetBasket()
         {
