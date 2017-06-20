@@ -101,6 +101,10 @@
     <Compile Include="Migrations\201706191521189_test.Designer.cs">
       <DependentUpon>201706191521189_test.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706201701023_Modified Order Entity.cs" />
+    <Compile Include="Migrations\201706201701023_Modified Order Entity.Designer.cs">
+      <DependentUpon>201706201701023_Modified Order Entity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706181152246_fixed review id.resx">
       <DependentUpon>201706181152246_fixed review id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706201701023_Modified Order Entity.resx">
+      <DependentUpon>201706201701023_Modified Order Entity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
