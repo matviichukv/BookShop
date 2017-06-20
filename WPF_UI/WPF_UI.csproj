@@ -67,6 +67,9 @@
     <Compile Include="BookInfo.xaml.cs">
       <DependentUpon>BookInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ChangeUser.xaml.cs">
+      <DependentUpon>ChangeUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PrivateOffice.xaml.cs">
       <DependentUpon>PrivateOffice.xaml</DependentUpon>
     </Compile>
@@ -81,6 +84,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BookInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChangeUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

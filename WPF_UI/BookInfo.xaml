@@ -44,7 +44,7 @@
                     <Label Name="publishDateLb">Publish date:</Label>
                     <Label Name="volumeLb">Volume:</Label>
                     <Label Name="priceLb" Foreground="GreenYellow">Price :</Label>
-                    <Button Margin="50,0,50,0" Background="Orange" Foreground="White" MaxWidth="200">Buy</Button>
+                    <Button Name="addToBasket" Margin="50,0,50,0" Background="Orange" Foreground="White" MaxWidth="200" Click="addToBasket_Click">Buy</Button>
                 </StackPanel>
             </Grid>
             <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center">Description:</Label>
@@ -65,24 +65,20 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel HorizontalAlignment="Center">
-                        <TextBox DockPanel.Dock="Top" Text="{Binding UserName}"></TextBox>
-                        <TextBox DockPanel.Dock="Top" Text="{Binding Date,StringFormat=dd-MM-yyyy}"></TextBox>
+                        <Label DockPanel.Dock="Top" Content="{Binding UserName}"></Label>
+                        <Label DockPanel.Dock="Top" Content="{Binding Date,StringFormat=dd-MM-yyyy}"></Label>
                         <TextBox DockPanel.Dock="top" Text="{Binding Message}" AcceptsReturn="True" MaxLines="2" MinLines="2" Width="430" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap"></TextBox>
                         <WrapPanel DockPanel.Dock="Bottom">
-                            <Button>
-                                <Image Height="20"></Image>
+                            <Button Background="White">
+                                <Image Height="20" Width="20"></Image>
                             </Button>
-                            <TextBox Text="{Binding ThumbUp}"></TextBox>
-                            <Button>
-                                <Image Height="20"></Image>
-                            </Button>
-                            <TextBox Text="{Binding ThumbDown}"></TextBox>
+                            <Label Content="{Binding Likes}"></Label>
                         </WrapPanel>
                     </DockPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <Button Grid.Column="0" Grid.Row="5" Background="Green" Foreground="White" MaxWidth="250" Name="sendReviewBtn" Click="sendReviewBtn_Click">Send review</Button>
-        <Button Grid.Column="2" Grid.Row="5" Background="Red" Foreground="White" MaxWidth="250">Continue search goods</Button>
+        <Button Grid.Column="2" Grid.Row="5" Background="Red" Foreground="White" MaxWidth="250" Name="continueSearchGoodsBtn" Click="continueSearchGoodsBtn_Click">Continue search goods</Button>
     </Grid>
 </Window>

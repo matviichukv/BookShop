@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BLL.Models;
 using BLL.Concrete;
+using System.Collections.ObjectModel;
 
 namespace WPF_UI
 {
@@ -24,7 +25,7 @@ namespace WPF_UI
     {
         private UserInfoViewModel user = null;
         private List<BookShortInfoViewModel> booksShortInfo = new List<BookShortInfoViewModel>();
-        private List<BookInBasketViewModel> booksInBasket = new List<BookInBasketViewModel>();
+        private ObservableCollection<OrderInfoViewModel> booksInBasket = new ObservableCollection<OrderInfoViewModel>();
 
         public MainWindow()
         {
@@ -59,7 +60,7 @@ namespace WPF_UI
         private void showUserProfileBtn_Click(object sender, RoutedEventArgs e)
         {
             PrivateOffice office = new PrivateOffice(user);
-            office.Show();
+            office.ShowDialog();
         }
 
         private void booksLb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -69,7 +70,7 @@ namespace WPF_UI
                 return;
             }
 
-            BookInfo info = new BookInfo(booksShortInfo[shortBooksInfoLb.SelectedIndex].BookId, user);
+            BookInfo info = new BookInfo(booksShortInfo[shortBooksInfoLb.SelectedIndex].BookId, user, booksInBasket);
             info.ShowDialog();
             shortBooksInfoLb.SelectedIndex = -1;
         }
@@ -77,7 +78,7 @@ namespace WPF_UI
         private void cartBtn_Click(object sender, RoutedEventArgs e)
         {
             Basket basket = new Basket(booksInBasket);
-            basket.Show();
+            basket.ShowDialog();
         }
 
         private void FillCategorisLb()
@@ -89,26 +90,8 @@ namespace WPF_UI
         {
             Button button = sender as Button;
             int index = shortBooksInfoLb.Items.IndexOf(button.DataContext);
-            ShortBookInfoVMToBookInBastekVm(booksShortInfo[index].BookId);
-        }
-
-        private void ShortBookInfoVMToBookInBastekVm(int bookId)
-        {
-            BookProvider bookProvider = new BookProvider();
-            BookInfoViewModel book = bookProvider.GetBookInfo(bookId);
-
-            BookInBasketViewModel bookInBastek = new BookInBasketViewModel
-            {
-                BookId = bookId,
-                AuthorName = book.AuthorName,
-                BookImagePath = book.BookImagePath,
-                BookName = book.BookName,
-                Count = 1,
-                Price = book.BookPrice,
-                Cost = book.BookPrice
-            };
-
-            booksInBasket.Add(bookInBastek);
+            BasketUIProvider basketUIProvider = new BasketUIProvider();
+            basketUIProvider.AddToBasket(booksShortInfo[index].BookId, booksInBasket);
         }
     }
 }

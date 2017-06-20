@@ -30,21 +30,13 @@ namespace BLL.Concrete
 
         public List<ReviewViewModel> GetUserReviews(int userId)
         {
-            var reviews = reviewRepository.GetUserReviews(userId);
-            List<ReviewViewModel> result = new List<ReviewViewModel>();
-
-            foreach(var item in reviews)
+            return reviewRepository.GetUserReviews(userId).Select(r => new ReviewViewModel()
             {
-                result.Add(new ReviewViewModel
-                {
-                     Message = item.Message,
-                     Date = item.Date,
-                     Likes = item.ReviewLikes.Count,
-                     UserName = item.User.UserName
-                });
-            }
-
-            return result;
+                Message = r.Message,
+                Date = r.Date,
+                Likes = r.ReviewLikes.Count,
+                UserName = r.User.UserName
+            }).ToList();
         }
     }
 }

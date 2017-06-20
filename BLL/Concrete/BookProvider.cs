@@ -57,22 +57,15 @@ namespace BLL.Concrete
 
         public List<BookShortInfoViewModel> GetBooks()
         {
-            List<BookShortInfoViewModel> result = new List<BookShortInfoViewModel>();
-
-            foreach (var book in bookRepository.GetBooks())
+            return bookRepository.GetBooks().Select(book => new BookShortInfoViewModel()
             {
-                result.Add(new BookShortInfoViewModel()
-                {
-                    BookAuthorName = book.BookAuthor.AuthorName,
-                    BookDescription = book.Description,
-                    BookId = book.BookId,
-                    BookName = book.BookName,
-                    BookImagePath = book.BookImage == null ? null : book.BookImage.PathToImageFile,
-                    BookPrice = book.Price
-                });
-            }
-
-            return result;
+                BookAuthorName = book.BookAuthor.AuthorName,
+                BookDescription = book.Description,
+                BookId = book.BookId,
+                BookName = book.BookName,
+                BookImagePath = book.BookImage == null ? null : book.BookImage.PathToImageFile,
+                BookPrice = book.Price
+            }).ToList();
         }
 
         public List<BookShortInfoViewModel> SearchBooks(string filter)
@@ -81,6 +74,25 @@ namespace BLL.Concrete
 
             var result = filteredBooks
                 .Where(r => r.BookName.Contains("Taras") || r.BookAuthor.AuthorName.Contains("Taras"))
+                .Select(b => new BookShortInfoViewModel()
+                {
+                    BookAuthorName = b.BookAuthor.AuthorName,
+                    BookDescription = b.Description,
+                    BookId = b.BookId,
+                    BookName = b.BookName,
+                    BookImagePath = b.BookImage.PathToImageFile,
+                    BookPrice = b.Price
+                }).ToList();
+
+            return result;
+        }
+
+        public List<BookShortInfoViewModel> GetBooksByCategoty(string category)
+        {
+            var filteredBooks = bookRepository.GetBooks().AsQueryable();
+
+            var result = filteredBooks
+                .Where(r => r.BookCategory.CategoryName == category)
                 .Select(b => new BookShortInfoViewModel()
                 {
                     BookAuthorName = b.BookAuthor.AuthorName,

@@ -15,6 +15,34 @@ namespace BLL.Concrete
     {
         IUserRepository userRepository = new UserRepository();
 
+        public bool EditUserInfo(UserChangeViewModel userChangeViewModel)
+        {
+            User changeUser = userRepository.GetUserByEmail(userChangeViewModel.Email);
+            if (changeUser.UserPassword == BCrypt.Net.BCrypt.HashPassword(userChangeViewModel.OldPassword, changeUser.Salt))
+            {
+                string salt = BCrypt.Net.BCrypt.GenerateSalt();
+
+                changeUser.UserName = userChangeViewModel.NewUserName;
+                changeUser.Salt = salt;
+                changeUser.UserPassword = BCrypt.Net.BCrypt.HashPassword(userChangeViewModel.NewPassword, salt);
+
+                if (changeUser.Avatar == null && userChangeViewModel.NewImagePath != null)
+                {
+                    Image avatar = new Image { PathToImageFile = userChangeViewModel.NewImagePath };
+                    changeUser.Avatar = avatar;
+                }
+                else if(userChangeViewModel.NewImagePath != null)
+                {
+                    changeUser.Avatar.PathToImageFile = userChangeViewModel.NewImagePath;
+                }
+
+                userRepository.UpdateUser(changeUser);
+                return true;
+            }
+            else
+                return false;
+        }
+
         public UserStatus CreateUser(UserCreateViewModel userModel)
         {
             if (userRepository.GetEmails().Contains(userModel.Email))
@@ -38,14 +66,12 @@ namespace BLL.Concrete
         {
             User user = userRepository.GetUserByEmail(Email);
 
-            if(user == null)
-            {
+            if (user == null)
                 return null;
-            }
 
             UserInfoViewModel userInfo = null;
 
-            if(BCrypt.Net.BCrypt.Verify(password, user.UserPassword))
+            if (BCrypt.Net.BCrypt.Verify(password, user.UserPassword))
             {
                 userInfo = new UserInfoViewModel()
                 {

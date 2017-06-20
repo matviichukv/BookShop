@@ -54,13 +54,20 @@ namespace WPF_UI
 
         private void backToMainWindowBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
         
         private void FillUserInfo()
         {
             userNameLb.Content = user.UserName;
             userEmailLb.Content = user.UserEmail;
+        }
+
+        private void changeProficeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeUser change = new ChangeUser(user);
+            change.ShowDialog();
+            FillUserInfo();
         }
     }
 }

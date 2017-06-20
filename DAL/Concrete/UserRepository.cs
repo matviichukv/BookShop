@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 using DAL.Entity;
 
 namespace DAL.Concrete
@@ -17,6 +18,13 @@ namespace DAL.Concrete
             ctx.Users.Add(user);
             ctx.SaveChanges();
             return user;
+        }
+
+        public void UpdateUser(User updateUser)
+        {
+            var oldUser = GetUserByEmail(updateUser.UserEmail);
+            oldUser = updateUser;
+            ctx.SaveChanges();
         }
 
         public List<string> GetEmails()
@@ -33,7 +41,9 @@ namespace DAL.Concrete
 
         public User GetUserByEmail(string Email)
         {
-            return ctx.Users.FirstOrDefault(t => t.UserEmail == Email);
+            return ctx.Users
+                .Include(u => u.Avatar)
+                .FirstOrDefault(t => t.UserEmail == Email);
         }
     }
 }

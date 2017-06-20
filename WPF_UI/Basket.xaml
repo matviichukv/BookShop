@@ -13,17 +13,17 @@
             <RowDefinition Height="0.2*" MaxHeight="100"></RowDefinition>
         </Grid.RowDefinitions>
         <Label Grid.Row="0" FontSize="20" Background="Orange" Foreground="White">The goods are delivered to the cart</Label>
-        <ListBox Grid.Row="1" ItemsSource="{Binding}" Name="basketLb">
+        <ListBox Grid.Row="1" ItemsSource="{Binding}" Name="basketLb" SelectionChanged="basketLb_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel HorizontalAlignment="Left" Margin="10">
                         <Image Height="100" Width="50" DockPanel.Dock="Left" Margin="10,0,10,0"></Image>
                         <WrapPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="50,0,0,0">
-                            <Button Width="20">-</Button>
+                            <Button Width="20" Name="subtractBtn" Click="subtractBtn_Click">-</Button>
                             <Label Content="{Binding Count}"></Label>
-                            <Button Width="20">+</Button>
+                            <Button Width="20" Name="addBtn" Click="addBtn_Click">+</Button>
                             <Label Content="{Binding Price}" Foreground="Orange"></Label>
-                            <Button Width="20" Background="Red" Foreground="White">X</Button>
+                            <Button Width="20" Background="Red" Foreground="White" Name="removeBookInBasket" Click="removeBookInBasket_Click">X</Button>
                         </WrapPanel>
                         <Label Content="{Binding BookName}" DockPanel.Dock="Top"></Label>
                         <Label Content="{Binding AuthorName}" DockPanel.Dock="Top"></Label>
@@ -38,9 +38,9 @@
             <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
                 <WrapPanel>
                     <Label FontSize="20">Result:</Label>
-                    <Label FontSize="20" Foreground="Orange">278</Label>
+                    <Label FontSize="20" Foreground="Orange" Name="costLbl"></Label>
                 </WrapPanel>
-                <Button HorizontalAlignment="Right" Background="Orange" Foreground="White">Place order</Button>
+                <Button HorizontalAlignment="Right" Background="Orange" Foreground="White" Margin="0,0,20,0">Place order</Button>
             </StackPanel>
         </DockPanel>
     </Grid>
