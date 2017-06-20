@@ -112,7 +112,8 @@ namespace BLL.Concrete
             if (!e.PropertyType.IsPrimitive)
             {
                 if (!e.PropertyType.IsInstanceOfType(""))
-                    e.Cancel = true;
+                    if (!e.PropertyType.IsInstanceOfType(DateTime.Now))
+                        e.Cancel = true;
             }
             
         }
@@ -139,8 +140,11 @@ namespace BLL.Concrete
             {
                 property.SetValue(dataGrid.SelectedItem, (sender as TextBox).Text);
             }
-            repo.ContextSaveChanges();
-            dataGrid.Items.Refresh();
+            if ((sender as TextBox).Text != "" && (sender as TextBox).Text != "0")
+            {
+                repo.ContextSaveChanges();
+                dataGrid.Items.Refresh();
+            }
         }
 
         private void TableDataGridOnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
