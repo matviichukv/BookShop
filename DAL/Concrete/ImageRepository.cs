@@ -13,7 +13,7 @@ namespace DAL.Concrete
 {
     public class ImageRepository : IImageRepository
     {
-        string imagesLocation =  new Uri( Path.Combine(typeof(Book).Assembly.Location, "..", "..", "..", "..", "DAL", "Images")).LocalPath;
+        string imagesLocation =  new Uri(Path.Combine( AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "DAL", "Images")).LocalPath;
 
         public bool SaveImage(Bitmap img, string fileName)
         {
