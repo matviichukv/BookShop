@@ -59,7 +59,7 @@ namespace WPF_UI
         private void showUserProfileBtn_Click(object sender, RoutedEventArgs e)
         {
             PrivateOffice office = new PrivateOffice(user);
-            office.Show();
+            office.ShowDialog();
         }
 
         private void booksLb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -77,7 +77,7 @@ namespace WPF_UI
         private void cartBtn_Click(object sender, RoutedEventArgs e)
         {
             Basket basket = new Basket(booksInBasket);
-            basket.Show();
+            basket.ShowDialog();
         }
 
         private void FillCategorisLb()

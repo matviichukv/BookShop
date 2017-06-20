@@ -26,11 +26,18 @@
         </StackPanel>
         <TabControl Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Name="tabContorl">
             <TabItem Visibility="Hidden">
-                <StackPanel HorizontalAlignment="Center">
-                    <Image Height="150" Source="E:\o-i-met-jk-rowling-facebook.jpg" Name="userAvatar"></Image>
-                    <Label FontSize="20" Name="userNameLb">Name</Label>
-                    <Label FontSize="20" Name="userEmailLb">Email</Label>
-                </StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="0.1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" HorizontalAlignment="Center">
+                        <Image Height="150" Source="E:\o-i-met-jk-rowling-facebook.jpg" Name="userAvatar"></Image>
+                        <Label FontSize="20" Name="userNameLb">Name</Label>
+                        <Label FontSize="20" Name="userEmailLb">Email</Label>
+                    </StackPanel>
+                    <Button Grid.Row="1" VerticalAlignment="Bottom" MaxWidth="150" Name="changeProficeBtn" Click="changeProficeBtn_Click">Change profile</Button>
+                </Grid>
             </TabItem>
             <TabItem Visibility="Hidden">
                 
@@ -40,14 +47,14 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <DockPanel>
-                                <TextBox DockPanel.Dock="Top" Text="{Binding UserName}"></TextBox>
-                                <TextBox DockPanel.Dock="Top" Text="{Binding Date}"></TextBox>
+                                <Label DockPanel.Dock="Top" Content="{Binding UserName}"></Label>
+                                <Label DockPanel.Dock="Top" Content="{Binding Date}"></Label>
                                 <TextBox DockPanel.Dock="top" Text="{Binding Message}" AcceptsReturn="True" MaxLines="2" MinLines="2" Width="330" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap"></TextBox>
                                 <WrapPanel DockPanel.Dock="Bottom">
-                                    <Button>Up</Button>
-                                    <TextBox Text="{Binding ThumbUp}"></TextBox>
-                                    <Button>Down</Button>
-                                    <TextBox Text="{Binding ThumbDown}"></TextBox>
+                                    <Button Background="White">
+                                        <Image Height="20" Width="20"></Image>
+                                    </Button>
+                                    <Label Content="{Binding Likes}"></Label>
                                 </WrapPanel>
                             </DockPanel>
                         </DataTemplate>

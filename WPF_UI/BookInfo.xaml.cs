@@ -68,5 +68,10 @@ namespace WPF_UI
             SendReview sendReview = new SendReview(user, bookId);
             sendReview.ShowDialog();
         }
+
+        private void continueSearchGoodsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
