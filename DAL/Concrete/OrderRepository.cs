@@ -13,6 +13,39 @@ namespace DAL.Concrete
     {
         BookShopContext ctx = new BookShopContext();
 
+        public bool AddOrder(Order order)
+        {
+            try
+            {
+                ctx.Orders.Add(order);
+                ctx.SaveChanges();
+                return true;
+            }
+            catch { return false; }
+        }
+
+        public bool ConfirmOrder(int orderId)
+        {
+            try
+            {
+                ctx.Orders.FirstOrDefault(o => o.OrderId == orderId).IsPaid = true;
+                ctx.Orders.FirstOrDefault(o => o.OrderId == orderId).DateOrdered = DateTime.Now;
+                ctx.SaveChanges();
+                return true;
+            }
+            catch { return false; }
+        }
+
+        public bool RemoveOrder(int orderId)
+        {
+            try
+            {
+                ctx.Orders.Remove(ctx.Orders.FirstOrDefault(o => o.OrderId == orderId));
+                return true;
+            }
+            catch { return false; }
+        }
+
         public List<Order> GetOrders()
         {
             return ctx.Orders

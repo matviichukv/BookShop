@@ -32,5 +32,10 @@ namespace DAL.Concrete
                 .Include(b => b.BookImage)
                 .ToList();
         }
+
+        public void SaveChanges()
+        {
+            ctx.SaveChanges();
+        }
     }
 }

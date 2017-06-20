@@ -11,7 +11,7 @@ namespace DAL.Entity
     public class Order
     {
         public int OrderId { get; set; }
-        public int OrderNumber { get; set; }
+        public DateTime? DateOrdered { get; set; }
         public int OrderPrice { get; set; }
         public int BookCount { get; set; }
         public bool IsPaid { get; set; }
