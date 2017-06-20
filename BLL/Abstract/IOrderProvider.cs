@@ -11,7 +11,7 @@ namespace BLL.Abstract
     {
         List<OrderInfoViewModel> GetBasket();
         List<OrderInfoViewModel> GetHistory();
-        bool AddOrder(OrderInfoViewModel orderModel, string userEmail);
+        bool AddOrder(OrderAddViewModel orderModel, string userEmail);
         bool RemoveOrder(int orderId);
         bool ConfirmOrder(int orderId);
     }
