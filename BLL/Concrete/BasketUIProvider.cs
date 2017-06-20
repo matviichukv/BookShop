@@ -11,9 +11,10 @@ namespace BLL.Concrete
 {
     public class BasketUIProvider : IBasketUIProvider
     {
-        public void AddToBasket(int bookId, ObservableCollection<OrderInfoViewModel> booksInBasket)
+        public void AddToBasket(int bookId, ObservableCollection<OrderInfoViewModel> booksInBasket, string userEmail)
         {
-            BookProvider bookProvider = new BookProvider();
+            IOrderProvider orderProvider = new OrderProvider();
+            IBookProvider bookProvider = new BookProvider();
             BookInfoViewModel bookVM = bookProvider.GetBookInfo(bookId);
 
             OrderInfoViewModel order = new OrderInfoViewModel
@@ -33,10 +34,12 @@ namespace BLL.Concrete
             {
                 int index = booksInBasket.IndexOf(book);
                 booksInBasket[index].Count++;
+                booksInBasket[index].Cost = booksInBasket[index].Price * booksInBasket[index].Count;
             }
             else
             {
                 booksInBasket.Add(order);
+                orderProvider.AddOrder(new OrderAddViewModel() { BookId = bookId, Count = bookVM.BookCount, Price = bookVM.BookPrice }, userEmail);
             }
         }
     }

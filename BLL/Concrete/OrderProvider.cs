@@ -21,7 +21,7 @@ namespace BLL.Concrete
             return orderRepository.RemoveOrder(orderId);
         }
 
-        public bool AddOrder(OrderInfoViewModel orderModel, string userEmail)
+        public bool AddOrder(OrderAddViewModel orderModel, string userEmail)
         {
             Order newOrder = new Order()
             {
