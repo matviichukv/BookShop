@@ -19,6 +19,12 @@ namespace DAL.Concrete
             ctx.SaveChanges();
         }
 
+        public List<Review> GetBookReviews(int bookId)
+        {
+            return ctx.Reviews
+                .Include(r => r.User).Include(i => i.ReviewLikes).Where(i => i.BookId == bookId).ToList();
+        }
+
         public List<Review> GetUserReviews(int userId)
         {
             return ctx.Reviews

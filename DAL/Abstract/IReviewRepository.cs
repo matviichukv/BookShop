@@ -11,5 +11,6 @@ namespace DAL.Abstract
     {
         void AddReview(Review review);
         List<Review> GetUserReviews(int userId);
+        List<Review> GetBookReviews(int bookId);
     }
 }
