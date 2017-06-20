@@ -25,7 +25,7 @@ namespace WcfBookShopService
             Order newOrder = new Order()
             {
                 BookCount = count,
-                OrderNumber = orderId,
+                OrderId = orderId,
                 OrderPrice = count * ctx.Books.FirstOrDefault(book => book.BookId == bookId).Price,
                 UserId = userId
             };
