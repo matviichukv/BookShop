@@ -91,7 +91,7 @@ namespace WPF_UI
             Button button = sender as Button;
             int index = shortBooksInfoLb.Items.IndexOf(button.DataContext);
             BasketUIProvider basketUIProvider = new BasketUIProvider();
-            basketUIProvider.AddToBasket(booksShortInfo[index].BookId, booksInBasket);
+            basketUIProvider.AddToBasket(booksShortInfo[index].BookId, booksInBasket, user.UserEmail);
         }
     }
 }

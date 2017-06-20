@@ -75,7 +75,7 @@ namespace WPF_UI
             };
 
             UserProvider userProvider = new UserProvider();
-            if (userProvider.ChangeUserInfo(userChange))
+            if (userProvider.EditUserInfo(userChange))
             {
                 user.UserEmail = userChange.Email;
                 user.UserName = userChange.NewUserName;

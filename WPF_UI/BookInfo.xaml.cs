@@ -80,7 +80,7 @@ namespace WPF_UI
         private void addToBasket_Click(object sender, RoutedEventArgs e)
         {
             BasketUIProvider basketUIProvider = new BasketUIProvider();
-            basketUIProvider.AddToBasket(bookId, booksInBasket);
+            basketUIProvider.AddToBasket(bookId, booksInBasket, user.UserEmail);
         }
     }
 }
