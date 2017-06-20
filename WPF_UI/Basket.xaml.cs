@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BLL.Models;
 using System.Collections.ObjectModel;
+using BLL.Concrete;
 
 namespace WPF_UI
 {
@@ -33,6 +34,7 @@ namespace WPF_UI
             InitializeComponent();
             books = _books;
             basketLb.DataContext = books;
+            SumaAllBooksInBasket();
         }
 
         private void continueSearchBtn_Click(object sender, RoutedEventArgs e)
@@ -50,6 +52,7 @@ namespace WPF_UI
             }
 
             books[index].Count--;
+            SumaAllBooksInBasket();
             basketLb.Items.Refresh();
         }
 
@@ -57,6 +60,7 @@ namespace WPF_UI
         {
             int index = basketLb.Items.IndexOf(((Button)sender).DataContext);
             books[index].Count++;
+            SumaAllBooksInBasket();
             basketLb.Items.Refresh();
         }
 
@@ -64,11 +68,24 @@ namespace WPF_UI
         {
             int index = basketLb.Items.IndexOf(((Button)sender).DataContext);
             books.RemoveAt(index);
+            SumaAllBooksInBasket();
         }
 
         private void basketLb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void SumaAllBooksInBasket()
+        {
+            int res = 0;
+
+            for(int i = 0; i < books.Count; i++)
+            {
+                res += books[i].Count * books[i].Price;
+            }
+
+            costLbl.Content = res.ToString();
         }
     }
 }

@@ -55,12 +55,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IAdminPanelProvider.cs" />
+    <Compile Include="Abstract\IBasketUIProvider.cs" />
     <Compile Include="Abstract\IBookProvider.cs" />
     <Compile Include="Abstract\ICategoryProvider.cs" />
     <Compile Include="Abstract\IOrderProvider.cs" />
     <Compile Include="Abstract\IReviewProvider.cs" />
     <Compile Include="Abstract\IUserProvider.cs" />
     <Compile Include="Concrete\AdminPanelProvider.cs" />
+    <Compile Include="Concrete\BasketUIProvider.cs" />
     <Compile Include="Concrete\BookProvider.cs" />
     <Compile Include="Concrete\CategoryProvider.cs" />
     <Compile Include="Concrete\OrderProvider.cs" />

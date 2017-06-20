@@ -45,6 +45,7 @@ namespace WPF_UI
         {
             ReviewProvider reviewProvider = new ReviewProvider();
             reviewProvider.AddReview(messageTb.Text, bookId, user.UserId);
+            this.Close();
         }
     }
 }

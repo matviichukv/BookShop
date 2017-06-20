@@ -25,8 +25,18 @@ namespace BLL.Concrete
                 changeUser.UserName = userChangeViewModel.NewUserName;
                 changeUser.Salt = salt;
                 changeUser.UserPassword = BCrypt.Net.BCrypt.HashPassword(userChangeViewModel.NewPassword, salt);
-                changeUser.Avatar.PathToImageFile = userChangeViewModel.NewImagePath;
 
+                if (changeUser.Avatar == null && userChangeViewModel.NewImagePath != null)
+                {
+                    Image avatar = new Image { PathToImageFile = userChangeViewModel.NewImagePath };
+                    changeUser.Avatar = avatar;
+                }
+                else if(userChangeViewModel.NewImagePath != null)
+                {
+                    changeUser.Avatar.PathToImageFile = userChangeViewModel.NewImagePath;
+                }
+
+                userRepository.UpdateUser(changeUser);
                 return true;
             }
             else

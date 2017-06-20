@@ -12,5 +12,6 @@ namespace DAL.Abstract
         User CreateUser(User user);
         List<string> GetEmails();
         User GetUserByEmail(string Email);
+        void UpdateUser(User updateUser);
     }
 }

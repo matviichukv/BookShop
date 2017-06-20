@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BLL.Models;
 using BLL.Concrete;
+using System.Collections.ObjectModel;
 
 namespace WPF_UI
 {
@@ -24,6 +25,7 @@ namespace WPF_UI
         private BookProvider bookProvider = new BookProvider();
         private BookInfoViewModel bookInfo = null;
         private UserInfoViewModel user = null;
+        private ObservableCollection<OrderInfoViewModel> booksInBasket;
         private int bookId;
 
         public BookInfo()
@@ -31,11 +33,12 @@ namespace WPF_UI
             InitializeComponent();
         }
 
-        public BookInfo(int _bookId, UserInfoViewModel _user)
+        public BookInfo(int _bookId, UserInfoViewModel _user, ObservableCollection<OrderInfoViewModel> _booksInBasket)
         {
             InitializeComponent();
             user = _user;
             bookId = _bookId;
+            booksInBasket = _booksInBasket;
             bookInfo = bookProvider.GetBookInfo(bookId);
             FillBookInfo(bookInfo);
         }
@@ -72,6 +75,12 @@ namespace WPF_UI
         private void continueSearchGoodsBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void addToBasket_Click(object sender, RoutedEventArgs e)
+        {
+            BasketUIProvider basketUIProvider = new BasketUIProvider();
+            basketUIProvider.AddToBasket(bookId, booksInBasket);
         }
     }
 }

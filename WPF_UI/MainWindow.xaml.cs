@@ -69,7 +69,7 @@ namespace WPF_UI
                 return;
             }
 
-            BookInfo info = new BookInfo(booksShortInfo[shortBooksInfoLb.SelectedIndex].BookId, user);
+            BookInfo info = new BookInfo(booksShortInfo[shortBooksInfoLb.SelectedIndex].BookId, user, booksInBasket);
             info.ShowDialog();
             shortBooksInfoLb.SelectedIndex = -1;
         }
@@ -89,26 +89,8 @@ namespace WPF_UI
         {
             Button button = sender as Button;
             int index = shortBooksInfoLb.Items.IndexOf(button.DataContext);
-            ShortBookInfoVMToBookInBastekVm(booksShortInfo[index].BookId);
-        }
-
-        private void ShortBookInfoVMToBookInBastekVm(int bookId)
-        {
-            BookProvider bookProvider = new BookProvider();
-            BookInfoViewModel book = bookProvider.GetBookInfo(bookId);
-
-            OrderInfoViewModel bookInBastek = new OrderInfoViewModel
-            {
-                BookId = bookId,
-                AuthorName = book.AuthorName,
-                BookImagePath = book.BookImagePath,
-                BookName = book.BookName,
-                Count = 1,
-                Price = book.BookPrice,
-                Cost = book.BookPrice
-            };
-
-            booksInBasket.Add(bookInBastek);
+            BasketUIProvider basketUIProvider = new BasketUIProvider();
+            basketUIProvider.AddToBasket(booksShortInfo[index].BookId, booksInBasket);
         }
     }
 }

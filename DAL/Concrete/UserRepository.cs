@@ -20,6 +20,13 @@ namespace DAL.Concrete
             return user;
         }
 
+        public void UpdateUser(User updateUser)
+        {
+            var oldUser = GetUserByEmail(updateUser.UserEmail);
+            oldUser = updateUser;
+            ctx.SaveChanges();
+        }
+
         public List<string> GetEmails()
         {
             List<string> result = new List<string>();

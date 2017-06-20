@@ -44,7 +44,7 @@
                     <Label Name="publishDateLb">Publish date:</Label>
                     <Label Name="volumeLb">Volume:</Label>
                     <Label Name="priceLb" Foreground="GreenYellow">Price :</Label>
-                    <Button Margin="50,0,50,0" Background="Orange" Foreground="White" MaxWidth="200">Buy</Button>
+                    <Button Name="addToBasket" Margin="50,0,50,0" Background="Orange" Foreground="White" MaxWidth="200" Click="addToBasket_Click">Buy</Button>
                 </StackPanel>
             </Grid>
             <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center">Description:</Label>

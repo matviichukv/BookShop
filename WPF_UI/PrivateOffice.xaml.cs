@@ -65,8 +65,9 @@ namespace WPF_UI
 
         private void changeProficeBtn_Click(object sender, RoutedEventArgs e)
         {
-            UserProvider userProvider = new UserProvider();
-
+            ChangeUser change = new ChangeUser(user);
+            change.ShowDialog();
+            FillUserInfo();
         }
     }
 }
