@@ -68,6 +68,7 @@
     <Compile Include="Concrete\OrderProvider.cs" />
     <Compile Include="Concrete\ReviewProvider.cs" />
     <Compile Include="Concrete\UserProvider.cs" />
+    <Compile Include="Models\OrderAddViewModel.cs" />
     <Compile Include="Models\OrderInfoViewModel.cs" />
     <Compile Include="Models\BookInfoViewModel.cs" />
     <Compile Include="Models\BookShortInfoViewModel.cs" />

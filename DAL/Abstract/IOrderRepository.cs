@@ -11,7 +11,7 @@ namespace DAL.Abstract
     {
         List<Order> GetOrders();
         bool AddOrder(Order order);
-        bool RemoveOder(int orderId);
+        bool RemoveOrder(int orderId);
         bool ConfirmOrder(int orderId);
     }
 }
