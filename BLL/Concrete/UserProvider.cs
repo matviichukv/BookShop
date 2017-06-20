@@ -15,7 +15,7 @@ namespace BLL.Concrete
     {
         IUserRepository userRepository = new UserRepository();
 
-        public bool ChangeUserInfo(UserChangeViewModel userChangeViewModel)
+        public bool EditUserInfo(UserChangeViewModel userChangeViewModel)
         {
             User changeUser = userRepository.GetUserByEmail(userChangeViewModel.Email);
             if (changeUser.UserPassword == BCrypt.Net.BCrypt.HashPassword(userChangeViewModel.OldPassword, changeUser.Salt))
@@ -67,9 +67,7 @@ namespace BLL.Concrete
             User user = userRepository.GetUserByEmail(Email);
 
             if (user == null)
-            {
                 return null;
-            }
 
             UserInfoViewModel userInfo = null;
 

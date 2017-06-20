@@ -12,5 +12,6 @@ namespace BLL.Abstract
         BookInfoViewModel GetBookInfo(int bookId);
         List<BookShortInfoViewModel> GetBooks();
         List<BookShortInfoViewModel> SearchBooks(string filter);
+        List<BookShortInfoViewModel> GetBooksByCategoty(string category);
     }
 }
