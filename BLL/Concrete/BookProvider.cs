@@ -9,6 +9,7 @@ using BLL.Models;
 using DAL.Concrete;
 using DAL.Entity;
 using DAL.Abstract;
+using System.Collections.ObjectModel;
 
 namespace BLL.Concrete
 {
@@ -19,7 +20,7 @@ namespace BLL.Concrete
         public BookInfoViewModel GetBookInfo(int bookId)
         {
             Book book = bookRepository.GetBookById(bookId);
-            List<ReviewViewModel> reviews = new List<ReviewViewModel>();
+            ObservableCollection<ReviewViewModel> reviews = new ObservableCollection<ReviewViewModel>();
 
             foreach (var review in book.BookReviews)
             {
