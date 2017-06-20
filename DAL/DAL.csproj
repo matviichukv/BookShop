@@ -43,6 +43,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,11 +55,13 @@
     <Compile Include="Abstract\IAdminPanelRepository.cs" />
     <Compile Include="Abstract\IBookRepository.cs" />
     <Compile Include="Abstract\ICategoryRepository.cs" />
+    <Compile Include="Abstract\IImageRepository.cs" />
     <Compile Include="Abstract\IReviewRepository.cs" />
     <Compile Include="Abstract\IUserRepository.cs" />
     <Compile Include="Concrete\AdminPanelRepository.cs" />
     <Compile Include="Concrete\BookRepository.cs" />
     <Compile Include="Concrete\CategoryRepository.cs" />
+    <Compile Include="Concrete\ImageRepository.cs" />
     <Compile Include="Concrete\ReviewRepository.cs" />
     <Compile Include="Concrete\UserRepository.cs" />
     <Compile Include="Entity\Category.cs" />
@@ -98,6 +101,10 @@
     <Compile Include="Migrations\201706191521189_test.cs" />
     <Compile Include="Migrations\201706191521189_test.Designer.cs">
       <DependentUpon>201706191521189_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706191602509_deleted test.cs" />
+    <Compile Include="Migrations\201706191602509_deleted test.Designer.cs">
+      <DependentUpon>201706191602509_deleted test.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -148,6 +155,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706181152246_fixed review id.resx">
       <DependentUpon>201706181152246_fixed review id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706191602509_deleted test.resx">
+      <DependentUpon>201706191602509_deleted test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

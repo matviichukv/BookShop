@@ -38,7 +38,8 @@ namespace WPF_UI
 
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            ImageProvider provider = new ImageProvider();
+            provider.SaveImage(@"C:\Users\v.matviichuk\Downloads\hs-2015-02-a-hires_jpg.jpg");
         }
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)

@@ -19,7 +19,7 @@ namespace DAL.Concrete
         public AdminPanelRepository(DbContext context)
         {
             _dbContext = context;
-            _notNeededProperties = new List<string>{ "Database", "ChangeTracker", "Configuration"};
+            _notNeededProperties = new List<string>{ "Database", "ChangeTracker", "Configuration", "Likes"};
         }
 
         public List<string> GetTableNamesList()
