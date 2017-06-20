@@ -10,5 +10,7 @@ namespace BLL.Abstract
     public interface IReviewProvider
     {
         void AddReview(string message, int bookId, int userId);
+        List<ReviewViewModel> GetUserReviews(int userId);
+        List<ReviewViewModel> GetBookReviews(int bookId);
     }
 }

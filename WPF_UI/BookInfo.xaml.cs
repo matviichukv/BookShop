@@ -70,7 +70,20 @@ namespace WPF_UI
 
             SendReview sendReview = new SendReview(user, bookId);
             sendReview.ShowDialog();
+            UpdateReviews();
         }
+
+        private void UpdateReviews()
+        {
+            ReviewProvider reviewProvider = new ReviewProvider();
+            var reviews = reviewProvider.GetBookReviews(bookId);
+            bookInfo.BookReviews.Clear();
+            foreach (var item in reviews)
+            {
+                bookInfo.BookReviews.Add(item);
+            }
+        }
+
 
         private void continueSearchGoodsBtn_Click(object sender, RoutedEventArgs e)
         {

@@ -28,6 +28,17 @@ namespace BLL.Concrete
             reviewRepository.AddReview(review);
         }
 
+        public List<ReviewViewModel> GetBookReviews(int bookId)
+        {
+            return reviewRepository.GetBookReviews(bookId).Select(r => new ReviewViewModel()
+            {
+                Message = r.Message,
+                Date = r.Date,
+                Likes = r.ReviewLikes.Count,
+                UserName = r.User.UserName
+            }).ToList();
+        }
+
         public List<ReviewViewModel> GetUserReviews(int userId)
         {
             return reviewRepository.GetUserReviews(userId).Select(r => new ReviewViewModel()

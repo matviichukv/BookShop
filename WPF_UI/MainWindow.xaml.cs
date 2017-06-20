@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using BLL.Models;
 using BLL.Concrete;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Reflection;
 
 namespace WPF_UI
 {
@@ -35,6 +37,9 @@ namespace WPF_UI
             booksShortInfo = providerBook.GetBooks();
             shortBooksInfoLb.ItemsSource = booksShortInfo;
             FillCategorisLb();
+            string imagesLocation = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "Images")).LocalPath;
+            string basketPath = imagesLocation + "\\cart.png";
+            basketImg.Source = new BitmapImage(new Uri(basketPath));
         }
 
         private void searchBtn_Click(object sender, RoutedEventArgs e)
