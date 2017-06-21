@@ -73,5 +73,10 @@ namespace BLL.Concrete
                     Cost = o.BookCount * o.Book.Price
                 }).ToList();
         }
+
+        public void UpdateBookCount(int orderId, int bookCount)
+        {
+            orderRepository.UpdateBookCount(orderId, bookCount);
+        }
     }
 }

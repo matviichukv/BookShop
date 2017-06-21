@@ -55,5 +55,11 @@ namespace DAL.Concrete
                 .Include(o => o.Book.BookImage)
                 .ToList();
         }
+
+        void IOrderRepository.UpdateBookCount(int orderId, int bookCount)
+        {
+            ctx.Orders.FirstOrDefault(o => o.OrderId == orderId).BookCount = bookCount;
+            ctx.SaveChanges();
+        }
     }
 }

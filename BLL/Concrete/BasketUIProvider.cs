@@ -22,6 +22,7 @@ namespace BLL.Concrete
                 int index = booksInBasket.IndexOf(book);
                 booksInBasket[index].Count++;
                 booksInBasket[index].Cost = booksInBasket[index].Price * booksInBasket[index].Count;
+                orderProvider.UpdateBookCount(book.OrderId, book.Count);
             }
             else
             {

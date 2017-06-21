@@ -14,5 +14,6 @@ namespace BLL.Abstract
         int AddOrder(OrderAddViewModel orderModel, string userEmail);
         bool RemoveOrder(int orderId);
         bool ConfirmOrder(int orderId);
+        void UpdateBookCount(int orderId, int bookCount);
     }
 }
