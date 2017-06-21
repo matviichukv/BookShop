@@ -10,5 +10,10 @@ namespace DAL.Abstract
     public interface IImageRepository
     {
         bool SaveImage(Bitmap img, string fileName);
+
+        Bitmap GetImage(string pathToImage);
+
+        Bitmap GetImage(int imageId);
     }
 }
+

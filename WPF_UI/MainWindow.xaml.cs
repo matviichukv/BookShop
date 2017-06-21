@@ -17,6 +17,8 @@ using BLL.Concrete;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace WPF_UI
 {
@@ -44,8 +46,7 @@ namespace WPF_UI
 
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
-            ImageProvider provider = new ImageProvider();
-            provider.SaveImage(@"C:\Users\v.matviichuk\Downloads\hs-2015-02-a-hires_jpg.jpg");
+            
         }
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)
@@ -97,6 +98,15 @@ namespace WPF_UI
             int index = shortBooksInfoLb.Items.IndexOf(button.DataContext);
             BasketUIProvider basketUIProvider = new BasketUIProvider();
             basketUIProvider.AddToBasket(booksShortInfo[index].BookId, booksInBasket, user.UserEmail);
+        }
+
+        private byte[] ImageToByteArray(System.Drawing.Image imageIn)
+        {
+            using (var ms = new MemoryStream())
+            {
+                imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+                return ms.ToArray();
+            }
         }
     }
 }

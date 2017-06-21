@@ -12,10 +12,22 @@ namespace BLL.Concrete
 {
     public class ImageProvider : IImageProvider
     {
+        ImageRepository repo = new ImageRepository();
+
+        public Bitmap GetImage(string pathToImage)
+        {
+            return repo.GetImage(pathToImage);
+        }
+
+        public Bitmap GetImage(int imageId)
+        {
+            return repo.GetImage(imageId);
+        }
+
         public bool SaveImage(string pathToImage)
         {
-            Bitmap bmp = new Bitmap(Image.FromFile(pathToImage));
-            ImageRepository repo = new ImageRepository();
+            var image = Image.FromFile(pathToImage);
+            Bitmap bmp = new Bitmap(image);
             Guid id = Guid.NewGuid();
             repo.SaveImage(bmp, id.ToString());
             return false;
