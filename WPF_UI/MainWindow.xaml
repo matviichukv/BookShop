@@ -30,7 +30,7 @@
             <ColumnDefinition Width="0.4*"/>
         </Grid.ColumnDefinitions>
 
-        <Button Template="{StaticResource btTemplate}" Grid.Column="2" Grid.Row="0" Visibility="Hidden" Name="showUserProfileBtn" Click="showUserProfileBtn_Click" Margin="10,5,10,0"></Button>
+        <!--<Button Template="{StaticResource btTemplate}" Grid.Column="2" Grid.Row="0" Visibility="Hidden" Name="showUserProfileBtn" Click="showUserProfileBtn_Click" Margin="10,5,10,0"></Button>-->
         <Image Source="{Binding}" Name="TestImage"></Image>
         <Button Template="{StaticResource btTemplate}" Grid.Column="2" Grid.Row="0" Visibility="Hidden" Name="showUserProfileBtn" Click="showUserProfileBtn_Click" Margin="10,5,10,0">
             <Image Name="userPhoto"></Image>

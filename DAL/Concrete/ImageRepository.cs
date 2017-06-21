@@ -11,6 +11,7 @@ using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using System.Threading;
+using Dropbox.Api;
 
 namespace DAL.Concrete
 {
@@ -23,7 +24,7 @@ namespace DAL.Concrete
             try
             {
                 var fullPath = Path.Combine(imagesLocation, fileName + ".jpg");
-                Save(img, 512, 512, 70, fullPath);
+                Save(img, 512, 512, 70, fileName + ".jpg");
                 DAL.Entity.Image newImage = new Entity.Image { PathToImageFile = fileName + ".jpg" };
                 using (var ctx = new BookShopContext())
                 {
@@ -94,8 +95,16 @@ namespace DAL.Concrete
             EncoderParameter encoderParameter = new EncoderParameter(encoder, quality);
             encoderParameters.Param[0] = encoderParameter;
             var test = new Bitmap(newImage);
-            newImage.Save(filePath, imageCodecInfo, encoderParameters);
+
+            //newImage.Save(filePath, imageCodecInfo, encoderParameters);
             //newImage.Save(filePath, ImageFormat.Jpeg);
+
+            MemoryStream ms = new MemoryStream();
+            newImage.Save(ms, imageCodecInfo, encoderParameters);
+            using (var dropboxClient = new DropboxClient("m54yWAzHPNAAAAAAAAAAFpUT15YHZUSl11Vcmy7qVna4qIoa19ThMUDCgjp6nHQW"))
+            {
+                dropboxClient.Files.UploadAsync(new Dropbox.Api.Files.CommitInfo(@"/Images/" + filePath, Dropbox.Api.Files.WriteMode.Add.Instance), ms);
+            }
         }
 
 
@@ -113,8 +122,10 @@ namespace DAL.Concrete
         {
             using (var ctx = new BookShopContext())
             {
-                return new Bitmap( Path.Combine(imagesLocation, ctx.Images.ElementAt(imageId + 1).PathToImageFile));
+                return new Bitmap( Path.Combine(imagesLocation, ctx.Images.FirstOrDefault(i => i.ImageId == imageId).PathToImageFile));
             }
         }
+
+       
     }
 }

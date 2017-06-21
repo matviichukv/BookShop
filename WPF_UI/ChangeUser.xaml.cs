@@ -80,7 +80,7 @@ namespace WPF_UI
                 user.UserEmail = userChange.Email;
                 user.UserName = userChange.NewUserName;
                 user.UserPassword = userChange.NewPassword;
-                user.AvatarPath = userChange.NewImagePath;
+                //user.AvatarPath = userChange.NewImagePath;
                 this.Close();
             }
             else
@@ -101,12 +101,12 @@ namespace WPF_UI
             firstNameTb.Text = splitInitials[(int)Initials.firstName];
             lastNameTb.Text = splitInitials[(int)Initials.lastName];
 
-            if (user.AvatarPath != null)
-            {
-                ImageSource imageSource = new BitmapImage(new Uri(user.AvatarPath));
-                userPhotoImg.Source = imageSource;
-                imagePath = user.AvatarPath;
-            }
+            //if (user.AvatarPath != null)
+            //{
+            //    ImageSource imageSource = new BitmapImage(new Uri(user.AvatarPath));
+            //    userPhotoImg.Source = imageSource;
+            //    imagePath = user.AvatarPath;
+            //}
         }
     }
 }

@@ -45,8 +45,8 @@ namespace WPF_UI
         {
             booksShortInfo = bookProvider.SearchBooks(SearchTextBox.Text);
             shortBooksInfoLb.ItemsSource = booksShortInfo;
-            //ImageProvider provider = new ImageProvider();
-            //provider.SaveImage(@"C:\Users\v.matviichuk\Downloads\hs-2015-02-a-hires_jpg.jpg");
+            var provider = new ImageProvider();
+            provider.SaveImage(@"C:\Users\v.matviichuk\Downloads\hi-512-14.jpg");
         }
 
         private void FillBasketUI()
@@ -64,7 +64,7 @@ namespace WPF_UI
             if (user != null)
             {
                 cartBtn.Visibility = Visibility.Visible;
-                showUserProfileBtn.Visibility = Visibility.Visible;
+                //showUserProfileBtn.Visibility = Visibility.Visible;
                 loginBtn.Visibility = Visibility.Hidden;
                 //SetAvatarImage(user.AvatarPath);
                 SetBasketImage();
@@ -143,12 +143,19 @@ namespace WPF_UI
             shortBooksInfoLb.ItemsSource = booksShortInfo;
         }
 
-        private byte[] ImageToByteArray(System.Drawing.Image imageIn)
+        BitmapImage BitmapToImageSource(Bitmap bitmap)
         {
-            using (var ms = new MemoryStream())
+            using (MemoryStream memory = new MemoryStream())
             {
-                imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
-                return ms.ToArray();
+                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
+                memory.Position = 0;
+                BitmapImage bitmapimage = new BitmapImage();
+                bitmapimage.BeginInit();
+                bitmapimage.StreamSource = memory;
+                bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapimage.EndInit();
+
+                return bitmapimage;
             }
         }
     }

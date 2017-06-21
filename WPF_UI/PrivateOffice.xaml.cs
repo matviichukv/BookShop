@@ -33,7 +33,7 @@ namespace WPF_UI
             InitializeComponent();
             user = _user;
             FillUserInfo();
-            SetAvatarImage(user.AvatarPath);
+            //SetAvatarImage(user.AvatarPath);
         }
 
         private void personalInfoBtn_Click(object sender, RoutedEventArgs e)
