@@ -32,7 +32,7 @@
                         <RowDefinition Height="0.1*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" HorizontalAlignment="Center">
-                        <Image Height="150" Source="E:\o-i-met-jk-rowling-facebook.jpg" Name="userAvatar"></Image>
+                        <Image Height="150" Name="userAvatar"></Image>
                         <Label FontSize="20" Name="userNameLb">Name</Label>
                         <Label FontSize="20" Name="userEmailLb">Email</Label>
                     </StackPanel>
@@ -40,11 +40,12 @@
                 </Grid>
             </TabItem>
             <TabItem Visibility="Hidden">
-                
+
             </TabItem>
             <TabItem Visibility="Hidden">
-                <ListBox Grid.ColumnSpan="3" Width="355" HorizontalAlignment="Center" ItemsSource="{Binding}" Name="reviewsHistoryLb">
+                <ListBox Grid.ColumnSpan="3" Width="365" HorizontalAlignment="Center" ItemsSource="{Binding}" Name="reviewsHistoryLb">
                     <ListBox.ItemTemplate>
+                        
                         <DataTemplate>
                             <DockPanel>
                                 <Label DockPanel.Dock="Top" Content="{Binding UserName}"></Label>

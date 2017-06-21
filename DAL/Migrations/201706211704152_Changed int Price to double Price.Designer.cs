@@ -7,13 +7,13 @@ namespace DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class deletedtest : IMigrationMetadata
+    public sealed partial class ChangedintPricetodoublePrice : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(deletedtest));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangedintPricetodoublePrice));
         
         string IMigrationMetadata.Id
         {
-            get { return "201706191602509_deleted test"; }
+            get { return "201706211704152_Changed int Price to double Price"; }
         }
         
         string IMigrationMetadata.Source

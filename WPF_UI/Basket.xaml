@@ -22,12 +22,12 @@
                             <Button Width="20" Name="subtractBtn" Click="subtractBtn_Click">-</Button>
                             <Label Content="{Binding Count}"></Label>
                             <Button Width="20" Name="addBtn" Click="addBtn_Click">+</Button>
-                            <Label Content="{Binding Price}" Foreground="Orange"></Label>
+                            <Label Content="{Binding Cost}" Foreground="Orange"></Label>
                             <Button Width="20" Background="Red" Foreground="White" Name="removeBookInBasket" Click="removeBookInBasket_Click">X</Button>
                         </WrapPanel>
                         <Label Content="{Binding BookName}" DockPanel.Dock="Top"></Label>
                         <Label Content="{Binding AuthorName}" DockPanel.Dock="Top"></Label>
-                        <Label Content="{Binding Cost}" DockPanel.Dock="Top"></Label>
+                        <Label Content="{Binding Price}" DockPanel.Dock="Top"></Label>
                     </DockPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

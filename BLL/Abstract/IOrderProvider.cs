@@ -9,10 +9,11 @@ namespace BLL.Abstract
 {
     public interface IOrderProvider
     {
-        List<OrderInfoViewModel> GetBasket();
+        List<OrderInfoViewModel> GetBasket(int userId);
         List<OrderInfoViewModel> GetHistory();
-        bool AddOrder(OrderAddViewModel orderModel, string userEmail);
+        int AddOrder(OrderAddViewModel orderModel, string userEmail);
         bool RemoveOrder(int orderId);
         bool ConfirmOrder(int orderId);
+        void UpdateBookCount(int orderId, int bookCount);
     }
 }

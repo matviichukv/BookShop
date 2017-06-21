@@ -76,7 +76,7 @@ namespace BLL.Concrete
                 userInfo = new UserInfoViewModel()
                 {
                     UserId = user.UserId,
-                    AvatarPath = user.Avatar == null ? null : user.Avatar.PathToImageFile,
+                    AvatarId = user.Avatar == null ? 0 : user.Avatar.ImageId,
                     UserEmail = user.UserEmail,
                     UserName = user.UserName,
                     UserPassword = user.UserPassword

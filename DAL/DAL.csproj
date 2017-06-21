@@ -109,9 +109,9 @@
     <Compile Include="Migrations\201706201701023_Modified Order Entity.Designer.cs">
       <DependentUpon>201706201701023_Modified Order Entity.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706191602509_deleted test.cs" />
-    <Compile Include="Migrations\201706191602509_deleted test.Designer.cs">
-      <DependentUpon>201706191602509_deleted test.cs</DependentUpon>
+    <Compile Include="Migrations\201706211704152_Changed int Price to double Price.cs" />
+    <Compile Include="Migrations\201706211704152_Changed int Price to double Price.Designer.cs">
+      <DependentUpon>201706211704152_Changed int Price to double Price.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -166,8 +166,8 @@
     <EmbeddedResource Include="Migrations\201706201701023_Modified Order Entity.resx">
       <DependentUpon>201706201701023_Modified Order Entity.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706191602509_deleted test.resx">
-      <DependentUpon>201706191602509_deleted test.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706211704152_Changed int Price to double Price.resx">
+      <DependentUpon>201706211704152_Changed int Price to double Price.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

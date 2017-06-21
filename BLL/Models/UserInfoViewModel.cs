@@ -1,5 +1,4 @@
-﻿using DAL.Entity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +12,6 @@ namespace BLL.Models
         public string UserEmail { get; set; }
         public string UserPassword { get; set; }
         public string UserName { get; set; }
-        public string AvatarPath { get; set; }
+        public int AvatarId { get; set; }
     }
 }

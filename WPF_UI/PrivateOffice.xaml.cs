@@ -33,6 +33,7 @@ namespace WPF_UI
             InitializeComponent();
             user = _user;
             FillUserInfo();
+            SetAvatarImage(user.AvatarPath);
         }
 
         private void personalInfoBtn_Click(object sender, RoutedEventArgs e)
@@ -68,6 +69,22 @@ namespace WPF_UI
             ChangeUser change = new ChangeUser(user);
             change.ShowDialog();
             FillUserInfo();
+        }
+
+        private void SetAvatarImage(string avatarPath)
+        {
+            string imagesLocation = null;
+
+            if (avatarPath != null)
+            {
+
+            }
+            else
+            {
+                imagesLocation = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "Images")).LocalPath;
+                imagesLocation += "\\nonePhoto.jpg";
+                userAvatar.Source = new BitmapImage(new Uri(imagesLocation));
+            }
         }
     }
 }

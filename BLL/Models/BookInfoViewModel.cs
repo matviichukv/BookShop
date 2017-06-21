@@ -14,7 +14,7 @@ namespace BLL.Models
         public int BookVolume { get; set; }
         public string BookLanguage { get; set; }
         public string BookDescription { get; set; }
-        public int BookPrice { get; set; }
+        public double BookPrice { get; set; }
         public int BookCount { get; set; }
 
         public string AuthorName { get; set; }
@@ -25,7 +25,7 @@ namespace BLL.Models
         public string PublisherName { get; set; }
         public string PublisherCity { get; set; }
 
-        public string BookImagePath { get; set; }
+        public int ImageId { get; set; }
         public string CategoryName { get; set; }
 
         public ObservableCollection<ReviewViewModel> BookReviews { get; set; }

@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="760" Width="655" MinHeight="750" MinWidth="655">
     <Window.Resources>
-        <ControlTemplate TargetType="Button" x:Key="btTemplate">
+        <ControlTemplate TargetType="Button" x:Key="btTemplate" x:Name="avatarPhoto">
             <Border CornerRadius="50" BorderBrush="Black" BorderThickness="1"
                     Background="white" Height="40" Width="60" >
                 <ContentControl Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Image></Image>
+                    <Image Name="userPhoto"></Image>
                 </ContentControl>
             </Border>
         </ControlTemplate>
@@ -29,6 +29,8 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="0.4*"/>
         </Grid.ColumnDefinitions>
+
+        <Button Template="{StaticResource btTemplate}" Grid.Column="2" Grid.Row="0" Visibility="Hidden" Name="showUserProfileBtn" Click="showUserProfileBtn_Click" Margin="10,5,10,0"></Button>
         <Image Source="{Binding}" Name="TestImage"></Image>
         <Button Template="{StaticResource btTemplate}" Grid.Column="2" Grid.Row="0" Visibility="Hidden" Name="showUserProfileBtn" Click="showUserProfileBtn_Click" Margin="10,5,10,0">
             <Image Name="userPhoto"></Image>
@@ -43,12 +45,12 @@
         <DockPanel Grid.Column="1" Grid.Row="0">
             <Label DockPanel.Dock="Top" HorizontalAlignment="Center">BOOK SHOP</Label>
             <Button DockPanel.Dock="Right" Background="Blue" Foreground="White" Width="50" Name="searchBtn" Click="searchBtn_Click">Search</Button>
-            <TextBox DockPanel.Dock="Left"></TextBox>
+            <TextBox Name = "SearchTextBox" DockPanel.Dock="Left"></TextBox>
         </DockPanel>
         <Button Grid.Column="2" Grid.Row="0" Background="Green" Foreground="White" Margin="20,25,20,0" Name="loginBtn" Click="loginBtn_Click">Login</Button>
         <StackPanel Grid.Column="0" Grid.Row="2">
             <Label HorizontalAlignment="Center" FontSize="18">Categories</Label>
-            <ListBox HorizontalAlignment="Center" Name="categoriesLb" ItemsSource="{Binding}">
+            <ListBox HorizontalAlignment="Center" Name="categoriesLb" ItemsSource="{Binding}" SelectionChanged="categoriesLb_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding NameCategory}"></TextBlock>

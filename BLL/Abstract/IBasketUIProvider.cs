@@ -10,6 +10,7 @@ namespace BLL.Abstract
 {
     public interface IBasketUIProvider
     {
-        void AddToBasket(int bookId, ObservableCollection<OrderInfoViewModel> booksInBasket, string userEmail);
+        void AddToBasket(BookShortInfoViewModel bookInfo, ObservableCollection<OrderInfoViewModel> booksInBasket, string userEmail);
+        void FillBasket(ObservableCollection<OrderInfoViewModel> booksInBasket, int userId);
     }
 }

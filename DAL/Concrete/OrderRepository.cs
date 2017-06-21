@@ -13,15 +13,15 @@ namespace DAL.Concrete
     {
         BookShopContext ctx = new BookShopContext();
 
-        public bool AddOrder(Order order)
+        public int AddOrder(Order order)
         {
             try
             {
                 ctx.Orders.Add(order);
                 ctx.SaveChanges();
-                return true;
+                return order.OrderId;
             }
-            catch { return false; }
+            catch { return -1; }
         }
 
         public bool ConfirmOrder(int orderId)
@@ -41,6 +41,7 @@ namespace DAL.Concrete
             try
             {
                 ctx.Orders.Remove(ctx.Orders.FirstOrDefault(o => o.OrderId == orderId));
+                ctx.SaveChanges();
                 return true;
             }
             catch { return false; }
@@ -53,6 +54,12 @@ namespace DAL.Concrete
                 .Include(o => o.Book.BookAuthor)
                 .Include(o => o.Book.BookImage)
                 .ToList();
+        }
+
+        void IOrderRepository.UpdateBookCount(int orderId, int bookCount)
+        {
+            ctx.Orders.FirstOrDefault(o => o.OrderId == orderId).BookCount = bookCount;
+            ctx.SaveChanges();
         }
     }
 }

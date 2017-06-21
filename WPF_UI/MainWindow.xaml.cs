@@ -27,6 +27,7 @@ namespace WPF_UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private BookProvider bookProvider = new BookProvider();
         private UserInfoViewModel user = null;
         private List<BookShortInfoViewModel> booksShortInfo = new List<BookShortInfoViewModel>();
         private ObservableCollection<OrderInfoViewModel> booksInBasket = new ObservableCollection<OrderInfoViewModel>();
@@ -35,18 +36,23 @@ namespace WPF_UI
         {
             //hello
             InitializeComponent();
-            BookProvider providerBook = new BookProvider();
-            booksShortInfo = providerBook.GetBooks();
+            booksShortInfo = bookProvider.GetBooks();
             shortBooksInfoLb.ItemsSource = booksShortInfo;
             FillCategorisLb();
-            string imagesLocation = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "Images")).LocalPath;
-            string basketPath = imagesLocation + "\\cart.png";
-            basketImg.Source = new BitmapImage(new Uri(basketPath));
         }
 
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            booksShortInfo = bookProvider.SearchBooks(SearchTextBox.Text);
+            shortBooksInfoLb.ItemsSource = booksShortInfo;
+            //ImageProvider provider = new ImageProvider();
+            //provider.SaveImage(@"C:\Users\v.matviichuk\Downloads\hs-2015-02-a-hires_jpg.jpg");
+        }
+
+        private void FillBasketUI()
+        {
+            BasketUIProvider basketUiProvider = new BasketUIProvider();
+            basketUiProvider.FillBasket(booksInBasket, user.UserId);
         }
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)
@@ -60,6 +66,9 @@ namespace WPF_UI
                 cartBtn.Visibility = Visibility.Visible;
                 showUserProfileBtn.Visibility = Visibility.Visible;
                 loginBtn.Visibility = Visibility.Hidden;
+                //SetAvatarImage(user.AvatarPath);
+                SetBasketImage();
+                FillBasketUI();
             }
         }
 
@@ -76,7 +85,7 @@ namespace WPF_UI
                 return;
             }
 
-            BookInfo info = new BookInfo(booksShortInfo[shortBooksInfoLb.SelectedIndex].BookId, user, booksInBasket);
+            BookInfo info = new BookInfo(booksShortInfo[shortBooksInfoLb.SelectedIndex], user, booksInBasket);
             info.ShowDialog();
             shortBooksInfoLb.SelectedIndex = -1;
         }
@@ -94,10 +103,44 @@ namespace WPF_UI
 
         private void addToBasket_Click(object sender, RoutedEventArgs e)
         {
+            if(user == null)
+            {
+                MessageBox.Show("Login before buy book");
+                return;
+            }
+
             Button button = sender as Button;
             int index = shortBooksInfoLb.Items.IndexOf(button.DataContext);
             BasketUIProvider basketUIProvider = new BasketUIProvider();
-            basketUIProvider.AddToBasket(booksShortInfo[index].BookId, booksInBasket, user.UserEmail);
+            basketUIProvider.AddToBasket(booksShortInfo[index], booksInBasket, user.UserEmail);
+        }
+
+        private void SetBasketImage()
+        {
+            string imagesLocation = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "Images")).LocalPath;
+            string basketPath = imagesLocation + "\\cart.png";
+            basketImg.Source = new BitmapImage(new Uri(basketPath));
+        }
+
+        private void SetAvatarImage(string avatarPath)
+        {
+            string imagesLocation = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "Images")).LocalPath;
+
+            if (avatarPath != null)
+            {
+
+            }
+            else
+            {
+                imagesLocation += "\\nonePhoto.jpg";
+                //userPhoto.Source = new BitmapImage(new Uri(imagesLocation));
+            }
+        }
+
+        private void categoriesLb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            booksShortInfo = bookProvider.GetBooksByCategoty((categoriesLb.SelectedItem as CategoryViewModel).NameCategory);
+            shortBooksInfoLb.ItemsSource = booksShortInfo;
         }
 
         private byte[] ImageToByteArray(System.Drawing.Image imageIn)
