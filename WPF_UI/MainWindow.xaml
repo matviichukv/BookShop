@@ -41,12 +41,12 @@
         <DockPanel Grid.Column="1" Grid.Row="0">
             <Label DockPanel.Dock="Top" HorizontalAlignment="Center">BOOK SHOP</Label>
             <Button DockPanel.Dock="Right" Background="Blue" Foreground="White" Width="50" Name="searchBtn" Click="searchBtn_Click">Search</Button>
-            <TextBox DockPanel.Dock="Left"></TextBox>
+            <TextBox Name = "SearchTextBox" DockPanel.Dock="Left"></TextBox>
         </DockPanel>
         <Button Grid.Column="2" Grid.Row="0" Background="Green" Foreground="White" Margin="20,25,20,0" Name="loginBtn" Click="loginBtn_Click">Login</Button>
         <StackPanel Grid.Column="0" Grid.Row="2">
             <Label HorizontalAlignment="Center" FontSize="18">Categories</Label>
-            <ListBox HorizontalAlignment="Center" Name="categoriesLb" ItemsSource="{Binding}">
+            <ListBox HorizontalAlignment="Center" Name="categoriesLb" ItemsSource="{Binding}" SelectionChanged="categoriesLb_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding NameCategory}"></TextBlock>

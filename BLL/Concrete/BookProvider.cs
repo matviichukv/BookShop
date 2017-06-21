@@ -36,12 +36,12 @@ namespace BLL.Concrete
             BookInfoViewModel bookInfo = new BookInfoViewModel()
             {
                 AuthorDescription = book.BookAuthor.Description,
-                AuthorImagePath = book.BookAuthor.AuthorImage == null? null : book.BookAuthor.AuthorImage.PathToImageFile,
+                AuthorImagePath = book.BookAuthor.AuthorImage == null ? null : book.BookAuthor.AuthorImage.PathToImageFile,
                 AuthorName = book.BookAuthor.AuthorName,
-                AuthorNationality = book.BookAuthor.AuthorNationality == null? null : book.BookAuthor.AuthorNationality.NationalityName,
+                AuthorNationality = book.BookAuthor.AuthorNationality == null ? null : book.BookAuthor.AuthorNationality.NationalityName,
                 BookCount = book.Count,
                 BookDescription = book.Description,
-                BookImagePath = book.BookImage == null? null : book.BookImage.PathToImageFile,
+                BookImagePath = book.BookImage == null ? null : book.BookImage.PathToImageFile,
                 BookLanguage = book.Language,
                 BookName = book.BookName,
                 BookPrice = book.Price,
@@ -52,13 +52,14 @@ namespace BLL.Concrete
                 PublisherName = book.BookPublisher.PublisherName,
                 BookReviews = reviews
             };
-            
+
             return bookInfo;
         }
 
         public List<BookShortInfoViewModel> GetBooks()
         {
-            return bookRepository.GetBooks().Select(book => new BookShortInfoViewModel()
+            return bookRepository.GetBooks()
+                .Select(book => new BookShortInfoViewModel()
             {
                 BookAuthorName = book.BookAuthor.AuthorName,
                 BookDescription = book.Description,
@@ -71,28 +72,22 @@ namespace BLL.Concrete
 
         public List<BookShortInfoViewModel> SearchBooks(string filter)
         {
-            var filteredBooks = bookRepository.GetBooks().AsQueryable();
-
-            var result = filteredBooks
-                .Where(r => r.BookName.Contains("Taras") || r.BookAuthor.AuthorName.Contains("Taras"))
+            return bookRepository.GetBooks()
+                .Where(r => r.BookName.Contains(filter) || r.BookAuthor.AuthorName.Contains(filter) || r.Description.Contains(filter))
                 .Select(b => new BookShortInfoViewModel()
                 {
                     BookAuthorName = b.BookAuthor.AuthorName,
                     BookDescription = b.Description,
                     BookId = b.BookId,
                     BookName = b.BookName,
-                    BookImagePath = b.BookImage.PathToImageFile,
+                    //BookImagePath = b.BookImage.PathToImageFile == null ? null : b.BookImage.PathToImageFile,
                     BookPrice = b.Price
                 }).ToList();
-
-            return result;
         }
 
         public List<BookShortInfoViewModel> GetBooksByCategoty(string category)
         {
-            var filteredBooks = bookRepository.GetBooks().AsQueryable();
-
-            var result = filteredBooks
+            return bookRepository.GetBooks()
                 .Where(r => r.BookCategory.CategoryName == category)
                 .Select(b => new BookShortInfoViewModel()
                 {
@@ -100,11 +95,9 @@ namespace BLL.Concrete
                     BookDescription = b.Description,
                     BookId = b.BookId,
                     BookName = b.BookName,
-                    BookImagePath = b.BookImage.PathToImageFile,
+                    //BookImagePath = b.BookImage.PathToImageFile == null ? null : b.BookImage.PathToImageFile,
                     BookPrice = b.Price
                 }).ToList();
-
-            return result;
         }
     }
 }

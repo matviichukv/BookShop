@@ -134,7 +134,7 @@ namespace BLL.Concrete
             var property = dataGrid.SelectedItem.GetType().GetProperty((sender as TextBox).Name.Replace(dataGrid.Name.Replace("DataGrid", ""), ""));
             if (property.PropertyType == typeof(int))
             {
-                property.SetValue(dataGrid.SelectedItem, Int32.Parse( (sender as TextBox).Text) );
+                property.SetValue(dataGrid.SelectedItem, Int32.Parse((sender as TextBox).Text));
             }
             else
             {
@@ -194,7 +194,7 @@ namespace BLL.Concrete
             try
             {
                 repo.ContextSaveChanges();
-
+                (((sender as Button).Parent as StackPanel).Parent as Grid).Children.OfType<DataGrid>().FirstOrDefault().Items.Refresh();
             }
             catch
             {

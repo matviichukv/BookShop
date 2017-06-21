@@ -8,7 +8,7 @@
         xmlns:models="clr-namespace:BLL.Models;assembly=BLL"
         x:Class="AdminPanel.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525" MinHeight="800" MinWidth="1200">
     <!-- <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.35*"/>

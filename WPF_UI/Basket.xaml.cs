@@ -85,7 +85,7 @@ namespace WPF_UI
 
         private void SumaAllBooksInBasket()
         {
-            int res = 0;
+            double res = 0;
 
             for(int i = 0; i < books.Count; i++)
             {

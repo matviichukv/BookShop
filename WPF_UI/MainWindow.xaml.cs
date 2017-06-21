@@ -25,6 +25,7 @@ namespace WPF_UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private BookProvider bookProvider = new BookProvider();
         private UserInfoViewModel user = null;
         private List<BookShortInfoViewModel> booksShortInfo = new List<BookShortInfoViewModel>();
         private ObservableCollection<OrderInfoViewModel> booksInBasket = new ObservableCollection<OrderInfoViewModel>();
@@ -33,16 +34,17 @@ namespace WPF_UI
         {
             //hello
             InitializeComponent();
-            BookProvider providerBook = new BookProvider();
-            booksShortInfo = providerBook.GetBooks();
+            booksShortInfo = bookProvider.GetBooks();
             shortBooksInfoLb.ItemsSource = booksShortInfo;
             FillCategorisLb();
         }
 
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
-            ImageProvider provider = new ImageProvider();
-            provider.SaveImage(@"C:\Users\v.matviichuk\Downloads\hs-2015-02-a-hires_jpg.jpg");
+            booksShortInfo = bookProvider.SearchBooks(SearchTextBox.Text);
+            shortBooksInfoLb.ItemsSource = booksShortInfo;
+            //ImageProvider provider = new ImageProvider();
+            //provider.SaveImage(@"C:\Users\v.matviichuk\Downloads\hs-2015-02-a-hires_jpg.jpg");
         }
 
         private void FillBasketUI()
@@ -131,6 +133,12 @@ namespace WPF_UI
                 imagesLocation += "\\nonePhoto.jpg";
                 //userPhoto.Source = new BitmapImage(new Uri(imagesLocation));
             }
+        }
+
+        private void categoriesLb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            booksShortInfo = bookProvider.GetBooksByCategoty((categoriesLb.SelectedItem as CategoryViewModel).NameCategory);
+            shortBooksInfoLb.ItemsSource = booksShortInfo;
         }
     }
 }

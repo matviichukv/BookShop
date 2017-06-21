@@ -25,7 +25,7 @@ namespace BLL.Models
         public string PublisherName { get; set; }
         public string PublisherCity { get; set; }
 
-        public string BookImagePath { get; set; }
+        public int ImageId { get; set; }
         public string CategoryName { get; set; }
 
         public ObservableCollection<ReviewViewModel> BookReviews { get; set; }
