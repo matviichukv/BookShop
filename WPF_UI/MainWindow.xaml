@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="760" Width="655" MinHeight="750" MinWidth="655">
     <Window.Resources>
-        <ControlTemplate TargetType="Button" x:Key="btTemplate">
+        <ControlTemplate TargetType="Button" x:Key="btTemplate" x:Name="avatarPhoto">
             <Border CornerRadius="50" BorderBrush="Black" BorderThickness="1"
                     Background="white" Height="40" Width="60" >
                 <ContentControl Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Image></Image>
+                    <Image Name="userPhoto"></Image>
                 </ContentControl>
             </Border>
         </ControlTemplate>
@@ -30,9 +30,7 @@
             <ColumnDefinition Width="0.4*"/>
         </Grid.ColumnDefinitions>
 
-        <Button Template="{StaticResource btTemplate}" Grid.Column="2" Grid.Row="0" Visibility="Hidden" Name="showUserProfileBtn" Click="showUserProfileBtn_Click" Margin="10,5,10,0">
-            <Image Name="userPhoto"></Image>
-        </Button>
+        <Button Template="{StaticResource btTemplate}" Grid.Column="2" Grid.Row="0" Visibility="Hidden" Name="showUserProfileBtn" Click="showUserProfileBtn_Click" Margin="10,5,10,0"></Button>
         <Button Grid.Column="2" Grid.Row="1" Name="cartBtn" Margin="10,0,10,0" Visibility="Hidden" Click="cartBtn_Click">
             <WrapPanel>
                 <Label>Cart</Label>

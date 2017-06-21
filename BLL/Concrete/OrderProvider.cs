@@ -21,7 +21,7 @@ namespace BLL.Concrete
             return orderRepository.RemoveOrder(orderId);
         }
 
-        public bool AddOrder(OrderAddViewModel orderModel, string userEmail)
+        public int AddOrder(OrderAddViewModel orderModel, string userEmail)
         {
             Order newOrder = new Order()
             {
@@ -41,15 +41,16 @@ namespace BLL.Concrete
             return orderRepository.ConfirmOrder(orderId);
         }
 
-        public List<OrderInfoViewModel> GetBasket()
+        public List<OrderInfoViewModel> GetBasket(int userId)
         {
             return orderRepository.GetOrders()
-                .Where(order => order.IsPaid == false)
+                .Where(order => order.IsPaid == false && order.UserId == userId)
                 .Select(o => new OrderInfoViewModel()
                 {
                     AuthorName = o.Book.BookAuthor.AuthorName,
                     BookId = o.BookId,
-                    BookImagePath = o.Book.BookImage.PathToImageFile,
+                    OrderId = o.OrderId,
+                    BookImagePath = o.Book.BookImage == null? null : o.Book.BookImage.PathToImageFile,
                     BookName = o.Book.BookName,
                     Count = o.BookCount,
                     Price = o.Book.Price,

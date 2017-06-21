@@ -24,22 +24,22 @@ namespace WPF_UI
     {
         private BookProvider bookProvider = new BookProvider();
         private BookInfoViewModel bookInfo = null;
+        private BookShortInfoViewModel shortBookInfo;
         private UserInfoViewModel user = null;
         private ObservableCollection<OrderInfoViewModel> booksInBasket;
-        private int bookId;
 
         public BookInfo()
         {
             InitializeComponent();
         }
 
-        public BookInfo(int _bookId, UserInfoViewModel _user, ObservableCollection<OrderInfoViewModel> _booksInBasket)
+        public BookInfo(BookShortInfoViewModel _shortBookInfo, UserInfoViewModel _user, ObservableCollection<OrderInfoViewModel> _booksInBasket)
         {
             InitializeComponent();
             user = _user;
-            bookId = _bookId;
+            shortBookInfo = _shortBookInfo;
             booksInBasket = _booksInBasket;
-            bookInfo = bookProvider.GetBookInfo(bookId);
+            bookInfo = bookProvider.GetBookInfo(_shortBookInfo.BookId);
             FillBookInfo(bookInfo);
         }
 
@@ -68,7 +68,7 @@ namespace WPF_UI
                 return;
             }
 
-            SendReview sendReview = new SendReview(user, bookId);
+            SendReview sendReview = new SendReview(user, shortBookInfo.BookId);
             sendReview.ShowDialog();
             UpdateReviews();
         }
@@ -76,7 +76,7 @@ namespace WPF_UI
         private void UpdateReviews()
         {
             ReviewProvider reviewProvider = new ReviewProvider();
-            var reviews = reviewProvider.GetBookReviews(bookId);
+            var reviews = reviewProvider.GetBookReviews(shortBookInfo.BookId);
             bookInfo.BookReviews.Clear();
             foreach (var item in reviews)
             {
@@ -92,8 +92,14 @@ namespace WPF_UI
 
         private void addToBasket_Click(object sender, RoutedEventArgs e)
         {
+            if (user == null)
+            {
+                MessageBox.Show("Login before buy book");
+                return;
+            }
+
             BasketUIProvider basketUIProvider = new BasketUIProvider();
-            basketUIProvider.AddToBasket(bookId, booksInBasket, user.UserEmail);
+            basketUIProvider.AddToBasket(shortBookInfo, booksInBasket, user.UserEmail);
         }
     }
 }

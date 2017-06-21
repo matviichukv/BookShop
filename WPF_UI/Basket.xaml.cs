@@ -52,6 +52,7 @@ namespace WPF_UI
             }
 
             books[index].Count--;
+            books[index].Cost = books[index].Price * books[index].Count;
             SumaAllBooksInBasket();
             basketLb.Items.Refresh();
         }
@@ -60,6 +61,7 @@ namespace WPF_UI
         {
             int index = basketLb.Items.IndexOf(((Button)sender).DataContext);
             books[index].Count++;
+            books[index].Cost = books[index].Price * books[index].Count;
             SumaAllBooksInBasket();
             basketLb.Items.Refresh();
         }
@@ -67,6 +69,8 @@ namespace WPF_UI
         private void removeBookInBasket_Click(object sender, RoutedEventArgs e)
         {
             int index = basketLb.Items.IndexOf(((Button)sender).DataContext);
+            OrderProvider orderProvider = new OrderProvider();
+            orderProvider.RemoveOrder(books[index].OrderId);
             books.RemoveAt(index);
             SumaAllBooksInBasket();
         }
