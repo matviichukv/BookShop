@@ -23,6 +23,7 @@ namespace WPF_UI
     public partial class Basket : Window
     {
         private ObservableCollection<OrderInfoViewModel> books = null;
+        private OrderProvider orderProvider = new OrderProvider();
 
         public Basket()
         {
@@ -55,6 +56,7 @@ namespace WPF_UI
             books[index].Cost = books[index].Price * books[index].Count;
             SumaAllBooksInBasket();
             basketLb.Items.Refresh();
+            orderProvider.UpdateBookCount(books[index].OrderId, books[index].Count);
         }
 
         private void addBtn_Click(object sender, RoutedEventArgs e)
@@ -64,6 +66,7 @@ namespace WPF_UI
             books[index].Cost = books[index].Price * books[index].Count;
             SumaAllBooksInBasket();
             basketLb.Items.Refresh();
+            orderProvider.UpdateBookCount(books[index].OrderId, books[index].Count);
         }
 
         private void removeBookInBasket_Click(object sender, RoutedEventArgs e)
