@@ -50,7 +50,7 @@ namespace BLL.Concrete
                     AuthorName = o.Book.BookAuthor.AuthorName,
                     BookId = o.BookId,
                     OrderId = o.OrderId,
-                    BookImagePath = o.Book.BookImage == null? null : o.Book.BookImage.PathToImageFile,
+                    BookImageId = o.Book.BookImage == null? 0 : o.Book.BookImage.ImageId,
                     BookName = o.Book.BookName,
                     Count = o.BookCount,
                     Price = o.Book.Price,
@@ -66,7 +66,7 @@ namespace BLL.Concrete
                 {
                     AuthorName = o.Book.BookAuthor.AuthorName,
                     BookId = o.BookId,
-                    BookImagePath = o.Book.BookImage.PathToImageFile,
+                    BookImageId = o.Book.BookImage == null? 0 : o.Book.BookImage.ImageId,
                     BookName = o.Book.BookName,
                     Count = o.BookCount,
                     Price = o.Book.Price,

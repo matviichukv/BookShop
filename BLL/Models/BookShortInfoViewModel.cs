@@ -13,6 +13,6 @@ namespace BLL.Models
         public string BookAuthorName { get; set; }
         public string BookDescription { get; set; }
         public int BookImageId { get; set; }
-        public int BookPrice { get; set; }
+        public double BookPrice { get; set; }
     }
 }

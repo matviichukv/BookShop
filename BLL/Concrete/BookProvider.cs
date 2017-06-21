@@ -41,7 +41,7 @@ namespace BLL.Concrete
                 AuthorNationality = book.BookAuthor.AuthorNationality == null ? null : book.BookAuthor.AuthorNationality.NationalityName,
                 BookCount = book.Count,
                 BookDescription = book.Description,
-                BookImagePath = book.BookImage == null ? null : book.BookImage.PathToImageFile,
+                ImageId = book.BookImage == null ? 0 : book.BookImage.ImageId,
                 BookLanguage = book.Language,
                 BookName = book.BookName,
                 BookPrice = book.Price,
@@ -65,7 +65,7 @@ namespace BLL.Concrete
                 BookDescription = book.Description,
                 BookId = book.BookId,
                 BookName = book.BookName,
-                BookImagePath = book.BookImage == null ? null : book.BookImage.PathToImageFile,
+                BookImageId = book.BookImage == null ? 0 : book.BookImage.ImageId,
                 BookPrice = book.Price
             }).ToList();
         }
@@ -80,7 +80,7 @@ namespace BLL.Concrete
                     BookDescription = b.Description,
                     BookId = b.BookId,
                     BookName = b.BookName,
-                    //BookImagePath = b.BookImage.PathToImageFile == null ? null : b.BookImage.PathToImageFile,
+                    BookImageId = b.BookImage == null ? 0 : b.BookImage.ImageId,
                     BookPrice = b.Price
                 }).ToList();
         }
@@ -95,7 +95,7 @@ namespace BLL.Concrete
                     BookDescription = b.Description,
                     BookId = b.BookId,
                     BookName = b.BookName,
-                    //BookImagePath = b.BookImage.PathToImageFile == null ? null : b.BookImage.PathToImageFile,
+                    BookImageId = b.BookImage == null ? 0 : b.BookImage.ImageId,
                     BookPrice = b.Price
                 }).ToList();
         }
