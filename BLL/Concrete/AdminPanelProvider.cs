@@ -15,6 +15,11 @@ using DAL.Abstract;
 using DAL.Concrete;
 using DAL.Entity;
 using BLL.Models;
+using System.Collections;
+using Microsoft.Win32;
+using System.Windows.Media.Imaging;
+using System.Drawing;
+using System.IO;
 
 namespace BLL.Concrete
 {
@@ -37,65 +42,107 @@ namespace BLL.Concrete
                     var dbSet = firstOrDefault
                         .MakeGenericMethod(type)
                         .Invoke(repo, null) as DbSet;
-
-                    var tabItem = new TabItemModel {Header = tableName, TableDbSet = dbSet};
-                    tabItem.TableGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.4, GridUnitType.Star) });
-                    tabItem.TableGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1.0, GridUnitType.Star) });
-                    var dataGrid = new DataGrid() {Name = $"{tableName}DataGrid"};
-                    dataGrid.SetValue(Grid.ColumnProperty, 1);
-                    dataGrid.ItemsSource = dbSet.Local;
-                    dataGrid.SelectedIndex = 1;
-                    dataGrid.SelectionChanged += TableDataGridOnSelectionChanged;
-                    dataGrid.AutoGeneratingColumn += DataGrid_AutoGeneratingColumn;
-                    dataGrid.AddingNewItem += DataGrid_AddingNewItem;
-                    tabItem.TableGrid.Children.Add(dataGrid);
-
-                    var stackPanel = new StackPanel(){Name = $"{tableName}StackPanel"};
-                    stackPanel.SetValue(Grid.ColumnProperty, 0);
-                    tabItem.TableGrid.Children.Add(stackPanel);
-                    foreach (var propertyInfo in type.GetProperties())
+                    if (tableName == "Images")
                     {
+                        var tabItem = new TabItemModel { Header = tableName, TableDbSet = dbSet };
+                        tabItem.TableGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.4, GridUnitType.Star) });
+                        tabItem.TableGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1.0, GridUnitType.Star) });
+                        var dataGrid = new DataGrid() { Name = $"{tableName}DataGrid" };
+                        dataGrid.SetValue(Grid.ColumnProperty, 1);
+                        dataGrid.ItemsSource = dbSet.Local;
+                        dataGrid.SelectedIndex = 1;
+                        dataGrid.SelectionChanged += ImagesDataGrid_SelectionChanged;
+                        tabItem.TableGrid.Children.Add(dataGrid);
 
-                        if ((propertyInfo.PropertyType == typeof(int) || propertyInfo.PropertyType == typeof(int?) || propertyInfo.PropertyType == typeof(string)) && !propertyInfo.Name.Contains("Id"))
-                        {
-                            tabItem.TableGrid.Children.OfType<StackPanel>().FirstOrDefault()?.Children.Add(new Label() { Content = propertyInfo.Name });
-                            if (dataGrid.Items.Count > 1)
-                            {
-                                var textBox = new TextBox(){ Name = tableName + propertyInfo.Name};
-                                textBox.TextChanged += TextBoxOnTextChanged;
-                                tabItem.TableGrid.Children.OfType<StackPanel>()
-                                    .FirstOrDefault()?
-                                    .Children.Add(textBox);
-                            }
-                        }
-                        else if (propertyInfo.Name.Contains("Id") && service.Singularize(tableName) + "Id" != propertyInfo.Name && propertyInfo.PropertyType != typeof(DAL.Entity.Image) && propertyInfo.Name != "ImageId")
-                        {
-                            Type setType = Type.GetType($"DAL.Entity.{ propertyInfo.Name.Replace("Id", "")}, DAL");
-                            var set = (DbSet)repo.GetType()
-                                                 .GetMethods()
-                                                 .FirstOrDefault(m => m.Name == "GetDbSetByType")
-                                                 ?.MakeGenericMethod(setType)
-                                                 .Invoke(repo, null);
-
-                            tabItem.TableGrid.Children.OfType<StackPanel>().FirstOrDefault()?.Children.Add(new Label() { Content = propertyInfo.Name });
-                            var comboBox = new ComboBox() { Name = tableName + propertyInfo.Name };
-                            comboBox.SelectionChanged += ForeignKeyComboBox_SelectionChanged;
-                            tabItem.TableGrid.Children.OfType<StackPanel>().FirstOrDefault()?.Children.Add(comboBox);
-                            foreach (var item in set)
-                            {
-                                string itemValue = item.GetType()
-                                    .GetProperty(set.ElementType.Name + "Id")
-                                    .GetValue(item) + " - " + item.GetType()
-                                                              .GetProperty(set.ElementType.Name + "Name")
-                                                              .GetValue(item);
-                                comboBox.Items.Add(itemValue);
-                            }
-                        }
+                        var stackPanel = new StackPanel() { Name = $"{tableName}StackPanel" };
+                        stackPanel.SetValue(Grid.ColumnProperty, 0);
+                        tabItem.TableGrid.Children.Add(stackPanel);
+                        Button button1 = new Button();
+                        button1.Content = "Upload image";
+                        button1.Click += UploadButton_Click;
+                        stackPanel.Children.Add(button1);
+                        Button button2 = new Button();
+                        button2.Content = "Save changes";
+                        button2.Click += SaveChanges_Click;
+                        stackPanel.Children.Add(button2);
+                        System.Windows.Controls.Image img = new System.Windows.Controls.Image();
+                        stackPanel.Children.Add(img);
+                        result.Add(new Tuple<string, TabItemModel>(tableName, tabItem));
                     }
-                    var button = new Button(){Content = "Save changes"};
-                    button.Click += SaveChanges_Click;
-                    tabItem.TableGrid.Children.OfType<StackPanel>().FirstOrDefault()?.Children.Add(button);
-                    result.Add(new Tuple<string, TabItemModel>(tableName, tabItem));
+                    else
+                    {
+                        var tabItem = new TabItemModel { Header = tableName, TableDbSet = dbSet };
+                        tabItem.TableGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.4, GridUnitType.Star) });
+                        tabItem.TableGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1.0, GridUnitType.Star) });
+                        var dataGrid = new DataGrid() { Name = $"{tableName}DataGrid" };
+                        dataGrid.SetValue(Grid.ColumnProperty, 1);
+                        dataGrid.ItemsSource = dbSet.Local;
+                        dataGrid.SelectedIndex = 1;
+                        dataGrid.SelectionChanged += TableDataGridOnSelectionChanged;
+                        dataGrid.AutoGeneratingColumn += DataGrid_AutoGeneratingColumn;
+                        dataGrid.AddingNewItem += DataGrid_AddingNewItem;
+                        tabItem.TableGrid.Children.Add(dataGrid);
+
+                        var stackPanel = new StackPanel() { Name = $"{tableName}StackPanel" };
+                        stackPanel.SetValue(Grid.ColumnProperty, 0);
+                        tabItem.TableGrid.Children.Add(stackPanel);
+                        foreach (var propertyInfo in type.GetProperties())
+                        {
+
+                            if ((propertyInfo.PropertyType == typeof(int) || propertyInfo.PropertyType == typeof(int?) || propertyInfo.PropertyType == typeof(string)) && !propertyInfo.Name.Contains("Id"))
+                            {
+                                tabItem.TableGrid.Children.OfType<StackPanel>().FirstOrDefault()?.Children.Add(new Label() { Content = propertyInfo.Name });
+                                if (dataGrid.Items.Count > 1)
+                                {
+                                    var textBox = new TextBox() { Name = tableName + propertyInfo.Name };
+                                    textBox.TextChanged += TextBoxOnTextChanged;
+                                    tabItem.TableGrid.Children.OfType<StackPanel>()
+                                        .FirstOrDefault()?
+                                        .Children.Add(textBox);
+                                }
+                            }
+                            else if (propertyInfo.Name.Contains("Id") && service.Singularize(tableName) + "Id" != propertyInfo.Name)
+                            {
+                                Type setType = Type.GetType($"DAL.Entity.{ propertyInfo.Name.Replace("Id", "")}, DAL");
+                                var set = (DbSet)repo.GetType()
+                                                     .GetMethods()
+                                                     .FirstOrDefault(m => m.Name == "GetDbSetByType")
+                                                     ?.MakeGenericMethod(setType)
+                                                     .Invoke(repo, null);
+
+                                tabItem.TableGrid.Children.OfType<StackPanel>().FirstOrDefault()?.Children.Add(new Label() { Content = propertyInfo.Name });
+                                var comboBox = new ComboBox() { Name = tableName + propertyInfo.Name };
+                                comboBox.SelectionChanged += ForeignKeyComboBox_SelectionChanged;
+                                tabItem.TableGrid.Children.OfType<StackPanel>().FirstOrDefault()?.Children.Add(comboBox);
+                                foreach (var item in set)
+                                {
+                                    string itemValue = "";
+                                    try
+                                    {
+                                        itemValue = item.GetType()
+                                            .GetProperty(set.ElementType.Name + "Id")
+                                            .GetValue(item) + " - " + item.GetType()
+                                                                      .GetProperty(set.ElementType.Name + "Name")
+                                                                      .GetValue(item);
+                                    }
+                                    catch
+                                    {
+                                        itemValue = item.GetType()
+                                            .GetProperty(set.ElementType.Name + "Id")
+                                            .GetValue(item).ToString();
+                                    }
+                                    finally
+                                    {
+                                        comboBox.Items.Add(itemValue);
+                                    }
+                                }
+                            }
+                        }
+                        var button = new Button() { Content = "Save changes" };
+                        button.Click += SaveChanges_Click;
+                        tabItem.TableGrid.Children.OfType<StackPanel>().FirstOrDefault()?.Children.Add(button);
+                        result.Add(new Tuple<string, TabItemModel>(tableName, tabItem));
+                    }
                 }
 
             }
@@ -199,6 +246,54 @@ namespace BLL.Concrete
             catch
             {
 
+            }
+        }
+
+        public DbSet GetTableByName(string name)
+        {
+            var service = PluralizationService.CreateService(CultureInfo.GetCultureInfo("en-US"));
+            Type type = Type.GetType($"DAL.Entity.{service.Singularize(name)}, DAL");
+
+            var dbset = repo
+                          .GetType()
+                          .GetMethods()
+                          .FirstOrDefault(m => m.Name == "GetDbSetByType")
+                          .MakeGenericMethod(type)
+                          .Invoke(repo, null) as DbSet;
+            return dbset;
+        }
+
+        private async void ImagesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //ImageProvider provider = new ImageProvider();
+            //var image = await provider.GetImage(((sender as DataGrid).SelectedItem as DAL.Entity.Image).ImageId);
+            //((sender as DataGrid).Parent as Grid).Children.OfType<StackPanel>().FirstOrDefault().Children.OfType<System.Windows.Controls.Image>().FirstOrDefault().Source = BitmapToImageSource(image);
+        }
+
+        private void UploadButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            if (dialog.ShowDialog().Value)
+            {
+                ImageProvider provider = new ImageProvider();
+                provider.SaveImage(dialog.FileName);
+                (((sender as Button).Parent as StackPanel).Parent as Grid).Children.OfType<DataGrid>().FirstOrDefault().Items.Refresh();
+            }
+        }
+
+        BitmapImage BitmapToImageSource(Bitmap bitmap)
+        {
+            using (MemoryStream memory = new MemoryStream())
+            {
+                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
+                memory.Position = 0;
+                BitmapImage bitmapimage = new BitmapImage();
+                bitmapimage.BeginInit();
+                bitmapimage.StreamSource = memory;
+                bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapimage.EndInit();
+
+                return bitmapimage;
             }
         }
     }

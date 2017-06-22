@@ -40,12 +40,13 @@ namespace WPF_UI
             FillCategorisLb();
         }
 
-        private void searchBtn_Click(object sender, RoutedEventArgs e)
+        private async void searchBtn_Click(object sender, RoutedEventArgs e)
         {
             booksShortInfo = bookProvider.SearchBooks(SearchTextBox.Text);
             shortBooksInfoLb.ItemsSource = booksShortInfo;
-            //var provider = new ImageProvider();
-            //provider.SaveImage(@"C:\Users\v.matviichuk\Downloads\hi-512-14.jpg");
+            var provider = new ImageProvider();
+            var image = await provider.GetImage(28);
+            TestImage.Source = BitmapToImageSource(image);
         }
 
         private void FillBasketUI()

@@ -19,9 +19,9 @@ namespace BLL.Concrete
             return repo.GetImage(pathToImage);
         }
 
-        public Bitmap GetImage(int imageId)
+        public async Task<Bitmap> GetImage(int imageId)
         {
-            return repo.GetImage(imageId);
+            return await repo.GetImage(imageId);
         }
 
         public bool SaveImage(string pathToImage)

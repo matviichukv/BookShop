@@ -47,5 +47,6 @@
                 
             </DataTemplate>
         </TabControl.ContentTemplate>
+        
     </TabControl>
 </Window>
