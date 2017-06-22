@@ -14,6 +14,7 @@ namespace BLL.Concrete
     public class ReviewProvider : IReviewProvider
     {
         IReviewRepository reviewRepository = new ReviewRepository();
+        IUserRepository userRepository = new UserRepository();
 
         public void AddReview(string message, int bookId, int userId)
         {
@@ -22,7 +23,7 @@ namespace BLL.Concrete
                 Message = message,
                 Date = DateTime.Now,
                 BookId = bookId,
-                UserId = userId
+                UserId = userId,
             };
 
             reviewRepository.AddReview(review);
@@ -35,7 +36,8 @@ namespace BLL.Concrete
                 Message = r.Message,
                 Date = r.Date,
                 Likes = r.ReviewLikes.Count,
-                UserName = r.User.UserName
+                UserName = r.User.UserName,
+                BookName = r.Book.BookName
             }).ToList();
         }
 
@@ -46,8 +48,25 @@ namespace BLL.Concrete
                 Message = r.Message,
                 Date = r.Date,
                 Likes = r.ReviewLikes.Count,
-                UserName = r.User.UserName
+                UserName = r.User.UserName,
+                BookName = r.Book.BookName
             }).ToList();
+        }
+
+        public void PressLikeButton(string userEmail, int reviewId)
+        {
+            if (reviewRepository.GetReviewById(reviewId).ReviewLikes.Select(l => l.User.UserEmail).Contains(userEmail))
+            {
+                reviewRepository.RemoveLike(reviewRepository.GetReviewById(reviewId).ReviewLikes.FirstOrDefault(l => l.User.UserEmail == userEmail));
+            }
+            else
+            {
+                reviewRepository.AddLike(new Like()
+                {
+                    ReviewId = reviewId,
+                    UserId = userRepository.GetUserByEmail(userEmail).UserId
+                });
+            }
         }
     }
 }
