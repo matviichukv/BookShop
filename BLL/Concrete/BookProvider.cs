@@ -10,6 +10,9 @@ using DAL.Concrete;
 using DAL.Entity;
 using DAL.Abstract;
 using System.Collections.ObjectModel;
+using System.Windows.Media.Imaging;
+using System.IO;
+using System.Drawing;
 
 namespace BLL.Concrete
 {
@@ -17,7 +20,7 @@ namespace BLL.Concrete
     {
         IBookRepository bookRepository = new BookRepository();
 
-        public BookInfoViewModel GetBookInfo(int bookId)
+        public async Task<BookInfoViewModel> GetBookInfo(int bookId)
         {
             Book book = bookRepository.GetBookById(bookId);
             ObservableCollection<ReviewViewModel> reviews = new ObservableCollection<ReviewViewModel>();
@@ -32,7 +35,7 @@ namespace BLL.Concrete
                     UserName = review.User.UserName
                 });
             }
-
+            ImageProvider provider = new ImageProvider();
             BookInfoViewModel bookInfo = new BookInfoViewModel()
             {
                 AuthorDescription = book.BookAuthor.Description,
@@ -41,7 +44,7 @@ namespace BLL.Concrete
                 AuthorNationality = book.BookAuthor.AuthorNationality == null ? null : book.BookAuthor.AuthorNationality.NationalityName,
                 BookCount = book.Count,
                 BookDescription = book.Description,
-                ImageId = book.BookImage == null ? 0 : book.BookImage.ImageId,
+                BookImageSource = book.BookImage == null ? null: BitmapToImageSource(await provider.GetImage(book.BookImage.ImageId)),
                 BookLanguage = book.Language,
                 BookName = book.BookName,
                 BookPrice = book.Price,
@@ -98,6 +101,22 @@ namespace BLL.Concrete
                     BookImageId = b.BookImage == null ? 0 : b.BookImage.ImageId,
                     BookPrice = b.Price
                 }).ToList();
+        }
+
+        BitmapImage BitmapToImageSource(Bitmap bitmap)
+        {
+            using (MemoryStream memory = new MemoryStream())
+            {
+                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
+                memory.Position = 0;
+                BitmapImage bitmapimage = new BitmapImage();
+                bitmapimage.BeginInit();
+                bitmapimage.StreamSource = memory;
+                bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapimage.EndInit();
+
+                return bitmapimage;
+            }
         }
     }
 }

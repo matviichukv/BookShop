@@ -28,7 +28,7 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Source="E:\img_0335.jpg" Height="200"></Image>
+                <Image Grid.Column="0" Name="bookImage" Source="{Binding}" Height="200"></Image>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Right">
                     <Label>Author:</Label>
                     <Label>Publish:</Label>
