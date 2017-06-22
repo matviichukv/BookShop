@@ -89,7 +89,7 @@ namespace BLL.Concrete
                         foreach (var propertyInfo in type.GetProperties())
                         {
 
-                            if ((propertyInfo.PropertyType == typeof(int) || propertyInfo.PropertyType == typeof(int?) || propertyInfo.PropertyType == typeof(string)) && !propertyInfo.Name.Contains("Id"))
+                            if ((propertyInfo.PropertyType == typeof(int) || propertyInfo.PropertyType == typeof(int?) || propertyInfo.PropertyType == typeof(decimal) || propertyInfo.PropertyType == typeof(string)) && !propertyInfo.Name.Contains("Id"))
                             {
                                 tabItem.TableGrid.Children.OfType<StackPanel>().FirstOrDefault()?.Children.Add(new Label() { Content = propertyInfo.Name });
                                 if (dataGrid.Items.Count > 1)
@@ -160,7 +160,8 @@ namespace BLL.Concrete
             {
                 if (!e.PropertyType.IsInstanceOfType(""))
                     if (!e.PropertyType.IsInstanceOfType(DateTime.Now))
-                        e.Cancel = true;
+                        if(!e.PropertyType.IsInstanceOfType(new int?(1)))
+                            e.Cancel = true;
             }
             
         }
@@ -182,6 +183,10 @@ namespace BLL.Concrete
             if (property.PropertyType == typeof(int))
             {
                 property.SetValue(dataGrid.SelectedItem, Int32.Parse((sender as TextBox).Text));
+            }
+            else if (property.PropertyType == typeof(decimal))
+            {
+                property.SetValue(dataGrid.SelectedItem, Decimal.Parse((sender as TextBox).Text));
             }
             else
             {
