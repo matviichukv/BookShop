@@ -12,7 +12,7 @@ namespace DAL.Entity
     {
         public int OrderId { get; set; }
         public DateTime? DateOrdered { get; set; }
-        public double OrderPrice { get; set; }
+        public decimal OrderPrice { get; set; }
         public int BookCount { get; set; }
         public bool IsPaid { get; set; }
 

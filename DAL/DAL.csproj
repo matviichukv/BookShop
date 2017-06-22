@@ -119,6 +119,10 @@
     <Compile Include="Migrations\201706211704152_Changed int Price to double Price.Designer.cs">
       <DependentUpon>201706211704152_Changed int Price to double Price.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706221554418_Changed double Price to decimal Price.cs" />
+    <Compile Include="Migrations\201706221554418_Changed double Price to decimal Price.Designer.cs">
+      <DependentUpon>201706221554418_Changed double Price to decimal Price.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706211704152_Changed int Price to double Price.resx">
       <DependentUpon>201706211704152_Changed int Price to double Price.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706221554418_Changed double Price to decimal Price.resx">
+      <DependentUpon>201706221554418_Changed double Price to decimal Price.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

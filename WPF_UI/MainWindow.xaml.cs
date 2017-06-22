@@ -34,7 +34,6 @@ namespace WPF_UI
 
         public MainWindow()
         {
-            //hello
             InitializeComponent();
             booksShortInfo = bookProvider.GetBooks();
             shortBooksInfoLb.ItemsSource = booksShortInfo;
@@ -45,8 +44,8 @@ namespace WPF_UI
         {
             booksShortInfo = bookProvider.SearchBooks(SearchTextBox.Text);
             shortBooksInfoLb.ItemsSource = booksShortInfo;
-            var provider = new ImageProvider();
-            provider.SaveImage(@"C:\Users\v.matviichuk\Downloads\hi-512-14.jpg");
+            //var provider = new ImageProvider();
+            //provider.SaveImage(@"C:\Users\v.matviichuk\Downloads\hi-512-14.jpg");
         }
 
         private void FillBasketUI()
