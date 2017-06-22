@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace BLL.Models
 {
@@ -25,7 +26,7 @@ namespace BLL.Models
         public string PublisherName { get; set; }
         public string PublisherCity { get; set; }
 
-        public int ImageId { get; set; }
+        public BitmapImage BookImageSource { get; set; }
         public string CategoryName { get; set; }
 
         public ObservableCollection<ReviewViewModel> BookReviews { get; set; }

@@ -42,10 +42,28 @@ namespace WPF_UI
             user = _user;
             shortBookInfo = _shortBookInfo;
             booksInBasket = _booksInBasket;
-            bookInfo = bookProvider.GetBookInfo(_shortBookInfo.BookId);
+            SetBookInfo(_shortBookInfo);
+            //FillBookInfo(bookInfo);
+        }
+
+        private async void SetBookInfo(BookShortInfoViewModel _shortBookInfo)
+        {
+            bookInfo = await bookProvider.GetBookInfo(_shortBookInfo.BookId);
+            bookNameLB.Content = bookInfo.BookName;
+            authorNameLb.Content = bookInfo.AuthorName;
+            publisherNameLb.Content = bookInfo.PublisherName;
+            languageNameLb.Content = bookInfo.BookLanguage;
+            publishDateLb.Content = bookInfo.DatePublished;
+            volumeLb.Content = bookInfo.BookVolume;
+            priceLb.Content = bookInfo.BookPrice;
+            descriptionBookTb.Text = bookInfo.BookDescription;
+            bookImage.Source = bookInfo.BookImageSource;
+            infoAuthorNameLB.Content = bookInfo.AuthorName;
+            descriptionAuthorTb.Text = bookInfo.AuthorDescription;
+
+            reviewLB.ItemsSource = bookInfo.BookReviews.Reverse();
             updateReviewsThread = new Thread(UpdateReviews);
             updateReviewsThread.Start();
-            FillBookInfo(bookInfo);
         }
 
         private void FillBookInfo(BookInfoViewModel bookInfo)
@@ -58,7 +76,7 @@ namespace WPF_UI
             volumeLb.Content = bookInfo.BookVolume;
             priceLb.Content = bookInfo.BookPrice;
             descriptionBookTb.Text = bookInfo.BookDescription;
-
+            bookImage.Source = bookInfo.BookImageSource;
             infoAuthorNameLB.Content = bookInfo.AuthorName;
             descriptionAuthorTb.Text = bookInfo.AuthorDescription;
 
