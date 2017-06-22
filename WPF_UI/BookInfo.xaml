@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_UI"
         mc:Ignorable="d"
-        Title="BookInfo" Height="760" Width="525" MinHeight="750" MinWidth="515" Background="Gray">
+        Title="BookInfo" Height="760" Width="525" MinHeight="750" MinWidth="515" Background="Gray" Closing="Window_Closing">
     <Grid Background="Gray" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>

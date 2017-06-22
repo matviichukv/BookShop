@@ -94,5 +94,26 @@ namespace WPF_UI
 
             costLbl.Content = res.ToString();
         }
+
+        private void placeOrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            for(int i = 0; i < books.Count;i++)
+            {
+                if(orderProvider.ConfirmOrder(books[i].OrderId))
+                {
+                    books.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            if(books.Count == 0)
+            {
+                costLbl.Content = 0;
+            }
+            else
+            {
+                SumaAllBooksInBasket();
+            }
+        }
     }
 }

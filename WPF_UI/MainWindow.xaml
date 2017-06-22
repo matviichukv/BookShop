@@ -39,7 +39,7 @@
             <WrapPanel>
                 <Label>Cart</Label>
                 <Image Name="basketImg"></Image>
-                <Label Foreground="Orange">0</Label>
+                <Label Foreground="Orange" Name="countBooksInBasketLbl">0</Label>
             </WrapPanel>
         </Button>
         <DockPanel Grid.Column="1" Grid.Row="0">
@@ -62,7 +62,7 @@
             ItemsSource="{Binding}" SelectionChanged="booksLb_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <DockPanel Width="350">
+                    <DockPanel Width="340" HorizontalAlignment="Center">
                         <Image DockPanel.Dock="Left" Source="{Binding BookImagePath}" Height="100" Width="84"/>
                         <DockPanel Width="136" HorizontalAlignment="Left" Height="96" >
                             <TextBlock DockPanel.Dock="Top" Text="{Binding BookName}" Height="28" FontWeight="Bold" FontSize="13" Foreground="#FF020208"/>

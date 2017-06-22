@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using BLL.Models;
 using BLL.Concrete;
 using System.Collections.ObjectModel;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace WPF_UI
 {
@@ -27,6 +29,7 @@ namespace WPF_UI
         private BookShortInfoViewModel shortBookInfo;
         private UserInfoViewModel user = null;
         private ObservableCollection<OrderInfoViewModel> booksInBasket;
+        private Thread updateReviewsThread;
 
         public BookInfo()
         {
@@ -40,6 +43,8 @@ namespace WPF_UI
             shortBookInfo = _shortBookInfo;
             booksInBasket = _booksInBasket;
             bookInfo = bookProvider.GetBookInfo(_shortBookInfo.BookId);
+            updateReviewsThread = new Thread(UpdateReviews);
+            updateReviewsThread.Start();
             FillBookInfo(bookInfo);
         }
 
@@ -57,7 +62,7 @@ namespace WPF_UI
             infoAuthorNameLB.Content = bookInfo.AuthorName;
             descriptionAuthorTb.Text = bookInfo.AuthorDescription;
 
-            reviewLB.ItemsSource = bookInfo.BookReviews;
+            reviewLB.ItemsSource = bookInfo.BookReviews.Reverse();
         }
 
         private void sendReviewBtn_Click(object sender, RoutedEventArgs e)
@@ -68,25 +73,34 @@ namespace WPF_UI
                 return;
             }
 
+
             SendReview sendReview = new SendReview(user, shortBookInfo.BookId);
             sendReview.ShowDialog();
-            UpdateReviews();
         }
 
         private void UpdateReviews()
         {
-            ReviewProvider reviewProvider = new ReviewProvider();
-            var reviews = reviewProvider.GetBookReviews(shortBookInfo.BookId);
-            bookInfo.BookReviews.Clear();
-            foreach (var item in reviews)
+            while (true)
             {
-                bookInfo.BookReviews.Add(item);
+                ReviewProvider reviewProvider = new ReviewProvider();
+                var reviews = reviewProvider.GetBookReviews(shortBookInfo.BookId).AsEnumerable().Reverse();
+                Dispatcher.BeginInvoke((Action)(() => bookInfo.BookReviews.Clear()));
+
+                foreach (var item in reviews)
+                {
+                    Dispatcher.BeginInvoke((Action)(() => bookInfo.BookReviews.Add(item)));
+                }
+
+                Dispatcher.BeginInvoke((Action)(() => reviewLB.ItemsSource = null));
+                Dispatcher.BeginInvoke((Action)(() => reviewLB.ItemsSource = bookInfo.BookReviews));
+                Thread.Sleep(5000);
             }
         }
 
 
         private void continueSearchGoodsBtn_Click(object sender, RoutedEventArgs e)
         {
+            updateReviewsThread.Abort();
             this.Close();
         }
 
@@ -100,6 +114,11 @@ namespace WPF_UI
 
             BasketUIProvider basketUIProvider = new BasketUIProvider();
             basketUIProvider.AddToBasket(shortBookInfo, booksInBasket, user.UserEmail);
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            updateReviewsThread.Abort();
         }
     }
 }

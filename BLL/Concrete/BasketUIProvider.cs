@@ -30,7 +30,7 @@ namespace BLL.Concrete
                 {
                     BookId = bookInfo.BookId,
                     AuthorName = bookInfo.BookAuthorName,
-                    BookImageId = book.BookImageId,
+                    BookImageId = 0,//book.BookImageId,
                     BookName = bookInfo.BookName,
                     Count = 1,
                     Price = bookInfo.BookPrice,

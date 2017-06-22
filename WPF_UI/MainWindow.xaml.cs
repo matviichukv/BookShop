@@ -53,6 +53,7 @@ namespace WPF_UI
         {
             BasketUIProvider basketUiProvider = new BasketUIProvider();
             basketUiProvider.FillBasket(booksInBasket, user.UserId);
+            countBooksInBasketLbl.Content = booksInBasket.Sum(i => i.Count);
         }
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)
@@ -94,6 +95,7 @@ namespace WPF_UI
         {
             Basket basket = new Basket(booksInBasket);
             basket.ShowDialog();
+            countBooksInBasketLbl.Content = booksInBasket.Sum(i => i.Count);
         }
 
         private void FillCategorisLb()
