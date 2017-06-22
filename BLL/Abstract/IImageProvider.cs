@@ -13,6 +13,8 @@ namespace BLL.Abstract
 
         Bitmap GetImage(string pathToImage);
 
-        Bitmap GetImage(int imageId);
+        Task<Bitmap> GetImage(int imageId);
+
+
     }
 }
