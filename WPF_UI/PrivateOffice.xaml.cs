@@ -22,6 +22,7 @@ namespace WPF_UI
     public partial class PrivateOffice : Window
     {
         private UserInfoViewModel user;
+        private List<ReviewViewModel> userReviews = new List<ReviewViewModel>();
 
         public PrivateOffice()
         {
@@ -44,13 +45,16 @@ namespace WPF_UI
         private void historyOrdersBtn_Click(object sender, RoutedEventArgs e)
         {
             tabContorl.SelectedIndex = 1;
+            OrderProvider orderProvider = new OrderProvider();
         }
 
         private void historyReviews_Click(object sender, RoutedEventArgs e)
         {
             tabContorl.SelectedIndex = 2;
             ReviewProvider reviewProvider = new ReviewProvider();
-            reviewsHistoryLb.ItemsSource = reviewProvider.GetUserReviews(user.UserId);
+            var reviews = reviewProvider.GetUserReviews(user.UserId).AsEnumerable().Reverse();
+            CreateListBoxReview create = new CreateListBoxReview();
+            reviewsHistoryLb.ItemsSource = create.GetListBoxReviewItems(reviews.ToList(),0);
         }
 
         private void backToMainWindowBtn_Click(object sender, RoutedEventArgs e)
@@ -85,6 +89,19 @@ namespace WPF_UI
                 imagesLocation += "\\nonePhoto.jpg";
                 userAvatar.Source = new BitmapImage(new Uri(imagesLocation));
             }
+        }
+
+        private void showOrderInDateExpanded_Expanded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void likeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ReviewProvider reviewProvider = new ReviewProvider();
+            Button button = sender as Button;
+            var reviewId = button.DataContext;
+            reviewProvider.PressLikeButton(user.UserEmail, (int)reviewId);
         }
     }
 }

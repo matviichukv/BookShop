@@ -30,6 +30,7 @@ namespace WPF_UI
         private UserInfoViewModel user = null;
         private ObservableCollection<OrderInfoViewModel> booksInBasket;
         private Thread updateReviewsThread;
+        private RoutedEventHandler eventClick = null;
 
         public BookInfo()
         {
@@ -43,7 +44,7 @@ namespace WPF_UI
             shortBookInfo = _shortBookInfo;
             booksInBasket = _booksInBasket;
             SetBookInfo(_shortBookInfo);
-            //FillBookInfo(bookInfo);
+            eventClick = likeBtn_Click;
         }
 
         private async void SetBookInfo(BookShortInfoViewModel _shortBookInfo)
@@ -60,27 +61,8 @@ namespace WPF_UI
             bookImage.Source = bookInfo.BookImageSource;
             infoAuthorNameLB.Content = bookInfo.AuthorName;
             descriptionAuthorTb.Text = bookInfo.AuthorDescription;
-
-            reviewLB.ItemsSource = bookInfo.BookReviews.Reverse();
             updateReviewsThread = new Thread(UpdateReviews);
             updateReviewsThread.Start();
-        }
-
-        private void FillBookInfo(BookInfoViewModel bookInfo)
-        {
-            bookNameLB.Content = bookInfo.BookName;
-            authorNameLb.Content = bookInfo.AuthorName;
-            publisherNameLb.Content = bookInfo.PublisherName;
-            languageNameLb.Content = bookInfo.BookLanguage;
-            publishDateLb.Content = bookInfo.DatePublished;
-            volumeLb.Content = bookInfo.BookVolume;
-            priceLb.Content = bookInfo.BookPrice;
-            descriptionBookTb.Text = bookInfo.BookDescription;
-            bookImage.Source = bookInfo.BookImageSource;
-            infoAuthorNameLB.Content = bookInfo.AuthorName;
-            descriptionAuthorTb.Text = bookInfo.AuthorDescription;
-
-            reviewLB.ItemsSource = bookInfo.BookReviews.Reverse();
         }
 
         private void sendReviewBtn_Click(object sender, RoutedEventArgs e)
@@ -102,19 +84,12 @@ namespace WPF_UI
             {
                 ReviewProvider reviewProvider = new ReviewProvider();
                 var reviews = reviewProvider.GetBookReviews(shortBookInfo.BookId).AsEnumerable().Reverse();
-                Dispatcher.BeginInvoke((Action)(() => bookInfo.BookReviews.Clear()));
-
-                foreach (var item in reviews)
-                {
-                    Dispatcher.BeginInvoke((Action)(() => bookInfo.BookReviews.Add(item)));
-                }
-
+                CreateListBoxReview create = new CreateListBoxReview(eventClick);
                 Dispatcher.BeginInvoke((Action)(() => reviewLB.ItemsSource = null));
-                Dispatcher.BeginInvoke((Action)(() => reviewLB.ItemsSource = bookInfo.BookReviews));
+                Dispatcher.BeginInvoke((Action)(() => reviewLB.ItemsSource = create.GetListBoxReviewItems(reviews.ToList(),1)));
                 Thread.Sleep(5000);
             }
         }
-
 
         private void continueSearchGoodsBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -137,6 +112,20 @@ namespace WPF_UI
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             updateReviewsThread.Abort();
+        }
+
+        private void likeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(user == null)
+            {
+                MessageBox.Show("Login before press like");
+                return;
+            }
+
+            ReviewProvider reviewProvider = new ReviewProvider();
+            Button button = sender as Button;
+            var reviewId =  button.DataContext;
+            reviewProvider.PressLikeButton(user.UserEmail, (int)reviewId);
         }
     }
 }

@@ -8,6 +8,7 @@ namespace BLL.Models
 {
     public class ReviewViewModel
     {
+        public int ReviewId { get; set; }
         public string UserName { get; set; }
         public string Message { get; set; }
         public string BookName { get; set; }

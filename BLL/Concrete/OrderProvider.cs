@@ -58,22 +58,6 @@ namespace BLL.Concrete
                 }).ToList();
         }
 
-        public List<OrderInfoViewModel> GetHistory()
-        {
-            return orderRepository.GetOrders()
-                .Where(order => order.IsPaid == true)
-                .Select(o => new OrderInfoViewModel()
-                {
-                    AuthorName = o.Book.BookAuthor.AuthorName,
-                    BookId = o.BookId,
-                    BookImageId = o.Book.BookImage == null? 0 : o.Book.BookImage.ImageId,
-                    BookName = o.Book.BookName,
-                    Count = o.BookCount,
-                    Price = o.Book.Price,
-                    Cost = o.BookCount * o.Book.Price
-                }).ToList();
-        }
-
         public void UpdateBookCount(int orderId, int bookCount)
         {
             orderRepository.UpdateBookCount(orderId, bookCount);

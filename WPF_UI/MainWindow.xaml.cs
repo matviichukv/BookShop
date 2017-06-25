@@ -63,7 +63,7 @@ namespace WPF_UI
             if (user != null)
             {
                 cartBtn.Visibility = Visibility.Visible;
-                //showUserProfileBtn.Visibility = Visibility.Visible;
+                showUserProfileBtn.Visibility = Visibility.Visible;
                 loginBtn.Visibility = Visibility.Hidden;
                 //SetAvatarImage(user.AvatarPath);
                 SetBasketImage();

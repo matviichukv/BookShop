@@ -22,7 +22,7 @@ namespace DAL.Concrete
         public List<Review> GetBookReviews(int bookId)
         {
             return ctx.Reviews
-                .Include(r => r.User).Include(i => i.ReviewLikes).Where(i => i.BookId == bookId).ToList();
+                .Include(r => r.User).Include(i => i.ReviewLikes).Include(i => i.Book).Where(i => i.BookId == bookId).ToList();
         }
 
         public Review GetReviewById(int reviewId)
@@ -47,7 +47,7 @@ namespace DAL.Concrete
         public List<Review> GetUserReviews(int userId)
         {
             return ctx.Reviews
-                .Include(r => r.User)
+                .Include(r => r.User).Include(i => i.Book)
                 .Where(i => i.UserId == userId).ToList();
         }
     }
