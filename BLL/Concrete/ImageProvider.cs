@@ -22,6 +22,7 @@ namespace BLL.Concrete
 
         public async Task<Bitmap> GetImage(int imageId)
         {
+            Directory.CreateDirectory(imagesCacheLocation);
             if (Directory.GetFiles(imagesCacheLocation, "*.jpg").Contains(Path.Combine(imagesCacheLocation, $"img_{imageId}.jpg")))
             {
                 return new Bitmap(Image.FromFile(Path.Combine(imagesCacheLocation, $"img_{imageId}.jpg")));
