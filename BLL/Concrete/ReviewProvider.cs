@@ -37,8 +37,9 @@ namespace BLL.Concrete
                 Date = r.Date,
                 Likes = r.ReviewLikes.Count,
                 UserName = r.User.UserName,
-                BookName = r.Book.BookName
+                BookName = "asd"
             }).ToList();
+
         }
 
         public List<ReviewViewModel> GetUserReviews(int userId)
