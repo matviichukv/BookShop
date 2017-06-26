@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -26,8 +27,8 @@ namespace DAL.Entity
 
         public int PublisherId { get; set; }
         public Publisher BookPublisher { get; set; }
-        
-        public int? ImageId { get; set; }
+        [DefaultValue(44)]
+        public int ImageId { get; set; }
         public Image BookImage { get; set; }
 
         public int CategoryId { get; set; }

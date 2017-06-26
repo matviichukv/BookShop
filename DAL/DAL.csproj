@@ -123,6 +123,10 @@
     <Compile Include="Migrations\201706221554418_Changed double Price to decimal Price.Designer.cs">
       <DependentUpon>201706221554418_Changed double Price to decimal Price.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706261603517_set default image id.cs" />
+    <Compile Include="Migrations\201706261603517_set default image id.Designer.cs">
+      <DependentUpon>201706261603517_set default image id.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706221554418_Changed double Price to decimal Price.resx">
       <DependentUpon>201706221554418_Changed double Price to decimal Price.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706261603517_set default image id.resx">
+      <DependentUpon>201706261603517_set default image id.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

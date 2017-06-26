@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,8 +20,8 @@ namespace DAL.Entity
 
         public int NationalityId { get; set; }
         public Nationality AuthorNationality { get; set; }
-        
-        public int? ImageId { get; set; }
+        [DefaultValue(44)]
+        public int ImageId { get; set; }
         public virtual Image AuthorImage { get; set; }
 
         public ICollection<Book> WrittenBooks { get; set; }

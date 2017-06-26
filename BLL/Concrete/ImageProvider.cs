@@ -12,6 +12,7 @@ namespace BLL.Concrete
 {
     public class ImageProvider : IImageProvider
     {
+        private string imagesCacheLocation = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "Images", "Cache")).LocalPath;
         ImageRepository repo = new ImageRepository();
 
         public Bitmap GetImage(string pathToImage)
@@ -21,7 +22,16 @@ namespace BLL.Concrete
 
         public async Task<Bitmap> GetImage(int imageId)
         {
-            return await repo.GetImage(imageId);
+            if (Directory.GetFiles(imagesCacheLocation, "*.jpg").Contains(Path.Combine(imagesCacheLocation, $"img_{imageId}.jpg")))
+            {
+                return new Bitmap(Image.FromFile(Path.Combine(imagesCacheLocation, $"img_{imageId}.jpg")));
+            }
+            else
+            {
+                var image = await repo.GetImage(imageId);
+                image.Save(Path.Combine(imagesCacheLocation, $"img_{imageId}.jpg"));
+                return image;
+            }
         }
 
         public bool SaveImage(string pathToImage)
