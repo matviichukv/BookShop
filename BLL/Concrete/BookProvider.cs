@@ -39,7 +39,7 @@ namespace BLL.Concrete
             BookInfoViewModel bookInfo = new BookInfoViewModel()
             {
                 AuthorDescription = book.BookAuthor.Description,
-                AuthorImagePath = book.BookAuthor.AuthorImage == null ? null : book.BookAuthor.AuthorImage.PathToImageFile,
+                AuthorImage = book.BookAuthor.AuthorImage == null ? null : BitmapToImageSource(await provider.GetImage((int)book.BookAuthor.ImageId)),
                 AuthorName = book.BookAuthor.AuthorName,
                 AuthorNationality = book.BookAuthor.AuthorNationality == null ? null : book.BookAuthor.AuthorNationality.NationalityName,
                 BookCount = book.Count,
@@ -59,18 +59,26 @@ namespace BLL.Concrete
             return bookInfo;
         }
 
-        public List<BookShortInfoViewModel> GetBooks()
+        public async Task<List<BookShortInfoViewModel>> GetBooks()
         {
-            return bookRepository.GetBooks()
-                .Select(book => new BookShortInfoViewModel()
+            ImageProvider provider = new ImageProvider();
+            List<BookShortInfoViewModel> shortInfoBooks = new List<BookShortInfoViewModel>();
+            var books = bookRepository.GetBooks();
+
+            foreach (var item in books)
             {
-                BookAuthorName = book.BookAuthor.AuthorName,
-                BookDescription = book.Description,
-                BookId = book.BookId,
-                BookName = book.BookName,
-                BookImageId = book.BookImage == null ? 0 : book.BookImage.ImageId,
-                BookPrice = book.Price
-            }).ToList();
+                shortInfoBooks.Add(new BookShortInfoViewModel
+                {
+                    BookAuthorName = item.BookAuthor.AuthorName,
+                    BookDescription = item.Description,
+                    BookId = item.BookId,
+                    BookName = item.BookName,
+                    BookImage = item.BookImage == null ? null : BitmapToImageSource(await provider.GetImage(item.BookImage.ImageId)),
+                    BookPrice = item.Price
+                });
+            }
+
+            return shortInfoBooks;
         }
 
         public List<BookShortInfoViewModel> SearchBooks(string filter)
@@ -83,7 +91,7 @@ namespace BLL.Concrete
                     BookDescription = b.Description,
                     BookId = b.BookId,
                     BookName = b.BookName,
-                    BookImageId = b.BookImage == null ? 0 : b.BookImage.ImageId,
+                    BookImage = null,//b.BookImage == null ? 0 : b.BookImage.ImageId,
                     BookPrice = b.Price
                 }).ToList();
         }
@@ -98,7 +106,7 @@ namespace BLL.Concrete
                     BookDescription = b.Description,
                     BookId = b.BookId,
                     BookName = b.BookName,
-                    BookImageId = b.BookImage == null ? 0 : b.BookImage.ImageId,
+                    BookImage = null,//b.BookImage == null ? 0 : b.BookImage.ImageId,
                     BookPrice = b.Price
                 }).ToList();
         }

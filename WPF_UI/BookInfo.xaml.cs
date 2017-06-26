@@ -61,6 +61,7 @@ namespace WPF_UI
             bookImage.Source = bookInfo.BookImageSource;
             infoAuthorNameLB.Content = bookInfo.AuthorName;
             descriptionAuthorTb.Text = bookInfo.AuthorDescription;
+            authorImage.Source = bookInfo.AuthorImage;
             updateReviewsThread = new Thread(UpdateReviews);
             updateReviewsThread.Start();
         }

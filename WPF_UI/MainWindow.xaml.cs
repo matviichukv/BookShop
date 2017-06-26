@@ -35,9 +35,14 @@ namespace WPF_UI
         public MainWindow()
         {
             InitializeComponent();
-            booksShortInfo = bookProvider.GetBooks();
-            shortBooksInfoLb.ItemsSource = booksShortInfo;
             FillCategorisLb();
+            SetBooks();
+        }
+
+        private async void SetBooks()
+        {
+            booksShortInfo = await bookProvider.GetBooks();
+            shortBooksInfoLb.ItemsSource = booksShortInfo;
         }
 
         private async void searchBtn_Click(object sender, RoutedEventArgs e)
@@ -47,11 +52,10 @@ namespace WPF_UI
            
         }
 
-        private void FillBasketUI()
+        private async void FillBasketUI()
         {
             BasketUIProvider basketUiProvider = new BasketUIProvider();
-            basketUiProvider.FillBasket(booksInBasket, user.UserId);
-            countBooksInBasketLbl.Content = booksInBasket.Sum(i => i.Count);
+            countBooksInBasketLbl.Content = await basketUiProvider.FillBasket(booksInBasket, user.UserId);
         }
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)
@@ -68,6 +72,7 @@ namespace WPF_UI
                 //SetAvatarImage(user.AvatarPath);
                 SetBasketImage();
                 FillBasketUI();
+                UpdateCountBooksInBasket();
             }
         }
 
@@ -93,7 +98,7 @@ namespace WPF_UI
         {
             Basket basket = new Basket(booksInBasket);
             basket.ShowDialog();
-            countBooksInBasketLbl.Content = booksInBasket.Sum(i => i.Count);
+            UpdateCountBooksInBasket();
         }
 
         private void FillCategorisLb()
@@ -113,6 +118,7 @@ namespace WPF_UI
             int index = shortBooksInfoLb.Items.IndexOf(button.DataContext);
             BasketUIProvider basketUIProvider = new BasketUIProvider();
             basketUIProvider.AddToBasket(booksShortInfo[index], booksInBasket, user.UserEmail);
+            UpdateCountBooksInBasket();
         }
 
         private void SetBasketImage()
@@ -141,6 +147,11 @@ namespace WPF_UI
         {
             booksShortInfo = bookProvider.GetBooksByCategoty((categoriesLb.SelectedItem as CategoryViewModel).NameCategory);
             shortBooksInfoLb.ItemsSource = booksShortInfo;
+        }
+
+        private void UpdateCountBooksInBasket()
+        {
+            countBooksInBasketLbl.Content = booksInBasket.Sum(i => i.Count);
         }
 
         

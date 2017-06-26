@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace BLL.Models
 {
@@ -12,7 +13,7 @@ namespace BLL.Models
         public string BookName { get; set; }
         public string BookAuthorName { get; set; }
         public string BookDescription { get; set; }
-        public int BookImageId { get; set; }
+        public BitmapImage BookImage { get; set; }
         public decimal BookPrice { get; set; }
     }
 }

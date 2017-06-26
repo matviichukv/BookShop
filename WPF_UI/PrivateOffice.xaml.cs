@@ -43,11 +43,11 @@ namespace WPF_UI
             tabContorl.SelectedIndex = 0;
         }
 
-        private void historyOrdersBtn_Click(object sender, RoutedEventArgs e)
+        private async void historyOrdersBtn_Click(object sender, RoutedEventArgs e)
         {
             tabContorl.SelectedIndex = 1;
             OrderProvider orderProvider = new OrderProvider();
-            ordersHistory = orderProvider.GetOrdersHistory(user.UserId);
+            ordersHistory = await orderProvider.GetOrdersHistory(user.UserId);
             orderHistoryLb.ItemsSource = GetListBoxOrdersHistory(ordersHistory);
             SumAllCostOrdersHistory();
         }
@@ -166,6 +166,7 @@ namespace WPF_UI
             dockPanel.Margin = new Thickness(10, 10, 10, 10);
             img.Height = 100;
             img.Width = 50;
+            img.Source = order.BookImage;
             img.Margin = new Thickness(10, 0, 10, 0);
             authorName.Content = order.AuthorName;
             price.Content = "Price: " + order.Price;

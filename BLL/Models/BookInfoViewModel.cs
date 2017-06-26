@@ -21,7 +21,7 @@ namespace BLL.Models
         public string AuthorName { get; set; }
         public string AuthorDescription { get; set; }
         public string AuthorNationality { get; set; }
-        public string AuthorImagePath { get; set; }
+        public BitmapImage AuthorImage { get; set; }
 
         public string PublisherName { get; set; }
         public string PublisherCity { get; set; }

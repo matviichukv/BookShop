@@ -30,7 +30,7 @@ namespace BLL.Concrete
                 {
                     BookId = bookInfo.BookId,
                     AuthorName = bookInfo.BookAuthorName,
-                    BookImageId = 0,//book.BookImageId,
+                    BookImage = bookInfo.BookImage == null? null : bookInfo.BookImage,
                     BookName = bookInfo.BookName,
                     Count = 1,
                     Price = bookInfo.BookPrice,
@@ -42,14 +42,16 @@ namespace BLL.Concrete
             }
         }
 
-        public void FillBasket(ObservableCollection<OrderInfoViewModel> booksInBasket, int userId)
+        public async Task<int> FillBasket(ObservableCollection<OrderInfoViewModel> booksInBasket, int userId)
         {
-            var books = orderProvider.GetBasket(userId);
+            var books = await orderProvider.GetBasket(userId);
 
             foreach(var item in books)
             {
                 booksInBasket.Add(item);
             }
+
+            return books.Sum(i => i.Count);
         }
     }
 }

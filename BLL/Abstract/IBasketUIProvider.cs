@@ -11,6 +11,6 @@ namespace BLL.Abstract
     public interface IBasketUIProvider
     {
         void AddToBasket(BookShortInfoViewModel bookInfo, ObservableCollection<OrderInfoViewModel> booksInBasket, string userEmail);
-        void FillBasket(ObservableCollection<OrderInfoViewModel> booksInBasket, int userId);
+        Task<int> FillBasket(ObservableCollection<OrderInfoViewModel> booksInBasket, int userId);
     }
 }

@@ -52,7 +52,7 @@
         </StackPanel>
         <Label Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center">About author</Label>
         <DockPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" MaxHeight="130">
-            <Image Source="E:\o-i-met-jk-rowling-facebook.jpg" Height="130" Margin="5" DockPanel.Dock="Left"></Image>
+            <Image Source="{Binding}" Height="130" Margin="5" DockPanel.Dock="Left" Name="authorImage"></Image>
             <StackPanel>
                 <Label DockPanel.Dock="Top" Name="infoAuthorNameLB">Name</Label>
                 <TextBox Margin="5" AcceptsReturn="True" MaxLines="4" MinLines="2" Name="descriptionAuthorTb" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap"></TextBox>

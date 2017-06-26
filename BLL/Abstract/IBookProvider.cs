@@ -10,7 +10,7 @@ namespace BLL.Abstract
     public interface IBookProvider
     {
         Task<BookInfoViewModel> GetBookInfo(int bookId);
-        List<BookShortInfoViewModel> GetBooks();
+        Task<List<BookShortInfoViewModel>> GetBooks();
         List<BookShortInfoViewModel> SearchBooks(string filter);
         List<BookShortInfoViewModel> GetBooksByCategoty(string category);
     }
