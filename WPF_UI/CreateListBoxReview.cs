@@ -59,7 +59,15 @@ namespace WPF_UI
             messageTb.AcceptsReturn = true;
             messageTb.MaxLines = 2;
             messageTb.MinLines = 2;
-            messageTb.Width = 330;
+            if (choose == (int)GetReview.bookReview)
+            {
+                messageTb.Width = 440;
+            }
+            else if (choose == (int)GetReview.userReview)
+            {
+                messageTb.Width = 330;
+            }
+
             messageTb.VerticalAlignment = VerticalAlignment.Bottom;
             messageTb.IsReadOnly = true;
             messageTb.Text = review.Message;

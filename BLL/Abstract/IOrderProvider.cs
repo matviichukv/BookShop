@@ -10,6 +10,7 @@ namespace BLL.Abstract
     public interface IOrderProvider
     {
         List<OrderInfoViewModel> GetBasket(int userId);
+        List<OrderHistoryViewModel> GetOrdersHistory(int userId);
         int AddOrder(OrderAddViewModel orderModel, string userEmail);
         bool RemoveOrder(int orderId);
         bool ConfirmOrder(int orderId);

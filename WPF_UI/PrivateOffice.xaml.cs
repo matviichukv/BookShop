@@ -23,6 +23,7 @@ namespace WPF_UI
     {
         private UserInfoViewModel user;
         private List<ReviewViewModel> userReviews = new List<ReviewViewModel>();
+        private List<OrderHistoryViewModel> ordersHistory = null;
 
         public PrivateOffice()
         {
@@ -46,6 +47,9 @@ namespace WPF_UI
         {
             tabContorl.SelectedIndex = 1;
             OrderProvider orderProvider = new OrderProvider();
+            ordersHistory = orderProvider.GetOrdersHistory(user.UserId);
+            orderHistoryLb.ItemsSource = GetListBoxOrdersHistory(ordersHistory);
+            SumAllCostOrdersHistory();
         }
 
         private void historyReviews_Click(object sender, RoutedEventArgs e)
@@ -102,6 +106,91 @@ namespace WPF_UI
             Button button = sender as Button;
             var reviewId = button.DataContext;
             reviewProvider.PressLikeButton(user.UserEmail, (int)reviewId);
+        }
+
+        private List<ListBoxItem> GetListBoxOrdersHistory(List<OrderHistoryViewModel> ordersHistory)
+        {
+            List<ListBoxItem> result = new List<ListBoxItem>();
+            for (int i = 0; i < ordersHistory.Count; i++)
+            {
+                ListBoxItem itemLb = new ListBoxItem();
+                itemLb.HorizontalAlignment = HorizontalAlignment.Center;
+                StackPanel stackPanel = new StackPanel();
+                stackPanel.Background = Brushes.Gray;
+                WrapPanel wrap = new WrapPanel();
+                Label orderdate = new Label();
+                orderdate.Content = ordersHistory[i].Date;
+                Label count = new Label();
+                count.Content = "Count:";
+                Label orderCount = new Label();
+                orderCount.Content = ordersHistory[i].Cout;
+                Label cost = new Label();
+                cost.Content = "Cost:";
+                Label orderCost = new Label();
+                orderCost.Content = ordersHistory[i].Cost;
+                wrap.Children.Add(orderdate);
+                wrap.Children.Add(count);
+                wrap.Children.Add(orderCount);
+                wrap.Children.Add(cost);
+                wrap.Children.Add(orderCost);
+                stackPanel.Children.Add(wrap);
+                Expander expander = new Expander();
+                expander.Width = 340;
+                ListBox infoOrderLb = new ListBox();
+                
+                for (int j = 0; j < ordersHistory[i].Orders.Count; j++)
+                {
+                    infoOrderLb.Items.Add(GetOrderHistoryBookInfoListboxItem(ordersHistory[i].Orders[j]));
+                }
+
+                expander.Content = infoOrderLb;
+                stackPanel.Children.Add(expander);
+                itemLb.Content = stackPanel;
+                result.Add(itemLb);
+            }
+
+            return result;
+        }
+
+        private ListBoxItem GetOrderHistoryBookInfoListboxItem(OrderInfoViewModel order)
+        {
+            ListBoxItem item = new ListBoxItem();
+            DockPanel dockPanel = new DockPanel();
+            Image img = new Image();
+            Label bookName = new Label();
+            Label authorName = new Label();
+            Label price = new Label();
+            Label countOrderLbl = new Label();
+            Label costOrderLBl = new Label();
+            dockPanel.HorizontalAlignment = HorizontalAlignment.Center;
+            dockPanel.Margin = new Thickness(10, 10, 10, 10);
+            img.Height = 100;
+            img.Width = 50;
+            img.Margin = new Thickness(10, 0, 10, 0);
+            authorName.Content = order.AuthorName;
+            price.Content = "Price: " + order.Price;
+            countOrderLbl.Content = "Count: " + order.Count;
+            costOrderLBl.Content = "Cost: " + order.Cost;
+            DockPanel.SetDock(img, Dock.Left);
+            DockPanel.SetDock(bookName, Dock.Top);
+            DockPanel.SetDock(authorName, Dock.Top);
+            DockPanel.SetDock(price, Dock.Top);
+            DockPanel.SetDock(countOrderLbl, Dock.Top);
+            DockPanel.SetDock(costOrderLBl, Dock.Top);
+            dockPanel.Children.Add(img);
+            bookName.Content = order.BookName;
+            dockPanel.Children.Add(bookName);
+            dockPanel.Children.Add(authorName);
+            dockPanel.Children.Add(price);
+            dockPanel.Children.Add(countOrderLbl);
+            dockPanel.Children.Add(costOrderLBl);
+            item.Content = dockPanel;
+            return item;
+        }
+
+        private void SumAllCostOrdersHistory()
+        {
+            ordersHistoryCostLbl.Content = ordersHistory.Sum(i => i.Cost);
         }
     }
 }
