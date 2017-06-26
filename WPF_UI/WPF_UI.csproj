@@ -71,6 +71,7 @@
     <Compile Include="ChangeUser.xaml.cs">
       <DependentUpon>ChangeUser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CreateListBoxReview.cs" />
     <Compile Include="PrivateOffice.xaml.cs">
       <DependentUpon>PrivateOffice.xaml</DependentUpon>
     </Compile>

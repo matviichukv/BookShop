@@ -58,7 +58,9 @@ namespace DAL.Concrete
 
         void IOrderRepository.UpdateBookCount(int orderId, int bookCount)
         {
-            ctx.Orders.FirstOrDefault(o => o.OrderId == orderId).BookCount = bookCount;
+            var order = ctx.Orders.Include(i => i.Book).FirstOrDefault(o => o.OrderId == orderId);
+            order.BookCount = bookCount;
+            order.OrderPrice = order.Book.Price * order.BookCount;
             ctx.SaveChanges();
         }
     }

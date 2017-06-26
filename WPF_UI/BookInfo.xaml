@@ -38,46 +38,29 @@
                     <Label>Price :</Label>
                 </StackPanel>
                 <StackPanel Grid.Column="2" HorizontalAlignment="Left">
-                    <Label Name="authorNameLb">Author:</Label>
-                    <Label Name="publisherNameLb">Publish:</Label>
-                    <Label Name="languageNameLb">Language:</Label>
-                    <Label Name="publishDateLb">Publish date:</Label>
-                    <Label Name="volumeLb">Volume:</Label>
+                    <Label Name="authorNameLb"></Label>
+                    <Label Name="publisherNameLb"></Label>
+                    <Label Name="languageNameLb"></Label>
+                    <Label Name="publishDateLb"></Label>
+                    <Label Name="volumeLb"></Label>
                     <Label Name="priceLb" Foreground="GreenYellow">Price :</Label>
                     <Button Name="addToBasket" Margin="50,0,50,0" Background="Orange" Foreground="White" MaxWidth="200" Click="addToBasket_Click">Buy</Button>
                 </StackPanel>
             </Grid>
             <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center">Description:</Label>
-            <TextBox VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" MaxLines="2" Name="descriptionBookTb">asdsdadkaccccccccccccccccccccccccccccccccccccccbbbbbbbbbbbbbbbbbnnnnnnnnnnnnnnnnnnnnnnnnnmmmmmmmmmmmmmmmmmmmmmmm,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,ccccccccccccc33333333ccc</TextBox>
+            <TextBox VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" MaxLines="2" Name="descriptionBookTb"></TextBox>
         </StackPanel>
         <Label Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center">About author</Label>
         <DockPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" MaxHeight="130">
-            <Image Source="E:\o-i-met-jk-rowling-facebook.jpg" Height="130" Margin="5" DockPanel.Dock="Left"></Image>
+            <Image Source="{Binding}" Height="130" Margin="5" DockPanel.Dock="Left" Name="authorImage"></Image>
             <StackPanel>
                 <Label DockPanel.Dock="Top" Name="infoAuthorNameLB">Name</Label>
-                <TextBox Margin="5" AcceptsReturn="True" MaxLines="4" MinLines="2" Name="descriptionAuthorTb" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap">aaaaaaaaaaaaabbbbb9999991111111111111aaabbbbbbbbbbbbbbbbbbbbbbcccccccccccczzzzzzzzcccccaaaaaddd</TextBox>
+                <TextBox Margin="5" AcceptsReturn="True" MaxLines="4" MinLines="2" Name="descriptionAuthorTb" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap"></TextBox>
             </StackPanel>
-            
         </DockPanel>
         <Label Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center">Reviews</Label>
         <ListBox Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" Width="480" HorizontalAlignment="Center" Name="reviewLB"
-            ItemsSource="{Binding}" Margin="0,0,0,10">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <DockPanel HorizontalAlignment="Center">
-                        <Label DockPanel.Dock="Top" Content="{Binding UserName}"></Label>
-                        <Label DockPanel.Dock="Top" Content="{Binding Date,StringFormat=dd-MM-yyyy}"></Label>
-                        <TextBox DockPanel.Dock="top" Text="{Binding Message}" AcceptsReturn="True" MaxLines="2" MinLines="2" Width="430" VerticalScrollBarVisibility="Auto" IsReadOnly="True" TextWrapping="Wrap"></TextBox>
-                        <WrapPanel DockPanel.Dock="Bottom">
-                            <Button Background="White">
-                                <Image Height="20" Width="20"></Image>
-                            </Button>
-                            <Label Content="{Binding Likes}"></Label>
-                        </WrapPanel>
-                    </DockPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            ItemsSource="{Binding}" Margin="0,0,0,10"></ListBox>
         <Button Grid.Column="0" Grid.Row="5" Background="Green" Foreground="White" MaxWidth="250" Name="sendReviewBtn" Click="sendReviewBtn_Click">Send review</Button>
         <Button Grid.Column="2" Grid.Row="5" Background="Red" Foreground="White" MaxWidth="250" Name="continueSearchGoodsBtn" Click="continueSearchGoodsBtn_Click">Continue search goods</Button>
     </Grid>

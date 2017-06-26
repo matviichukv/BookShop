@@ -8,6 +8,9 @@ using BLL.Abstract;
 using DAL.Concrete;
 using DAL.Entity;
 using DAL.Abstract;
+using System.Windows.Controls;
+using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace BLL.Concrete
 {
@@ -33,6 +36,7 @@ namespace BLL.Concrete
         {
             return reviewRepository.GetBookReviews(bookId).Select(r => new ReviewViewModel()
             {
+                ReviewId = r.ReviewId,
                 Message = r.Message,
                 Date = r.Date,
                 Likes = r.ReviewLikes.Count,
@@ -46,6 +50,7 @@ namespace BLL.Concrete
         {
             return reviewRepository.GetUserReviews(userId).Select(r => new ReviewViewModel()
             {
+                ReviewId = r.ReviewId,
                 Message = r.Message,
                 Date = r.Date,
                 Likes = r.ReviewLikes.Count,
@@ -69,5 +74,6 @@ namespace BLL.Concrete
                 });
             }
         }
+
     }
 }
