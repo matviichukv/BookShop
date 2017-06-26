@@ -61,6 +61,7 @@ namespace BLL.Concrete
 
         public async Task<List<BookShortInfoViewModel>> GetBooks()
         {
+            string imagesLocation = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "Images")).LocalPath;
             ImageProvider provider = new ImageProvider();
             List<BookShortInfoViewModel> shortInfoBooks = new List<BookShortInfoViewModel>();
             var books = bookRepository.GetBooks();
@@ -73,7 +74,7 @@ namespace BLL.Concrete
                     BookDescription = item.Description,
                     BookId = item.BookId,
                     BookName = item.BookName,
-                    BookImage = item.BookImage == null ? null : BitmapToImageSource(await provider.GetImage(item.BookImage.ImageId)),
+                    BookImage = item.BookImage == null ? BitmapToImageSource(new Bitmap(System.Drawing.Image.FromFile(Path.Combine(imagesLocation, "Default.jpg")))) : BitmapToImageSource(await provider.GetImage(item.BookImage.ImageId)),
                     BookPrice = item.Price
                 });
             }

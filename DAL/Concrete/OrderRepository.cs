@@ -28,8 +28,12 @@ namespace DAL.Concrete
         {
             try
             {
-                ctx.Orders.FirstOrDefault(o => o.OrderId == orderId).IsPaid = true;
-                ctx.Orders.FirstOrDefault(o => o.OrderId == orderId).DateOrdered = DateTime.Now;
+                if (ctx.Orders.FirstOrDefault(o => o.OrderId == orderId).Book.Count >= ctx.Orders.FirstOrDefault(o => o.OrderId == orderId).BookCount)
+                {
+                    ctx.Orders.FirstOrDefault(o => o.OrderId == orderId).IsPaid = true;
+                    ctx.Orders.FirstOrDefault(o => o.OrderId == orderId).DateOrdered = DateTime.Now;
+                    ctx.Orders.FirstOrDefault(o => o.OrderId == orderId).Book.Count -= ctx.Orders.FirstOrDefault(o => o.OrderId == orderId).BookCount;
+                }
                 ctx.SaveChanges();
                 return true;
             }
