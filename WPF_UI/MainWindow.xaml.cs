@@ -33,19 +33,22 @@ namespace WPF_UI
         private List<BookShortInfoViewModel> booksShortInfo = new List<BookShortInfoViewModel>();
         private ObservableCollection<OrderInfoViewModel> booksInBasket = new ObservableCollection<OrderInfoViewModel>();
         private int currentPage = 1;
+        private int maxPage;
 
         public MainWindow()
         {
             InitializeComponent();
             FillCategorisLb();
             SetBooks();
-            userPhoto.Source = new BitmapImage(new Uri(@"E:\tp\WPF_UI\Images\nonePhoto.jpg"));
+            //userPhoto.Source = new BitmapImage(new Uri(@"E:\tp\WPF_UI\Images\nonePhoto.jpg"));
         }
 
         private async void SetBooks()
         {
             searchBooks = await bookProvider.GetBooks();
             shortBooksInfoLb.ItemsSource = searchBooks.books;
+            CurrentPageLabel.Content = $"Page 1/{searchBooks.Pages}";
+            maxPage = searchBooks.Pages;
         }
 
         private async void searchBtn_Click(object sender, RoutedEventArgs e)
@@ -93,7 +96,7 @@ namespace WPF_UI
                 return;
             }
 
-            BookInfo info = new BookInfo(booksShortInfo[shortBooksInfoLb.SelectedIndex], user, booksInBasket);
+            BookInfo info = new BookInfo(searchBooks.books[shortBooksInfoLb.SelectedIndex], user, booksInBasket);
             info.ShowDialog();
             shortBooksInfoLb.SelectedIndex = -1;
         }
@@ -165,7 +168,9 @@ namespace WPF_UI
                 searchBooks.books = await bookProvider.GetNextPage(currentPage);
                 shortBooksInfoLb.ItemsSource = searchBooks.books;
                 currentPage += 1;
+                CurrentPageLabel.Content = $"Page {currentPage}/{searchBooks.Pages}";
             }
+
         }
 
         private async void previouslyBtn_Click(object sender, RoutedEventArgs e)
@@ -175,12 +180,24 @@ namespace WPF_UI
                 searchBooks.books = await bookProvider.GetPreviouslyPage(currentPage);
                 shortBooksInfoLb.ItemsSource = searchBooks.books;
                 currentPage -= 1;
+                CurrentPageLabel.Content = $"Page {currentPage}/{searchBooks.Pages}";
             }
         }
 
-        private void lastPageBtn_Click(object sender, RoutedEventArgs e)
+        private async void lastPageBtn_Click(object sender, RoutedEventArgs e)
         {
+            searchBooks.books = await bookProvider.GetNextPage(maxPage - 1);
+            shortBooksInfoLb.ItemsSource = searchBooks.books;
+            currentPage = maxPage;
+            CurrentPageLabel.Content = $"Page {currentPage}/{searchBooks.Pages}";
+        }
 
+        private async void firstButon_Click(object sender, RoutedEventArgs e)
+        {
+            searchBooks.books = await bookProvider.GetPreviouslyPage(2);
+            shortBooksInfoLb.ItemsSource = searchBooks.books;
+            currentPage = 1;
+            CurrentPageLabel.Content = $"Page {currentPage}/{searchBooks.Pages}";
         }
     }
 }

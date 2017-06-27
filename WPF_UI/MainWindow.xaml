@@ -26,7 +26,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.3*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="0.4*"/>
         </Grid.ColumnDefinitions>
 
@@ -78,12 +78,12 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <WrapPanel Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center">
-            <Button Name="previouslyBtn" Click="previouslyBtn_Click">Previously</Button>
-            <Label Margin="20,0,20,0">Page</Label>
+        <WrapPanel Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" Height="30" Margin="96,0,97,0" VerticalAlignment="Top">
+            <Button Name="firstButon" Click="firstButon_Click" Content="First"/>
+            <Button Name="previouslyBtn" Click="previouslyBtn_Click">Previous</Button>
+            <Label  Name="CurrentPageLabel">Page 1/1</Label>
             <Button Name="nextBtn" Click="nextBtn_Click">Next</Button>
-            <Label>2</Label>
-            <Button Name="lastPageBtn" Click="lastPageBtn_Click">Last:</Button>
+            <Button Name="lastPageBtn" Click="lastPageBtn_Click">Last</Button>
         </WrapPanel>
     </Grid>
 </Window>

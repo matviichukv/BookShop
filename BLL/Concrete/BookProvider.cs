@@ -81,7 +81,7 @@ namespace BLL.Concrete
             }
 
             int countBooks = bookRepository.GetBooks().Count;
-            searchBooks.Pages = countBooks % 10 != 0 ? countBooks / 10 + 1 : countBooks / 10;
+            searchBooks.Pages = (int)Math.Ceiling((double)countBooks / 10);
             searchBooks.books = shortInfoBooks;
             return searchBooks;
         }
