@@ -59,12 +59,13 @@ namespace BLL.Concrete
             return bookInfo;
         }
 
-        public async Task<List<BookShortInfoViewModel>> GetBooks()
+        public async Task<SearchBooksModel> GetBooks()
         {
             string imagesLocation = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "Images")).LocalPath;
             ImageProvider provider = new ImageProvider();
+            SearchBooksModel searchBooks = new SearchBooksModel();
             List<BookShortInfoViewModel> shortInfoBooks = new List<BookShortInfoViewModel>();
-            var books = bookRepository.GetBooks();
+            var books = bookRepository.GetBooks().Take(10);
 
             foreach (var item in books)
             {
@@ -79,7 +80,10 @@ namespace BLL.Concrete
                 });
             }
 
-            return shortInfoBooks;
+            int countBooks = bookRepository.GetBooks().Count;
+            searchBooks.Pages = countBooks % 10 != 0 ? countBooks / 10 + 1 : countBooks / 10;
+            searchBooks.books = shortInfoBooks;
+            return searchBooks;
         }
 
         public List<BookShortInfoViewModel> SearchBooks(string filter)
@@ -126,6 +130,48 @@ namespace BLL.Concrete
 
                 return bitmapimage;
             }
+        }
+
+        public async Task<List<BookShortInfoViewModel>> GetNextPage(int page)
+        {
+            List<BookShortInfoViewModel> searchBooks = new List<BookShortInfoViewModel>();
+            var books = bookRepository.GetBooks().Skip(page * 10).Take(10);
+
+            foreach (var item in books)
+            {
+                searchBooks.Add(await GetBookShortInfoViewModel(item));
+            }
+
+            return searchBooks;
+        }
+
+        public async Task<List<BookShortInfoViewModel>> GetPreviouslyPage(int page)
+        {
+            List<BookShortInfoViewModel> searchBooks = new List<BookShortInfoViewModel>();
+            var books = bookRepository.GetBooks().Skip((page - 2) * 10).Take(10);
+
+            foreach (var item in books)
+            {
+                searchBooks.Add(await GetBookShortInfoViewModel(item));
+            }
+
+            return searchBooks;
+        }
+
+        private async Task<BookShortInfoViewModel> GetBookShortInfoViewModel(Book book)
+        {
+            string imagesLocation = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "Images")).LocalPath;
+            ImageProvider provider = new ImageProvider();
+
+            return new BookShortInfoViewModel
+            {
+                BookAuthorName = book.BookAuthor.AuthorName,
+                BookDescription = book.Description,
+                BookId = book.BookId,
+                BookName = book.BookName,
+                BookImage = book.BookImage == null ? BitmapToImageSource(new Bitmap(System.Drawing.Image.FromFile(Path.Combine(imagesLocation, "Default.jpg")))) : BitmapToImageSource(await provider.GetImage(book.BookImage.ImageId)),
+                BookPrice = book.Price
+            };
         }
     }
 }

@@ -78,6 +78,7 @@
     <Compile Include="Models\BookShortInfoViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\ReviewViewModel.cs" />
+    <Compile Include="Models\SearchBooksModel.cs" />
     <Compile Include="Models\TabItemModel.cs" />
     <Compile Include="Models\UserChangeViewModel.cs" />
     <Compile Include="Models\UserCreateViewModel.cs" />

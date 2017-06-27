@@ -42,16 +42,17 @@ namespace BLL.Concrete
             }
         }
 
-        public async Task<int> FillBasket(ObservableCollection<OrderInfoViewModel> booksInBasket, int userId)
+        public async Task<ObservableCollection<OrderInfoViewModel>> GetBasket(int userId)
         {
             var books = await orderProvider.GetBasket(userId);
+            ObservableCollection<OrderInfoViewModel> booksInBasket = new ObservableCollection<OrderInfoViewModel>();
 
-            foreach(var item in books)
+            foreach (var item in books)
             {
                 booksInBasket.Add(item);
             }
 
-            return books.Sum(i => i.Count);
+            return booksInBasket;
         }
     }
 }

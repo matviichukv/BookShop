@@ -28,21 +28,24 @@ namespace WPF_UI
     public partial class MainWindow : Window
     {
         private BookProvider bookProvider = new BookProvider();
+        private SearchBooksModel searchBooks = new SearchBooksModel();
         private UserInfoViewModel user = null;
         private List<BookShortInfoViewModel> booksShortInfo = new List<BookShortInfoViewModel>();
         private ObservableCollection<OrderInfoViewModel> booksInBasket = new ObservableCollection<OrderInfoViewModel>();
+        private int currentPage = 1;
 
         public MainWindow()
         {
             InitializeComponent();
             FillCategorisLb();
             SetBooks();
+            userPhoto.Source = new BitmapImage(new Uri(@"E:\tp\WPF_UI\Images\nonePhoto.jpg"));
         }
 
         private async void SetBooks()
         {
-            booksShortInfo = await bookProvider.GetBooks();
-            shortBooksInfoLb.ItemsSource = booksShortInfo;
+            searchBooks = await bookProvider.GetBooks();
+            shortBooksInfoLb.ItemsSource = searchBooks.books;
         }
 
         private async void searchBtn_Click(object sender, RoutedEventArgs e)
@@ -55,7 +58,8 @@ namespace WPF_UI
         private async void FillBasketUI()
         {
             BasketUIProvider basketUiProvider = new BasketUIProvider();
-            countBooksInBasketLbl.Content = await basketUiProvider.FillBasket(booksInBasket, user.UserId);
+            booksInBasket = await basketUiProvider.GetBasket(user.UserId);
+            UpdateCountBooksInBasket();
         }
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)
@@ -154,6 +158,29 @@ namespace WPF_UI
             countBooksInBasketLbl.Content = booksInBasket.Sum(i => i.Count);
         }
 
-        
+        private async void nextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage + 1 <= searchBooks.Pages)
+            {
+                searchBooks.books = await bookProvider.GetNextPage(currentPage);
+                shortBooksInfoLb.ItemsSource = searchBooks.books;
+                currentPage += 1;
+            }
+        }
+
+        private async void previouslyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage - 1 != 0)
+            {
+                searchBooks.books = await bookProvider.GetPreviouslyPage(currentPage);
+                shortBooksInfoLb.ItemsSource = searchBooks.books;
+                currentPage -= 1;
+            }
+        }
+
+        private void lastPageBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -8,10 +8,9 @@
         Title="MainWindow" Height="760" Width="655" MinHeight="750" MinWidth="655">
     <Window.Resources>
         <ControlTemplate TargetType="Button" x:Key="btTemplate" x:Name="avatarPhoto">
-            <Border CornerRadius="50" BorderBrush="Black" BorderThickness="1"
-                    Background="white" Height="40" Width="60" >
+            <Border CornerRadius="5" BorderBrush="Black" BorderThickness="1"
+                    Background="white" Height="40" Width="40" >
                 <ContentControl Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Image Name="userPhoto"></Image>
                 </ContentControl>
             </Border>
         </ControlTemplate>
@@ -22,6 +21,7 @@
             <RowDefinition Height="0.07*"/>
             <RowDefinition Height="0.05*" />
             <RowDefinition/>
+            <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -32,10 +32,10 @@
 
         <!--<Button Template="{StaticResource btTemplate}" Grid.Column="2" Grid.Row="0" Visibility="Hidden" Name="showUserProfileBtn" Click="showUserProfileBtn_Click" Margin="10,5,10,0"></Button>-->
         <Image Source="{Binding}" Name="TestImage"></Image>
-        <Button Template="{StaticResource btTemplate}" Grid.Column="2" Grid.Row="0" Visibility="Hidden" Name="showUserProfileBtn" Click="showUserProfileBtn_Click" Margin="10,5,10,0">
+        <Button Grid.Column="2" Grid.Row="0" Visibility="Hidden" Name="showUserProfileBtn" Click="showUserProfileBtn_Click" Margin="50,5,50,5" MaxWidth="50">
             <Image Name="userPhoto"></Image>
         </Button>
-        <Button Grid.Column="2" Grid.Row="1" Name="cartBtn" Margin="10,0,10,0" Visibility="Hidden" Click="cartBtn_Click">
+        <Button Grid.Column="2" Grid.Row="1" Name="cartBtn" Margin="10,0,10,0" Visibility="Hidden" Click="cartBtn_Click" MaxWidth="100">
             <WrapPanel>
                 <Label>Cart</Label>
                 <Image Name="basketImg"></Image>
@@ -78,5 +78,12 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <WrapPanel Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center">
+            <Button Name="previouslyBtn" Click="previouslyBtn_Click">Previously</Button>
+            <Label Margin="20,0,20,0">Page</Label>
+            <Button Name="nextBtn" Click="nextBtn_Click">Next</Button>
+            <Label>2</Label>
+            <Button Name="lastPageBtn" Click="lastPageBtn_Click">Last:</Button>
+        </WrapPanel>
     </Grid>
 </Window>
