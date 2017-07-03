@@ -65,40 +65,24 @@ namespace BLL.Concrete
         public async Task<List<OrderHistoryViewModel>> GetOrdersHistory(int userId)
         {
             var orders = orderRepository.GetOrders()
-                .Where(order => order.IsPaid == true && order.UserId == userId).ToList();
+                .Where(order => order.IsPaid == true && order.UserId == userId)
+                .GroupBy(i => i.DateOrdered.Value.ToShortDateString()).ToList();
 
             List<OrderHistoryViewModel> ordersHistory = new List<OrderHistoryViewModel>();
 
-            OrderHistoryViewModel firstOrder = new OrderHistoryViewModel();
-            firstOrder.Date = (DateTime)orders[0].DateOrdered;
-            firstOrder.Cost = orders[0].OrderPrice;
-            firstOrder.Cout = orders[0].BookCount;
-            firstOrder.Orders.Add(await GetOrderInfoVM(orders[0]));
-            ordersHistory.Add(firstOrder);
-
-            for (int i = 1; i < orders.Count; i++)
+            foreach (IGrouping<string, Order> keyGroup in orders)
             {
-                for (int j = 0; j < ordersHistory.Count; j++)
+                OrderHistoryViewModel historyModel = new OrderHistoryViewModel();
+
+                foreach (Order order in keyGroup)
                 {
-                    if (ordersHistory[j].Date.ToShortDateString() == orders[i].DateOrdered.Value.ToShortDateString())
-                    {
-                        ordersHistory[j].Cost += orders[i].OrderPrice;
-                        ordersHistory[j].Cout += orders[i].BookCount;
-                        ordersHistory[j].Orders.Add(await GetOrderInfoVM(orders[i]));
-                        break;
-                    }
-                    
-                    if(ordersHistory.Count -1 == j)
-                    {
-                        OrderHistoryViewModel newDateOrder = new OrderHistoryViewModel();
-                        newDateOrder.Date = (DateTime)orders[i].DateOrdered;
-                        newDateOrder.Cost = orders[i].OrderPrice;
-                        newDateOrder.Cout = orders[i].BookCount;
-                        newDateOrder.Orders.Add(await GetOrderInfoVM(orders[i]));
-                        ordersHistory.Add(newDateOrder);
-                        break;
-                    }
+                    historyModel.Date = order.DateOrdered.Value;
+                    historyModel.Cost += order.OrderPrice;
+                    historyModel.Cout += order.BookCount;
+                    historyModel.Orders.Add(await GetOrderInfoVM(order));
                 }
+
+                ordersHistory.Add(historyModel);
             }
 
             return ordersHistory;
